@@ -2,6 +2,10 @@
 /// The navigation bar at the bottom of the screen
 
 import 'package:flutter/material.dart';
+import 'package:redpoint/pages/home_page.dart';
+import 'package:redpoint/pages/profile_page.dart';
+import 'package:redpoint/pages/projects_page.dart';
+import 'package:redpoint/pages/social_page.dart';
 import 'package:redpoint/widgets/nav/fab_placeholder.dart';
 
 import 'nav_button.dart';
@@ -23,12 +27,12 @@ class _BottomNavbarState extends State<BottomNavbar> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            const NavButton(buttonIcon: Icons.home),
-            const NavButton(buttonIcon: Icons.list),
+          children: const <Widget>[
+            NavButton(buttonIcon: Icons.home, page: HomePage()),
+            NavButton(buttonIcon: Icons.list, page: ProjectsPage()),
             FABPlaceholder(),
-            const NavButton(buttonIcon: Icons.show_chart),
-            const NavButton(buttonIcon: Icons.person),
+            NavButton(buttonIcon: Icons.show_chart, page: SocialPage()),
+            NavButton(buttonIcon: Icons.person, page: ProfilePage()),
           ],
         ));
   }

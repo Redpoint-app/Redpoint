@@ -6,6 +6,8 @@
 import 'package:flutter/material.dart';
 
 class FABPlaceholder extends StatelessWidget {
+  const FABPlaceholder({super.key});
+
   @override
   Widget build(BuildContext context) {
     return const IconButton(onPressed: null, icon: Icon(null));
