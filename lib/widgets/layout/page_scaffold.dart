@@ -19,9 +19,6 @@ class _PageScaffoldState extends State<PageScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: widget.body,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: const AddButton(),
