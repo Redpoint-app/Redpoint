@@ -18,8 +18,14 @@ class _NavButtonState extends State<NavButton> {
     return IconButton(
         onPressed: () {
           // navigate to given page
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => widget.page));
+          Navigator.push(
+              context,
+              PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) =>
+                    widget.page,
+                transitionDuration: Duration.zero,
+                reverseTransitionDuration: Duration.zero,
+              ));
         },
         icon: Icon(widget.buttonIcon));
   }
