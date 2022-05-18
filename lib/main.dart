@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:redpoint/pages/home_page.dart';
 import 'package:redpoint/widgets/layout/page_scaffold.dart';
 
 void main() {
@@ -32,26 +33,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return PageScaffold(
-      title: widget.title,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text("Redpoint"),
-          ],
-        ),
-      ),
-    );
+    return const HomePage();
   }
 }
