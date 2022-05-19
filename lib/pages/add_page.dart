@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redpoint/widgets/form_button.dart';
+import 'package:redpoint/widgets/form_chip.dart';
 
 final months = [
   'January',
@@ -25,6 +26,13 @@ class AddPage extends StatefulWidget {
 
 class _AddPageState extends State<AddPage> {
   DateTime? date;
+  int? statusIndex;
+
+  _setStatusIndex(int? index) {
+    setState(() {
+      statusIndex = index;
+    });
+  }
 
   _selectDate(BuildContext context) async {
     final DateTime? selected = await showDatePicker(
@@ -106,7 +114,14 @@ class _AddPageState extends State<AddPage> {
             const Divider(),
             Text("Type + grade"),
             const Divider(),
-            Text("Status"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FormChip(label: "Want to try", index: 0, selectedIndex: statusIndex, callback: _setStatusIndex),
+                FormChip(label: "In progress", index: 1, selectedIndex: statusIndex, callback: _setStatusIndex),
+                FormChip(label: "Completed", index: 2, selectedIndex: statusIndex, callback: _setStatusIndex),
+              ],
+            ),
             const Divider(),
             Text("Difficulty"),
             const Divider(),
