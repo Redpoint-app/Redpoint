@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:redpoint/pages/home_page.dart';
-import 'package:redpoint/widgets/layout/page_scaffold.dart';
 
 void main() {
   //debugPaintSizeEnabled = true;

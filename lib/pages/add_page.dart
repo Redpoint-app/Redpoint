@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:redpoint/widgets/form_button.dart';
-import 'package:redpoint/widgets/form_chip.dart';
+
+import '../widgets/add_form/form_button.dart';
+import '../widgets/add_form/form_chip.dart';
 
 final months = [
   'January',
