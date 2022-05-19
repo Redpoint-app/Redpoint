@@ -103,6 +103,16 @@ class _AddPageState extends State<AddPage> {
                         }),
                   ],
                 )),
+            const Divider(),
+            Text("Type + grade"),
+            const Divider(),
+            Text("Status"),
+            const Divider(),
+            Text("Difficulty"),
+            const Divider(),
+            Text("Tags"),
+            const Divider(),
+            Text("Thoughts"),
           ]),
         ));
   }
