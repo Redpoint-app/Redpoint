@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:redpoint/widgets/add_form/form_multi_select_chip.dart';
 
 import '../widgets/add_form/form_button.dart';
-import '../widgets/add_form/form_chip.dart';
+import '../widgets/add_form/form_select_chip.dart';
 
 final months = [
   'January',
@@ -127,17 +128,17 @@ class _AddPageState extends State<AddPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FormChip(
+                FormSelectChip(
                     label: "Want to try",
                     index: 0,
                     selectedIndex: statusIndex,
                     callback: _setStatusIndex),
-                FormChip(
+                FormSelectChip(
                     label: "In progress",
                     index: 1,
                     selectedIndex: statusIndex,
                     callback: _setStatusIndex),
-                FormChip(
+                FormSelectChip(
                     label: "Completed",
                     index: 2,
                     selectedIndex: statusIndex,
@@ -147,7 +148,9 @@ class _AddPageState extends State<AddPage> {
             const Divider(),
             Text("Difficulty"),
             const Divider(),
-            Text("Tags"),
+            Wrap(children: const [
+              FormMultiSelectChip(label: "Dynamic")
+            ],),
             const Divider(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
