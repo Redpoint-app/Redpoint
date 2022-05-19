@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redpoint/widgets/form_button.dart';
 
 final months = [
   'January',
@@ -23,7 +24,7 @@ class AddPage extends StatefulWidget {
 }
 
 class _AddPageState extends State<AddPage> {
-  DateTime date = DateTime.now();
+  DateTime? date;
 
   _selectDate(BuildContext context) async {
     final DateTime? selected = await showDatePicker(
@@ -32,15 +33,17 @@ class _AddPageState extends State<AddPage> {
         firstDate: DateTime(1900, 1, 1),
         lastDate: DateTime.now());
 
-    if (selected != null) {
-      setState(() {
-        date = selected;
-      });
-    }
+    setState(() {
+      date = selected;
+    });
   }
 
-  String _dateToString(DateTime date) {
-    return "${months[date.month - 1]} ${date.day}, ${date.year}";
+  String _dateToString(DateTime? date) {
+    if (date == null) {
+      return "Choose date";
+    } else {
+      return "${months[date.month - 1]} ${date.day}, ${date.year}";
+    }
   }
 
   @override
@@ -56,16 +59,17 @@ class _AddPageState extends State<AddPage> {
             },
           ),
           actions: [
-            TextButton(
-                onPressed: () {},
-                child: const Text(
-                  "Save",
-                  style: TextStyle(
-                    // TODO: Replace this hard coded color with theme reference
-                    color: Colors.white,
-                    fontSize: 16.0
-                    ),
-                ))
+            Padding(
+                padding: const EdgeInsets.only(right: 7.0),
+                child: TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      "Save",
+                      style: TextStyle(
+                          // TODO: Replace this hard coded color with theme reference
+                          color: Colors.white,
+                          fontSize: 17.0),
+                    )))
           ],
         ),
         body: Center(
@@ -87,24 +91,16 @@ class _AddPageState extends State<AddPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Expanded(
-                        child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
-                            child: TextButton.icon(
-                                onPressed: () {},
-                                icon: const Icon(Icons.location_pin),
-                                label: const Text("Choose location")))),
-                    Expanded(
-                        child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
-                            child: TextButton.icon(
-                                onPressed: () {
-                                  _selectDate(context);
-                                },
-                                icon: const Icon(Icons.calendar_month),
-                                label: Text(_dateToString(date))))),
+                    FormButton(
+                        icon: Icons.location_pin,
+                        label: "Choose location",
+                        onPressed: () {}),
+                    FormButton(
+                        icon: Icons.calendar_month,
+                        label: _dateToString(date),
+                        onPressed: () {
+                          _selectDate(context);
+                        }),
                   ],
                 )),
           ]),
