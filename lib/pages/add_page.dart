@@ -27,7 +27,8 @@ class AddPage extends StatefulWidget {
 
 class _AddPageState extends State<AddPage> {
   DateTime? date; // The selected date of the route
-  int? statusIndex; // The index of the selected Status chip (want to try, in progress, completed)
+  int?
+      statusIndex; // The index of the selected Status chip (want to try, in progress, completed)
 
   // Updates the status index
   _setStatusIndex(int? index) {
@@ -120,9 +121,21 @@ class _AddPageState extends State<AddPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FormChip(label: "Want to try", index: 0, selectedIndex: statusIndex, callback: _setStatusIndex),
-                FormChip(label: "In progress", index: 1, selectedIndex: statusIndex, callback: _setStatusIndex),
-                FormChip(label: "Completed", index: 2, selectedIndex: statusIndex, callback: _setStatusIndex),
+                FormChip(
+                    label: "Want to try",
+                    index: 0,
+                    selectedIndex: statusIndex,
+                    callback: _setStatusIndex),
+                FormChip(
+                    label: "In progress",
+                    index: 1,
+                    selectedIndex: statusIndex,
+                    callback: _setStatusIndex),
+                FormChip(
+                    label: "Completed",
+                    index: 2,
+                    selectedIndex: statusIndex,
+                    callback: _setStatusIndex),
               ],
             ),
             const Divider(),
@@ -130,7 +143,15 @@ class _AddPageState extends State<AddPage> {
             const Divider(),
             Text("Tags"),
             const Divider(),
-            Text("Thoughts"),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              child: TextField(
+                maxLines: 7,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: "Enter any thoughts here"),
+              ),
+            ),
           ]),
         ));
   }
