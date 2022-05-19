@@ -1,3 +1,9 @@
+
+/// A button used on the Add Route form. Has an icon and a label. Additionally, a method should be specified
+/// to handle on the onPressed event.
+/// 
+/// This widget is used as the "Choose location" and "Choose date" buttons on the add route page.
+
 import 'package:flutter/material.dart';
 
 class FormButton extends StatefulWidget {

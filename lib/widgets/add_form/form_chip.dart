@@ -1,3 +1,11 @@
+
+/// A chip that communicates with other chips to only allow 1 to be selected at a time. The chip has
+/// a label, an index (of the chip), a selected index (the index of the currently selected chip, null
+/// if none), and a callback to the parent that sets the selected index to the value that is provided
+/// as a parameter.
+/// 
+/// This widget is used in the status section of the Add route page.
+
 import 'package:flutter/material.dart';
 
 class FormChip extends StatefulWidget {
@@ -31,11 +39,6 @@ class _FormChipState extends State<FormChip> {
           backgroundColor: Theme.of(context).chipTheme.disabledColor,
           onSelected: (bool s) {
             int? newIndex = isSelected ? null : widget.index;
-
-            setState(() {
-              isSelected = !isSelected;
-            });
-
             widget.callback(newIndex);
           },
           labelStyle: TextStyle(

@@ -26,15 +26,17 @@ class AddPage extends StatefulWidget {
 }
 
 class _AddPageState extends State<AddPage> {
-  DateTime? date;
-  int? statusIndex;
+  DateTime? date; // The selected date of the route
+  int? statusIndex; // The index of the selected Status chip (want to try, in progress, completed)
 
+  // Updates the status index
   _setStatusIndex(int? index) {
     setState(() {
       statusIndex = index;
     });
   }
 
+  // Opens the date picker and updates the chosen date
   _selectDate(BuildContext context) async {
     final DateTime? selected = await showDatePicker(
         context: context,
@@ -47,6 +49,7 @@ class _AddPageState extends State<AddPage> {
     });
   }
 
+  // Converts the date to a string
   String _dateToString(DateTime? date) {
     if (date == null) {
       return "Choose date";
@@ -72,11 +75,10 @@ class _AddPageState extends State<AddPage> {
                 padding: const EdgeInsets.only(right: 7.0),
                 child: TextButton(
                     onPressed: () {},
-                    child: const Text(
+                    child: Text(
                       "Save",
                       style: TextStyle(
-                          // TODO: Replace this hard coded color with theme reference
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.onPrimary,
                           fontSize: 17.0),
                     )))
           ],
