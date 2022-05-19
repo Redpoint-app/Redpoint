@@ -18,20 +18,19 @@ class CustomChip extends StatefulWidget {
 class _CustomChipState extends State<CustomChip> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4),
-      child: ChoiceChip(
+    return ChoiceChip(
           label: Text(widget.label),
           selected: widget.selected,
           selectedColor: Theme.of(context).primaryColor,
           backgroundColor: Theme.of(context).chipTheme.disabledColor,
           onSelected: (bool s) {
-            widget.onSelected!(widget.selected);
+            if (widget.onSelected != null) {
+              widget.onSelected!(widget.selected);
+            }
           },
           labelStyle: TextStyle(
               color: widget.selected
                   ? Theme.of(context).colorScheme.onPrimary
-                  : Theme.of(context).colorScheme.onSurface)),
-    );
+                  : Theme.of(context).colorScheme.onSurface));
   }
 }

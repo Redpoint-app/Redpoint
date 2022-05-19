@@ -1,4 +1,7 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
+import 'package:redpoint/model/tag.dart';
 import 'package:redpoint/widgets/add_form/form_multi_select_chip.dart';
 
 import '../widgets/add_form/form_button.dart';
@@ -19,6 +22,19 @@ final months = [
   'December'
 ];
 
+final tagOptions = [
+  Tag("Dynamic"),
+  Tag("Static"),
+  Tag("Slopey"),
+  Tag("Crimpy"),
+  Tag("Slab"),
+  Tag("Overhang"),
+  Tag("Chimney"),
+  Tag("Crack"),
+];
+
+const int maxTags = 5;
+
 class AddPage extends StatefulWidget {
   const AddPage({super.key});
 
@@ -31,6 +47,12 @@ class _AddPageState extends State<AddPage> {
   DateTime? date;
   // The index of the selected Status chip (want to try, in progress, completed)
   int? statusIndex;
+
+  final selectedTags = ListQueue<Tag>();
+
+  // Controllers for the text fields, to retrieve the text values
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController thoughtsController = TextEditingController();
 
   // Updates the status index
   _setStatusIndex(int? index) {
@@ -60,10 +82,6 @@ class _AddPageState extends State<AddPage> {
       return "${months[date.month - 1]} ${date.day}, ${date.year}";
     }
   }
-
-  // Controllers for the text fields, to retrieve the text values
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController thoughtsController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -148,9 +166,26 @@ class _AddPageState extends State<AddPage> {
             const Divider(),
             Text("Difficulty"),
             const Divider(),
-            Wrap(children: const [
-              FormMultiSelectChip(label: "Dynamic")
-            ],),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Wrap(
+                runSpacing: -10,
+                alignment: WrapAlignment.center,
+                spacing: 4,
+                children: [
+                  for (final tag in tagOptions)
+                    FormMultiSelectChip<Tag>(
+                        label: tag.label,
+                        value: tag,
+                        values: selectedTags,
+                        maxLength: maxTags,
+                        callback: () {
+                          setState(() {});
+                        },
+                        )
+                ],
+              ),
+            ),
             const Divider(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),

@@ -30,14 +30,16 @@ class _FormSelectChipState extends State<FormSelectChip> {
   Widget build(BuildContext context) {
     bool isSelected = widget.index == widget.selectedIndex;
 
-    return CustomChip(
-      label: widget.label,
-      selected: isSelected,
-      onSelected: (bool selected) {
-        int? newIndex = isSelected ? null : widget.index;
+    return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4),
+        child: CustomChip(
+          label: widget.label,
+          selected: isSelected,
+          onSelected: (bool selected) {
+            int? newIndex = isSelected ? null : widget.index;
 
-        widget.callback(newIndex);
-      },
-    );
+            widget.callback(newIndex);
+          },
+        ));
   }
 }
