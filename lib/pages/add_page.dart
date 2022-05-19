@@ -27,10 +27,11 @@ final tagOptions = [
   Tag("Static"),
   Tag("Slopey"),
   Tag("Crimpy"),
+  Tag("Juggy"),
+  Tag("Crack"),
   Tag("Slab"),
   Tag("Overhang"),
   Tag("Chimney"),
-  Tag("Crack"),
 ];
 
 const int maxTags = 5;
