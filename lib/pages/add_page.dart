@@ -26,9 +26,10 @@ class AddPage extends StatefulWidget {
 }
 
 class _AddPageState extends State<AddPage> {
-  DateTime? date; // The selected date of the route
-  int?
-      statusIndex; // The index of the selected Status chip (want to try, in progress, completed)
+  // The selected date of the route
+  DateTime? date;
+  // The index of the selected Status chip (want to try, in progress, completed)
+  int? statusIndex;
 
   // Updates the status index
   _setStatusIndex(int? index) {
@@ -59,6 +60,10 @@ class _AddPageState extends State<AddPage> {
     }
   }
 
+  // Controllers for the text fields, to retrieve the text values
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController thoughtsController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,13 +91,14 @@ class _AddPageState extends State<AddPage> {
         ),
         body: Center(
           child: Column(children: [
-            const Padding(
-                padding: EdgeInsets.only(right: 20, left: 20, top: 10),
+            Padding(
+                padding: const EdgeInsets.only(right: 20, left: 20, top: 10),
                 child: TextField(
-                  style: TextStyle(
+                  controller: titleController,
+                  style: const TextStyle(
                     fontSize: 20.0,
                   ),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: "Enter route name",
                   ),
@@ -143,11 +149,12 @@ class _AddPageState extends State<AddPage> {
             const Divider(),
             Text("Tags"),
             const Divider(),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: TextField(
                 maxLines: 7,
-                decoration: InputDecoration(
+                controller: thoughtsController,
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: "Enter any thoughts here"),
               ),
