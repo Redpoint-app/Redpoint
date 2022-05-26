@@ -8,18 +8,20 @@
 import 'package:flutter/material.dart';
 import 'package:redpoint/widgets/custom_chip.dart';
 
+import '../../model/progress.dart';
+
 class FormSelectChip extends StatefulWidget {
   const FormSelectChip(
       {super.key,
       required this.label,
-      required this.index,
-      required this.selectedIndex,
+      required this.value,
+      required this.selectedValue,
       required this.callback});
 
   final String label;
-  final int index;
-  final int? selectedIndex;
-  final void Function(int? index) callback;
+  final Progress value;
+  final Progress? selectedValue;
+  final void Function(Progress? selectedValue) callback;
 
   @override
   _FormSelectChipState createState() => _FormSelectChipState();
@@ -28,7 +30,7 @@ class FormSelectChip extends StatefulWidget {
 class _FormSelectChipState extends State<FormSelectChip> {
   @override
   Widget build(BuildContext context) {
-    bool isSelected = widget.index == widget.selectedIndex;
+    bool isSelected = widget.value == widget.selectedValue;
 
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -36,9 +38,9 @@ class _FormSelectChipState extends State<FormSelectChip> {
           label: widget.label,
           selected: isSelected,
           onSelected: (bool selected) {
-            int? newIndex = isSelected ? null : widget.index;
+            Progress? newValue = isSelected ? null : widget.value;
 
-            widget.callback(newIndex);
+            widget.callback(newValue);
           },
         ));
   }

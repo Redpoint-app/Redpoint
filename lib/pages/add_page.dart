@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:redpoint/model/progress.dart';
 import 'package:redpoint/model/tag.dart';
 import 'package:redpoint/model/v_scale.dart';
 import 'package:redpoint/widgets/add_form/form_multi_select_chip.dart';
@@ -49,8 +50,8 @@ class AddPage extends StatefulWidget {
 class _AddPageState extends State<AddPage> {
   // The selected date of the route
   DateTime? date;
-  // The index of the selected Status chip (want to try, in progress, completed)
-  int? statusIndex;
+  // The selected progress value of the route
+  Progress? progress;
 
   final selectedTags = ListQueue<Tag>();
 
@@ -59,9 +60,9 @@ class _AddPageState extends State<AddPage> {
   final TextEditingController thoughtsController = TextEditingController();
 
   // Updates the status index
-  _setStatusIndex(int? index) {
+  _setStatusIndex(Progress? selectedProgress) {
     setState(() {
-      statusIndex = index;
+      progress = selectedProgress;
     });
   }
 
@@ -180,23 +181,15 @@ class _AddPageState extends State<AddPage> {
             const Divider(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                FormSelectChip(
-                    label: "Want to try",
-                    index: 0,
-                    selectedIndex: statusIndex,
-                    callback: _setStatusIndex),
-                FormSelectChip(
-                    label: "In progress",
-                    index: 1,
-                    selectedIndex: statusIndex,
-                    callback: _setStatusIndex),
-                FormSelectChip(
-                    label: "Completed",
-                    index: 2,
-                    selectedIndex: statusIndex,
-                    callback: _setStatusIndex),
-              ],
+              children: Progress.values
+                  .map(
+                    (Progress value) => FormSelectChip(
+                        label: value.label,
+                        value: value,
+                        selectedValue: progress,
+                        callback: _setStatusIndex),
+                  )
+                  .toList(),
             ),
             const Divider(),
             Column(
