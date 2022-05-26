@@ -1,8 +1,8 @@
-enum Progress {
+enum Status {
   wantToTry("Want to try"),
   inProgress("In progress"),
   completed("Completed");
 
-  const Progress(this.label);
+  const Status(this.label);
   final String label;
 }

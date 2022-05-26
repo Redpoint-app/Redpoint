@@ -1,7 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:redpoint/model/progress.dart';
+import 'package:redpoint/model/status.dart';
 import 'package:redpoint/model/tag.dart';
 import 'package:redpoint/model/v_scale.dart';
 import 'package:redpoint/widgets/add_form/form_multi_select_chip.dart';
@@ -51,7 +51,7 @@ class _AddPageState extends State<AddPage> {
   // The selected date of the route
   DateTime? date;
   // The selected progress value of the route
-  Progress? progress;
+  Status? progress;
 
   final selectedTags = ListQueue<Tag>();
 
@@ -60,7 +60,7 @@ class _AddPageState extends State<AddPage> {
   final TextEditingController thoughtsController = TextEditingController();
 
   // Updates the status index
-  _setStatusIndex(Progress? selectedProgress) {
+  void _setStatusIndex(Status? selectedProgress) {
     setState(() {
       progress = selectedProgress;
     });
@@ -181,9 +181,9 @@ class _AddPageState extends State<AddPage> {
             const Divider(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: Progress.values
+              children: Status.values
                   .map(
-                    (Progress value) => FormSelectChip(
+                    (Status value) => FormSelectChip<Status>(
                         label: value.label,
                         value: value,
                         selectedValue: progress,
