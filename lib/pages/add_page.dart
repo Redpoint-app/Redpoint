@@ -2,9 +2,9 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:redpoint/model/tag.dart';
+import 'package:redpoint/model/v_scale.dart';
 import 'package:redpoint/widgets/add_form/form_multi_select_chip.dart';
 
-import '../model/grade.dart';
 import '../model/route_type.dart';
 import '../widgets/add_form/form_button.dart';
 import '../widgets/add_form/form_select_chip.dart';
@@ -36,52 +36,6 @@ final tagOptions = [
   Tag("Overhang"),
   Tag("Chimney"),
 ];
-
-final typeOptions = [
-  RouteType("Top Rope"),
-  RouteType("Boulder"),
-  RouteType("Lead"),
-];
-
-final yds = [
-  Grade("5.5"),
-  Grade("5.6"),
-  Grade("5.7"),
-  Grade("5.8"),
-  Grade("5.9"),
-  Grade("5.10"),
-  Grade("5.11"),
-  Grade("5.12"),
-  Grade("5.13"),
-  Grade("5.14"),
-  Grade("5.15"),
-];
-
-final vScale = [
-  Grade("V0"),
-  Grade("V1"),
-  Grade("V2"),
-  Grade("V3"),
-  Grade("V4"),
-  Grade("V5"),
-  Grade("V6"),
-  Grade("V7"),
-  Grade("V8"),
-  Grade("V9"),
-  Grade("V10"),
-  Grade("V11"),
-  Grade("V12"),
-  Grade("V13"),
-  Grade("V14"),
-  Grade("V15"),
-  Grade("V16"),
-];
-
-final gradeOptions = {
-  typeOptions[0]: yds, // Top rope
-  typeOptions[1]: vScale, // Boulder
-  typeOptions[2]: yds, // Lead
-};
 
 const int maxTags = 5;
 
@@ -158,7 +112,8 @@ class _AddPageState extends State<AddPage> {
                     )))
           ],
         ),
-        body: Center(
+        body: SingleChildScrollView(
+            child: Center(
           child: Column(children: [
             Padding(
                 padding: const EdgeInsets.only(right: 20, left: 20, top: 10),
@@ -198,7 +153,7 @@ class _AddPageState extends State<AddPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: DropdownButton(
                     hint: const Text("Type"),
-                    items: typeOptions.map((RouteType type) {
+                    items: RouteType.values.map((RouteType type) {
                       return DropdownMenuItem<String>(
                         value: type.label,
                         child: Text(type.label),
@@ -211,7 +166,7 @@ class _AddPageState extends State<AddPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: DropdownButton(
                     hint: const Text("Grade"),
-                    items: vScale.map((Grade grade) {
+                    items: VScale.values.map((VScale grade) {
                       return DropdownMenuItem<String>(
                         value: grade.label,
                         child: Text(grade.label),
@@ -244,7 +199,22 @@ class _AddPageState extends State<AddPage> {
               ],
             ),
             const Divider(),
-            Text("Difficulty"),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(top: 15),
+                  child: Text("Difficulty"),
+                ),
+                Slider(
+                    value: 4,
+                    min: 0,
+                    max: 4,
+                    divisions: 4,
+                    label: "Hi",
+                    onChanged: (double value) {}),
+              ],
+            ),
             const Divider(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -278,6 +248,6 @@ class _AddPageState extends State<AddPage> {
               ),
             ),
           ]),
-        ));
+        )));
   }
 }
