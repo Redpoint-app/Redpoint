@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:redpoint/model/difficulty.dart';
 import 'package:redpoint/model/status.dart';
 import 'package:redpoint/model/tag.dart';
 import 'package:redpoint/model/v_scale.dart';
@@ -53,6 +54,8 @@ class _AddPageState extends State<AddPage> {
   // The selected progress value of the route
   Status? progress;
 
+  double difficultyIndex = 0;
+
   final selectedTags = ListQueue<Tag>();
 
   // Controllers for the text fields, to retrieve the text values
@@ -76,6 +79,12 @@ class _AddPageState extends State<AddPage> {
 
     setState(() {
       date = selected;
+    });
+  }
+
+  _setDifficulty(double value) {
+    setState(() {
+      difficultyIndex = value;
     });
   }
 
@@ -200,12 +209,14 @@ class _AddPageState extends State<AddPage> {
                   child: Text("Difficulty"),
                 ),
                 Slider(
-                    value: 4,
+                    value: difficultyIndex,
                     min: 0,
                     max: 4,
                     divisions: 4,
-                    label: "Hi",
-                    onChanged: (double value) {}),
+                    label: Difficulty.values[difficultyIndex.round()].label,
+                    onChanged: (double value) {
+                      _setDifficulty(value);
+                    }),
               ],
             ),
             const Divider(),
