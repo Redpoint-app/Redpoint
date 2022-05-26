@@ -8,8 +8,6 @@
 import 'package:flutter/material.dart';
 import 'package:redpoint/widgets/custom_chip.dart';
 
-import '../../model/status.dart';
-
 class FormSelectChip<T> extends StatefulWidget {
   const FormSelectChip(
       {super.key,
