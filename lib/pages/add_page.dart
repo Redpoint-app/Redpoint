@@ -55,7 +55,7 @@ class _AddPageState extends State<AddPage> {
   DateTime? _date;
 
   RouteType? _selectedType;
-  String? grade;
+  String? _grade;
 
   // The selected progress value of the route
   Status? _progress;
@@ -191,6 +191,7 @@ class _AddPageState extends State<AddPage> {
                       for (RouteType value in RouteType.values) {
                         if (value.label == selected) {
                           setState(() {
+                            _grade = null;
                             _selectedType = value;
                           });
                         }
@@ -202,13 +203,18 @@ class _AddPageState extends State<AddPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: DropdownButton(
                     hint: const Text("Grade"),
+                    value: _grade,
                     items: _selectedType?.grade.getScale().map((s) {
                       return DropdownMenuItem<String>(
                         value: s,
                         child: Text(s),
                       );
                     }).toList(),
-                    onChanged: (_) {},
+                    onChanged: (String? selected) {
+                      setState(() {
+                        _grade = selected;
+                      });
+                    },
                   ),
                 )
               ],

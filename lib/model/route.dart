@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:redpoint/model/completed_status.dart';
 import 'package:redpoint/model/difficulty.dart';
+import 'package:redpoint/model/grade.dart';
 import 'package:redpoint/model/route_type.dart';
 import 'package:redpoint/model/status.dart';
 import 'package:redpoint/model/tag.dart';
@@ -13,8 +14,7 @@ class Route {
   String title;
   DateTime date;
   RouteType type;
-  // TODO: Update grade to be generic
-  VScale grade;
+  Grade grade;
   Status status;
   CompletedStatus? completedStatus;
   Difficulty difficulty;
