@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:redpoint/model/difficulty.dart';
+import 'package:redpoint/model/grade.dart';
 import 'package:redpoint/model/status.dart';
 import 'package:redpoint/model/tag.dart';
 import 'package:redpoint/model/v_scale.dart';
@@ -54,6 +55,8 @@ class _AddPageState extends State<AddPage> {
   DateTime? _date;
 
   RouteType? _selectedType;
+  String? grade;
+
   // The selected progress value of the route
   Status? _progress;
   CompletedStatus? _completedStatus;
@@ -199,10 +202,10 @@ class _AddPageState extends State<AddPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: DropdownButton(
                     hint: const Text("Grade"),
-                    items: VScale.values.map((VScale grade) {
+                    items: _selectedType?.grade.getScale().map((s) {
                       return DropdownMenuItem<String>(
-                        value: grade.label,
-                        child: Text(grade.label),
+                        value: s,
+                        child: Text(s),
                       );
                     }).toList(),
                     onChanged: (_) {},
