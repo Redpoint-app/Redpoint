@@ -7,6 +7,7 @@ import 'package:redpoint/model/tag.dart';
 import 'package:redpoint/model/v_scale.dart';
 import 'package:redpoint/widgets/add_form/form_multi_select_chip.dart';
 
+import '../model/completed_status.dart';
 import '../model/route_type.dart';
 import '../widgets/add_form/form_button.dart';
 import '../widgets/add_form/form_select_chip.dart';
@@ -53,6 +54,7 @@ class _AddPageState extends State<AddPage> {
   DateTime? date;
   // The selected progress value of the route
   Status? progress;
+  CompletedStatus? completedStatus;
 
   double difficultyIndex = 0;
 
@@ -66,6 +68,12 @@ class _AddPageState extends State<AddPage> {
   void _setStatusIndex(Status? selectedProgress) {
     setState(() {
       progress = selectedProgress;
+    });
+  }
+
+  void _setCompletedStatusIndex(CompletedStatus? selectedCompletedStatus) {
+    setState(() {
+      completedStatus = selectedCompletedStatus;
     });
   }
 
@@ -188,17 +196,48 @@ class _AddPageState extends State<AddPage> {
               ],
             ),
             const Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: Status.values
-                  .map(
-                    (Status value) => FormSelectChip<Status>(
-                        label: value.label,
-                        value: value,
-                        selectedValue: progress,
-                        callback: _setStatusIndex),
-                  )
-                  .toList(),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child:
+            Column(
+              children: [
+            Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2),
+                child: SizedBox(
+                  height: 34,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: Status.values
+                        .map(
+                          (Status value) => FormSelectChip<Status>(
+                              label: value.label,
+                              value: value,
+                              selectedValue: progress,
+                              callback: _setStatusIndex),
+                        )
+                        .toList(),
+                  ),
+                )),
+                if (progress == Status.completed)
+            Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2),
+                child: SizedBox(
+                  height: 34,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: CompletedStatus.values
+                        .map(
+                          (CompletedStatus value) =>
+                              FormSelectChip<CompletedStatus>(
+                                  label: value.label,
+                                  value: value,
+                                  selectedValue: completedStatus,
+                                  callback: _setCompletedStatusIndex),
+                        )
+                        .toList(),
+                  ),
+                )),
+              ]),
             ),
             const Divider(),
             Column(
