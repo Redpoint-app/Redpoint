@@ -51,29 +51,31 @@ class AddPage extends StatefulWidget {
 
 class _AddPageState extends State<AddPage> {
   // The selected date of the route
-  DateTime? date;
+  DateTime? _date;
+
+  RouteType? _selectedType;
   // The selected progress value of the route
-  Status? progress;
-  CompletedStatus? completedStatus;
+  Status? _progress;
+  CompletedStatus? _completedStatus;
 
-  double difficultyIndex = 0;
+  double _difficultyIndex = 0;
 
-  final selectedTags = ListQueue<Tag>();
+  final _selectedTags = ListQueue<Tag>();
 
   // Controllers for the text fields, to retrieve the text values
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController thoughtsController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _thoughtsController = TextEditingController();
 
   // Updates the status index
   void _setStatusIndex(Status? selectedProgress) {
     setState(() {
-      progress = selectedProgress;
+      _progress = selectedProgress;
     });
   }
 
   void _setCompletedStatusIndex(CompletedStatus? selectedCompletedStatus) {
     setState(() {
-      completedStatus = selectedCompletedStatus;
+      _completedStatus = selectedCompletedStatus;
     });
   }
 
@@ -86,14 +88,18 @@ class _AddPageState extends State<AddPage> {
         lastDate: DateTime.now());
 
     setState(() {
-      date = selected;
+      _date = selected;
     });
   }
 
   _setDifficulty(double value) {
     setState(() {
-      difficultyIndex = value;
+      _difficultyIndex = value;
     });
+  }
+
+  void _save() {
+    if (_titleController.text != "" && _date != null && _progress != null) {}
   }
 
   // Converts the date to a string
@@ -121,7 +127,7 @@ class _AddPageState extends State<AddPage> {
             Padding(
                 padding: const EdgeInsets.only(right: 7.0),
                 child: TextButton(
-                    onPressed: () {},
+                    onPressed: _save,
                     child: Text(
                       "Save",
                       style: TextStyle(
@@ -136,7 +142,7 @@ class _AddPageState extends State<AddPage> {
             Padding(
                 padding: const EdgeInsets.only(right: 20, left: 20, top: 10),
                 child: TextField(
-                  controller: titleController,
+                  controller: _titleController,
                   style: const TextStyle(
                     fontSize: 20.0,
                   ),
@@ -157,7 +163,7 @@ class _AddPageState extends State<AddPage> {
                         onPressed: () {}),
                     FormButton(
                         icon: Icons.calendar_month,
-                        label: _dateToString(date),
+                        label: _dateToString(_date),
                         onPressed: () {
                           _selectDate(context);
                         }),
@@ -171,13 +177,22 @@ class _AddPageState extends State<AddPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: DropdownButton(
                     hint: const Text("Type"),
+                    value: _selectedType?.label,
                     items: RouteType.values.map((RouteType type) {
                       return DropdownMenuItem<String>(
                         value: type.label,
                         child: Text(type.label),
                       );
                     }).toList(),
-                    onChanged: (_) {},
+                    onChanged: (String? selected) {
+                      for (RouteType value in RouteType.values) {
+                        if (value.label == selected) {
+                          setState(() {
+                            _selectedType = value;
+                          });
+                        }
+                      }
+                    },
                   ),
                 ),
                 Padding(
@@ -198,45 +213,43 @@ class _AddPageState extends State<AddPage> {
             const Divider(),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 5),
-              child:
-            Column(
-              children: [
-            Padding(
-                padding: const EdgeInsets.symmetric(vertical: 2),
-                child: SizedBox(
-                  height: 34,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: Status.values
-                        .map(
-                          (Status value) => FormSelectChip<Status>(
-                              label: value.label,
-                              value: value,
-                              selectedValue: progress,
-                              callback: _setStatusIndex),
-                        )
-                        .toList(),
-                  ),
-                )),
-                if (progress == Status.completed)
-            Padding(
-                padding: const EdgeInsets.symmetric(vertical: 2),
-                child: SizedBox(
-                  height: 34,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: CompletedStatus.values
-                        .map(
-                          (CompletedStatus value) =>
-                              FormSelectChip<CompletedStatus>(
+              child: Column(children: [
+                Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 2),
+                    child: SizedBox(
+                      height: 34,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: Status.values
+                            .map(
+                              (Status value) => FormSelectChip<Status>(
                                   label: value.label,
                                   value: value,
-                                  selectedValue: completedStatus,
-                                  callback: _setCompletedStatusIndex),
-                        )
-                        .toList(),
-                  ),
-                )),
+                                  selectedValue: _progress,
+                                  callback: _setStatusIndex),
+                            )
+                            .toList(),
+                      ),
+                    )),
+                if (_progress == Status.completed)
+                  Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 2),
+                      child: SizedBox(
+                        height: 34,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: CompletedStatus.values
+                              .map(
+                                (CompletedStatus value) =>
+                                    FormSelectChip<CompletedStatus>(
+                                        label: value.label,
+                                        value: value,
+                                        selectedValue: _completedStatus,
+                                        callback: _setCompletedStatusIndex),
+                              )
+                              .toList(),
+                        ),
+                      )),
               ]),
             ),
             const Divider(),
@@ -248,11 +261,11 @@ class _AddPageState extends State<AddPage> {
                   child: Text("Difficulty"),
                 ),
                 Slider(
-                    value: difficultyIndex,
+                    value: _difficultyIndex,
                     min: 0,
                     max: 4,
                     divisions: 4,
-                    label: Difficulty.values[difficultyIndex.round()].label,
+                    label: Difficulty.values[_difficultyIndex.round()].label,
                     onChanged: (double value) {
                       _setDifficulty(value);
                     }),
@@ -270,7 +283,7 @@ class _AddPageState extends State<AddPage> {
                     FormMultiSelectChip<Tag>(
                       label: tag.label,
                       value: tag,
-                      values: selectedTags,
+                      values: _selectedTags,
                       maxLength: maxTags,
                       callback: () {
                         setState(() {});
@@ -281,10 +294,11 @@ class _AddPageState extends State<AddPage> {
             ),
             const Divider(),
             Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 80),
+              padding: const EdgeInsets.only(
+                  left: 10, right: 10, top: 5, bottom: 80),
               child: TextField(
                 maxLines: 7,
-                controller: thoughtsController,
+                controller: _thoughtsController,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: "Enter any thoughts here"),
