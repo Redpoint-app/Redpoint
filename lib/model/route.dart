@@ -8,13 +8,13 @@ import 'package:redpoint/model/status.dart';
 import 'package:redpoint/model/tag.dart';
 import 'package:redpoint/model/v_scale.dart';
 
-class Route {
-  Route(this.title, this.date, this.type, this.grade, this.status, this.completedStatus, this.difficulty, this.tags, this.thoughts);
+class ClimbingRoute {
+  ClimbingRoute(this.title, this.date, this.type, this.grade, this.status, this.completedStatus, this.difficulty, this.tags, this.thoughts);
 
   String title;
   DateTime date;
   RouteType type;
-  Grade grade;
+  String grade;
   Status status;
   CompletedStatus? completedStatus;
   Difficulty difficulty;

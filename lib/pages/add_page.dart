@@ -7,6 +7,7 @@ import 'package:redpoint/model/status.dart';
 import 'package:redpoint/model/tag.dart';
 import 'package:redpoint/model/v_scale.dart';
 import 'package:redpoint/widgets/add_form/form_multi_select_chip.dart';
+import 'package:redpoint/model/route.dart';
 
 import '../model/completed_status.dart';
 import '../model/route_type.dart';
@@ -58,7 +59,7 @@ class _AddPageState extends State<AddPage> {
   String? _grade;
 
   // The selected progress value of the route
-  Status? _progress;
+  Status? _status;
   CompletedStatus? _completedStatus;
 
   double _difficultyIndex = 0;
@@ -72,7 +73,7 @@ class _AddPageState extends State<AddPage> {
   // Updates the status index
   void _setStatusIndex(Status? selectedProgress) {
     setState(() {
-      _progress = selectedProgress;
+      _status = selectedProgress;
     });
   }
 
@@ -101,8 +102,56 @@ class _AddPageState extends State<AddPage> {
     });
   }
 
+  void showSnackbar(String message) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
   void _save() {
-    if (_titleController.text != "" && _date != null && _progress != null) {}
+    if (_titleController.text != "") {
+      if (_date != null) {
+        DateTime date = _date!;
+        if (_selectedType != null) {
+          RouteType type = _selectedType!;
+          if (_grade != null) {
+            String grade = _grade!;
+            if (_status != null) {
+              Status status = _status!;
+              if ((_status == Status.completed && _completedStatus != null) ||
+                  _status != Status.completed) {
+                if (_status != Status.completed) {
+                  _completedStatus = null;
+                }
+
+                ClimbingRoute(
+                    _titleController.text,
+                    date,
+                    type,
+                    grade,
+                    status,
+                    _completedStatus,
+                    Difficulty.values[_difficultyIndex.round()],
+                    _selectedTags,
+                    _thoughtsController.text);
+                Navigator.pop(context);
+              } else {
+                showSnackbar("Select a send type to save");
+              }
+            } else {
+              showSnackbar("Select a status to save");
+            }
+          } else {
+            showSnackbar("Route must have a grade");
+          }
+        } else {
+          showSnackbar("Route must have a type");
+        }
+      } else {
+        showSnackbar("Route must have a date");
+      }
+    } else {
+      showSnackbar("Route must have a title");
+    }
   }
 
   // Converts the date to a string
@@ -234,13 +283,13 @@ class _AddPageState extends State<AddPage> {
                               (Status value) => FormSelectChip<Status>(
                                   label: value.label,
                                   value: value,
-                                  selectedValue: _progress,
+                                  selectedValue: _status,
                                   callback: _setStatusIndex),
                             )
                             .toList(),
                       ),
                     )),
-                if (_progress == Status.completed)
+                if (_status == Status.completed)
                   Padding(
                       padding: const EdgeInsets.symmetric(vertical: 2),
                       child: SizedBox(
