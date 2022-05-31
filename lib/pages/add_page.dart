@@ -68,6 +68,8 @@ class _AddPageState extends State<AddPage> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _thoughtsController = TextEditingController();
 
+  bool _snackbarActive = false;
+
   // Updates the status index
   void _setStatusIndex(Status? selectedProgress) {
     setState(() {
@@ -101,8 +103,16 @@ class _AddPageState extends State<AddPage> {
   }
 
   void showSnackbar(String message) {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(message)));
+    if (!_snackbarActive) {
+      _snackbarActive = true;
+
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(message)))
+          .closed
+          .then((value) {
+        _snackbarActive = false;
+      });
+    }
   }
 
   void _save() {
