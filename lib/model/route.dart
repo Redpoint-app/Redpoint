@@ -9,7 +9,8 @@ import 'package:redpoint/model/tag.dart';
 import 'package:redpoint/model/v_scale.dart';
 
 class ClimbingRoute {
-  ClimbingRoute(this.title, this.date, this.type, this.grade, this.status, this.completedStatus, this.difficulty, this.tags, this.thoughts);
+  ClimbingRoute(this.title, this.date, this.type, this.grade, this.status,
+      this.completedStatus, this.difficulty, this.tags, this.thoughts);
 
   String title;
   DateTime date;
@@ -20,4 +21,9 @@ class ClimbingRoute {
   Difficulty difficulty;
   ListQueue<Tag> tags;
   String thoughts;
+
+  @override
+  String toString() {
+    return "ClimbingRoute{\ntitle: $title, \ndate: $date, \ntype: $type, \ngrade: $grade, \nstatus: $status, \ncompletedStatus: $completedStatus, \ndifficulty: $difficulty, \ntags: ${tags.toString()}, \nthoughts: $thoughts}";
+  }
 }

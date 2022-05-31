@@ -2,10 +2,8 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:redpoint/model/difficulty.dart';
-import 'package:redpoint/model/grade.dart';
 import 'package:redpoint/model/status.dart';
 import 'package:redpoint/model/tag.dart';
-import 'package:redpoint/model/v_scale.dart';
 import 'package:redpoint/widgets/add_form/form_multi_select_chip.dart';
 import 'package:redpoint/model/route.dart';
 
@@ -123,7 +121,7 @@ class _AddPageState extends State<AddPage> {
                   _completedStatus = null;
                 }
 
-                ClimbingRoute(
+                ClimbingRoute route = ClimbingRoute(
                     _titleController.text,
                     date,
                     type,
@@ -133,6 +131,8 @@ class _AddPageState extends State<AddPage> {
                     Difficulty.values[_difficultyIndex.round()],
                     _selectedTags,
                     _thoughtsController.text);
+                print(route.toString());
+
                 Navigator.pop(context);
               } else {
                 showSnackbar("Select a send type to save");
