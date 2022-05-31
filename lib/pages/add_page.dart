@@ -281,7 +281,7 @@ class _AddPageState extends State<AddPage> {
             ),
             const Divider(),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 80),
               child: TextField(
                 maxLines: 7,
                 controller: thoughtsController,
