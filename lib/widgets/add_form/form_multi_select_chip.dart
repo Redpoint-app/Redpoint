@@ -1,7 +1,6 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:redpoint/widgets/custom_chip.dart';
 
 class FormMultiSelectChip<T> extends StatefulWidget {
   const FormMultiSelectChip(
@@ -26,11 +25,11 @@ class FormMultiSelectChip<T> extends StatefulWidget {
 class _FormMultiSelectChipState<T> extends State<FormMultiSelectChip> {
   @override
   Widget build(BuildContext context) {
-    return CustomChip(
-      label: widget.label,
+    return ChoiceChip(
+      label: Text(widget.label),
       selected: widget.values.contains(widget.value),
       onSelected: (bool selected) {
-        if (selected) {
+        if (!selected) {
           widget.values.remove(widget.value);
         } else {
           if (widget.values.length == widget.maxLength) {

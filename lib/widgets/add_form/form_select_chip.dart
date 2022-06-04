@@ -6,7 +6,6 @@
 /// This widget is used in the status section of the Add route page.
 
 import 'package:flutter/material.dart';
-import 'package:redpoint/widgets/custom_chip.dart';
 
 class FormSelectChip<T> extends StatefulWidget {
   const FormSelectChip(
@@ -38,8 +37,8 @@ class _FormSelectChipState extends State<FormSelectChip> {
 
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4),
-        child: CustomChip(
-          label: widget.label,
+        child: ChoiceChip(
+          label: Text(widget.label),
           selected: isSelected,
           onSelected: (bool selected) {
             widget._onSelected(selected);

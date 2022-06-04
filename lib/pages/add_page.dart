@@ -317,7 +317,28 @@ class _AddPageState extends State<AddPage> {
                               )
                               .toList(),
                         ),
-                      )),
+                      ))
+                else if (_status == Status.inProgress)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Chip(label: Text("hello"),),
+                      CircleAvatar(
+                        backgroundColor: Theme.of(context).chipTheme.checkmarkColor,
+                          radius: 15,
+                          child: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.remove,
+                              ))),
+                      const Text("0 takes"),
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.add,
+                          )),
+                    ],
+                  )
               ]),
             ),
             const Divider(),
