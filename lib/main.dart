@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
               )),
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
               backgroundColor: Colors.blue, foregroundColor: Colors.white)),
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
       debugShowCheckedModeBanner: false,
     );

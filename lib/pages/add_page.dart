@@ -6,6 +6,8 @@ import 'package:redpoint/model/status.dart';
 import 'package:redpoint/model/tag.dart';
 import 'package:redpoint/widgets/add_form/form_multi_select_chip.dart';
 import 'package:redpoint/model/route.dart';
+import 'package:redpoint/widgets/add_form/small_icon_button.dart';
+import 'package:redpoint/widgets/add_form/takes_counter.dart';
 
 import '../model/completed_status.dart';
 import '../model/route_type.dart';
@@ -318,27 +320,8 @@ class _AddPageState extends State<AddPage> {
                               .toList(),
                         ),
                       ))
-                else if (_status == Status.inProgress)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Chip(label: Text("hello"),),
-                      CircleAvatar(
-                        backgroundColor: Theme.of(context).chipTheme.checkmarkColor,
-                          radius: 15,
-                          child: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.remove,
-                              ))),
-                      const Text("0 takes"),
-                      IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.add,
-                          )),
-                    ],
-                  )
+                else if (_status == Status.inProgress && (_selectedType == RouteType.lead || _selectedType == RouteType.topRope))
+                  const TakesCounter()
               ]),
             ),
             const Divider(),
