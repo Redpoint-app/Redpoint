@@ -15,23 +15,33 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-          brightness: Brightness.light,
+        brightness: Brightness.light,
+        primaryColor: Colors.blue,
+        chipTheme: const ChipThemeData(
+            selectedColor: Colors.blue,
+            backgroundColor: Color.fromRGBO(220, 220, 220, 1),
+            labelStyle: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+            ),
+            secondaryLabelStyle: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+            )),
+      ),
+      darkTheme: ThemeData(
+          brightness: Brightness.dark,
           primaryColor: Colors.blue,
           chipTheme: const ChipThemeData(
               selectedColor: Colors.blue,
-              backgroundColor: Color.fromRGBO(220, 220, 220, 1),
+              backgroundColor: Color.fromRGBO(73, 73, 73, 1),
               labelStyle: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w500,
-              ),
-              secondaryLabelStyle: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
               )),
-          ),
-          darkTheme: ThemeData(
-            // TODO: Implement
-          ),
+          floatingActionButtonTheme: const FloatingActionButtonThemeData(
+              foregroundColor: Colors.white)),
+      themeMode: ThemeMode.light,
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
       debugShowCheckedModeBanner: false,
     );
