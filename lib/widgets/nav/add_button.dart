@@ -31,7 +31,6 @@ class _AddButtonState extends State<AddButton> {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      backgroundColor: Theme.of(context).primaryColor,
         tooltip: "Add Route",
         child: const Icon(Icons.add),
         onPressed: () {

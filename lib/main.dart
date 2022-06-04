@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.light,
         primaryColor: Colors.blue,
+        disabledColor: const Color.fromRGBO(220, 220, 220, 1),
         chipTheme: const ChipThemeData(
             selectedColor: Colors.blue,
             backgroundColor: Color.fromRGBO(220, 220, 220, 1),
@@ -28,10 +29,13 @@ class MyApp extends StatelessWidget {
               color: Colors.white,
               fontWeight: FontWeight.w500,
             )),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+            backgroundColor: Colors.blue, foregroundColor: Colors.white),
       ),
       darkTheme: ThemeData(
           brightness: Brightness.dark,
           primaryColor: Colors.blue,
+          disabledColor: const Color.fromRGBO(73, 73, 73, 1),
           chipTheme: const ChipThemeData(
               selectedColor: Colors.blue,
               backgroundColor: Color.fromRGBO(73, 73, 73, 1),
@@ -40,8 +44,8 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               )),
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
-              foregroundColor: Colors.white)),
-      themeMode: ThemeMode.light,
+              backgroundColor: Colors.blue, foregroundColor: Colors.white)),
+      themeMode: ThemeMode.dark,
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
       debugShowCheckedModeBanner: false,
     );
