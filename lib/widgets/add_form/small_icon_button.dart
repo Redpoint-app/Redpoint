@@ -17,7 +17,7 @@ class _SmallIconButtonState extends State<SmallIconButton> {
         width: 24.0,
         height: 24.0,
         decoration: BoxDecoration(
-            color: widget.color ?? Colors.blue,
+            color: widget.color ?? Theme.of(context).primaryColor,
             borderRadius: const BorderRadius.all(Radius.circular(30.0))),
         child: Center(
             child: IconButton(

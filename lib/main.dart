@@ -3,17 +3,16 @@ import 'package:flutter/rendering.dart';
 import 'package:redpoint/pages/home_page.dart';
 
 void main() {
-  //debugPaintSizeEnabled = true;
-  runApp(const MyApp());
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Redpoint',
       theme: ThemeData(
         brightness: Brightness.light,
         primaryColor: Colors.blue,
@@ -45,24 +44,22 @@ class MyApp extends StatelessWidget {
               )),
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
               backgroundColor: Colors.blue, foregroundColor: Colors.white)),
-      themeMode: ThemeMode.light,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      themeMode: ThemeMode.system,
+      home: const InitialPage(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-
+class InitialPage extends StatefulWidget {
+  const InitialPage({super.key});
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<InitialPage> createState() => _InitialPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _InitialPageState extends State<InitialPage> {
   @override
   Widget build(BuildContext context) {
-    return const HomePage();
+    return const InitialPage();
   }
 }
