@@ -1,4 +1,3 @@
-
 /// The navigation bar at the bottom of the screen
 
 import 'package:flutter/material.dart';
@@ -23,17 +22,19 @@ class _BottomNavbarState extends State<BottomNavbar> {
     return BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: 6.0, // Margin between FAB and navbar
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const <Widget>[
-            NavButton(buttonIcon: Icons.home, page: HomePage()),
-            NavButton(buttonIcon: Icons.list, page: ProjectsPage()),
-            FABPlaceholder(),
-            NavButton(buttonIcon: Icons.show_chart, page: SocialPage()),
-            NavButton(buttonIcon: Icons.person, page: ProfilePage()),
-          ],
-        ));
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 10, top: 5),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const <Widget>[
+                NavButton(buttonIcon: Icons.home, page: HomePage()),
+                NavButton(buttonIcon: Icons.list, page: ProjectsPage()),
+                FABPlaceholder(),
+                NavButton(buttonIcon: Icons.show_chart, page: SocialPage()),
+                NavButton(buttonIcon: Icons.person, page: ProfilePage()),
+              ],
+            )));
   }
 }

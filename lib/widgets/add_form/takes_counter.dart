@@ -9,12 +9,12 @@ class TakesCounter extends StatefulWidget {
 }
 
 class _TakesCounterState extends State<TakesCounter> {
-  int count = 0;
+  int count = 2;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.only(top: 8, bottom: 3),
+        padding: const EdgeInsets.only(top: 18, bottom: 4),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -26,13 +26,13 @@ class _TakesCounterState extends State<TakesCounter> {
                   icon: Icons.remove,
                   onPressed: () {
                     setState(() {
-                      if (count >= 1) {
+                      if (count >= 2) {
                         count--;
                       }
                     });
                   },
                 )),
-            Text("$count takes"),
+            Text("$count ${count == 1 ? 'take' : 'takes'}"),
             Padding(
                 padding: const EdgeInsets.only(left: 8),
                 child: SmallIconButton(

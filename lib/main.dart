@@ -16,7 +16,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.light,
         primaryColor: Colors.blue,
-        disabledColor: const Color.fromRGBO(220, 220, 220, 1),
+        disabledColor: Color.fromRGBO(220, 220, 220, 1),
         chipTheme: const ChipThemeData(
             selectedColor: Colors.blue,
             backgroundColor: Color.fromRGBO(220, 220, 220, 1),
@@ -60,6 +60,6 @@ class InitialPage extends StatefulWidget {
 class _InitialPageState extends State<InitialPage> {
   @override
   Widget build(BuildContext context) {
-    return const InitialPage();
+    return const HomePage();
   }
 }

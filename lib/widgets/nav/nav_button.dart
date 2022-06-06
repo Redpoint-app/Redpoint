@@ -27,6 +27,8 @@ class _NavButtonState extends State<NavButton> {
                 reverseTransitionDuration: Duration.zero,
               ));
         },
-        icon: Icon(widget.buttonIcon));
+        icon: Icon(
+          widget.buttonIcon,
+        ));
   }
 }

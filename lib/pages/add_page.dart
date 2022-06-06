@@ -180,6 +180,7 @@ class _AddPageState extends State<AddPage> {
     return Scaffold(
         appBar: AppBar(
           title: const Text("Add Route"),
+          centerTitle: true,
           automaticallyImplyLeading: false,
           leading: IconButton(
             icon: const Icon(Icons.close),
@@ -234,55 +235,57 @@ class _AddPageState extends State<AddPage> {
                   ],
                 )),
             const Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: DropdownButton(
-                    hint: const Text("Type"),
-                    value: _selectedType?.label,
-                    items: RouteType.values.map((RouteType type) {
-                      return DropdownMenuItem<String>(
-                        value: type.label,
-                        child: Text(type.label),
-                      );
-                    }).toList(),
-                    onChanged: (String? selected) {
-                      for (RouteType value in RouteType.values) {
-                        if (value.label == selected) {
+            Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: DropdownButton(
+                        hint: const Text("Type"),
+                        value: _selectedType?.label,
+                        items: RouteType.values.map((RouteType type) {
+                          return DropdownMenuItem<String>(
+                            value: type.label,
+                            child: Text(type.label),
+                          );
+                        }).toList(),
+                        onChanged: (String? selected) {
+                          for (RouteType value in RouteType.values) {
+                            if (value.label == selected) {
+                              setState(() {
+                                _grade = null;
+                                _selectedType = value;
+                              });
+                            }
+                          }
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: DropdownButton(
+                        hint: const Text("Grade"),
+                        value: _grade,
+                        items: _selectedType?.grade.getScale().map((s) {
+                          return DropdownMenuItem<String>(
+                            value: s,
+                            child: Text(s),
+                          );
+                        }).toList(),
+                        onChanged: (String? selected) {
                           setState(() {
-                            _grade = null;
-                            _selectedType = value;
+                            _grade = selected;
                           });
-                        }
-                      }
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: DropdownButton(
-                    hint: const Text("Grade"),
-                    value: _grade,
-                    items: _selectedType?.grade.getScale().map((s) {
-                      return DropdownMenuItem<String>(
-                        value: s,
-                        child: Text(s),
-                      );
-                    }).toList(),
-                    onChanged: (String? selected) {
-                      setState(() {
-                        _grade = selected;
-                      });
-                    },
-                  ),
-                )
-              ],
-            ),
+                        },
+                      ),
+                    )
+                  ],
+                )),
             const Divider(),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
+              padding: const EdgeInsets.symmetric(vertical: 14),
               child: Column(children: [
                 Padding(
                     padding: const EdgeInsets.symmetric(vertical: 2),
@@ -320,7 +323,9 @@ class _AddPageState extends State<AddPage> {
                               .toList(),
                         ),
                       ))
-                else if (_status == Status.inProgress && (_selectedType == RouteType.lead || _selectedType == RouteType.topRope))
+                else if (_status == Status.inProgress &&
+                    (_selectedType == RouteType.lead ||
+                        _selectedType == RouteType.topRope))
                   const TakesCounter()
               ]),
             ),
@@ -332,20 +337,23 @@ class _AddPageState extends State<AddPage> {
                   padding: EdgeInsets.only(top: 15),
                   child: Text("Difficulty"),
                 ),
-                Slider(
-                    value: _difficultyIndex,
-                    min: 0,
-                    max: 4,
-                    divisions: 4,
-                    label: Difficulty.values[_difficultyIndex.round()].label,
-                    onChanged: (double value) {
-                      _setDifficulty(value);
-                    }),
+                Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 20, bottom: 5),
+                    child: Slider(
+                        value: _difficultyIndex,
+                        min: 0,
+                        max: 4,
+                        divisions: 4,
+                        label:
+                            Difficulty.values[_difficultyIndex.round()].label,
+                        onChanged: (double value) {
+                          _setDifficulty(value);
+                        })),
               ],
             ),
             const Divider(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            FractionallySizedBox(
+              widthFactor: 0.7,
               child: Wrap(
                 runSpacing: -10,
                 alignment: WrapAlignment.center,
@@ -367,7 +375,7 @@ class _AddPageState extends State<AddPage> {
             const Divider(),
             Padding(
               padding: const EdgeInsets.only(
-                  left: 10, right: 10, top: 5, bottom: 80),
+                  left: 15, right: 15, top: 15, bottom: 80),
               child: TextField(
                 maxLines: 7,
                 controller: _thoughtsController,
