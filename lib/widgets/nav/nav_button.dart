@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:redpoint/pages/home_page.dart';
 
 class NavButton extends StatefulWidget {
-  const NavButton({super.key, required this.buttonIcon, required this.page});
+  const NavButton({super.key, required this.buttonIcon, required this.page, required this.active});
   final IconData buttonIcon;
   final Widget page;
+  final bool active;
 
   @override
   _NavButtonState createState() => _NavButtonState();
@@ -29,6 +30,7 @@ class _NavButtonState extends State<NavButton> {
         },
         icon: Icon(
           widget.buttonIcon,
+          color: widget.active ? Theme.of(context).primaryColor : Theme.of(context).iconTheme.color,
         ));
   }
 }
