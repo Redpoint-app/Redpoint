@@ -15,8 +15,9 @@ class App extends StatelessWidget {
       title: 'Redpoint',
       theme: ThemeData(
         brightness: Brightness.light,
+        primarySwatch: Colors.blue,
         primaryColor: Colors.blue,
-        disabledColor: Color.fromRGBO(220, 220, 220, 1),
+        disabledColor: const Color.fromRGBO(220, 220, 220, 1),
         chipTheme: const ChipThemeData(
             selectedColor: Colors.blue,
             backgroundColor: Color.fromRGBO(220, 220, 220, 1),
@@ -33,6 +34,7 @@ class App extends StatelessWidget {
       ),
       darkTheme: ThemeData(
           brightness: Brightness.dark,
+          primarySwatch: Colors.blue,
           primaryColor: Colors.blue,
           disabledColor: const Color.fromRGBO(73, 73, 73, 1),
           chipTheme: const ChipThemeData(
