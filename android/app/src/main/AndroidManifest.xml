@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.redpoint.redpoint">
    <application
-        android:label="redpoint"
+        android:label="Redpoint"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
