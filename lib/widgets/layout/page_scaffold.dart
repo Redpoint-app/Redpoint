@@ -22,7 +22,7 @@ class _PageScaffoldState extends State<PageScaffold> {
       body: widget.body,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: const AddButton(),
-      bottomNavigationBar: const BottomNavbar()
+      bottomNavigationBar: BottomNavbar(pageTitle: widget.title)
     );
   }
 }

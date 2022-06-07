@@ -1,38 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:redpoint/pages/home_page.dart';
-import 'package:redpoint/widgets/layout/page_scaffold.dart';
 
 void main() {
-  //debugPaintSizeEnabled = true;
-  runApp(const MyApp());
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Redpoint',
       theme: ThemeData(
+        brightness: Brightness.light,
         primarySwatch: Colors.blue,
+        primaryColor: Colors.blue,
+        disabledColor: const Color.fromRGBO(220, 220, 220, 1),
+        chipTheme: const ChipThemeData(
+            selectedColor: Colors.blue,
+            backgroundColor: Color.fromRGBO(220, 220, 220, 1),
+            labelStyle: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+            ),
+            secondaryLabelStyle: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+            )),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+            backgroundColor: Colors.blue, foregroundColor: Colors.white),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          primarySwatch: Colors.blue,
+          primaryColor: Colors.blue,
+          disabledColor: const Color.fromRGBO(73, 73, 73, 1),
+          chipTheme: const ChipThemeData(
+              selectedColor: Colors.blue,
+              backgroundColor: Color.fromRGBO(73, 73, 73, 1),
+              labelStyle: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+              )),
+          floatingActionButtonTheme: const FloatingActionButtonThemeData(
+              backgroundColor: Colors.blue, foregroundColor: Colors.white)),
+      themeMode: ThemeMode.system,
+      home: const InitialPage(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-
+class InitialPage extends StatefulWidget {
+  const InitialPage({super.key});
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<InitialPage> createState() => _InitialPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _InitialPageState extends State<InitialPage> {
   @override
   Widget build(BuildContext context) {
     return const HomePage();
