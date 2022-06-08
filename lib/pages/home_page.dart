@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
           RouteCarousel(title: "Recent climbs", routes: routes),
           RouteCarousel(title: "Friend activity", routes: routes),
           const Padding(
-            padding: EdgeInsets.only(bottom: 50),
+            padding: EdgeInsets.only(bottom: 120),
           ),
         ],
       ),
