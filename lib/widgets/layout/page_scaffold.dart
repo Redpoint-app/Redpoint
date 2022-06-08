@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:redpoint/widgets/nav/add_button.dart';
+import 'package:flutter/services.dart';
 
 import '../nav/bottom_navbar.dart';
 
@@ -19,27 +20,15 @@ class _PageScaffoldState extends State<PageScaffold> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBody: true,
-        body: Stack(
-          children: [
-            Container(
-              height: 60,
-              width: MediaQuery.of(context).size.width,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Color.fromRGBO(0, 0, 0, .5),
-                    Color.fromRGBO(0, 0, 0, 0)
-                  ],
-                ),
-              ),
-            ),
-            SafeArea(
-              bottom: false,
-              child: SingleChildScrollView(child: widget.body),
-            ),
-          ],
+        body: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle(
+            statusBarBrightness: Theme.of(context).brightness,
+            statusBarColor: const Color.fromRGBO(0, 0, 0, 0.2),
+          ),
+          child: SafeArea(
+            bottom: false,
+            child: SingleChildScrollView(child: widget.body),
+          ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: const AddButton(),
