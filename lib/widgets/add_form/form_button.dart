@@ -14,7 +14,7 @@ class FormButton extends StatefulWidget {
   final void Function() onPressed;
 
   @override
-  _FormButtonState createState() => _FormButtonState();
+  State<FormButton> createState() => _FormButtonState();
 }
 
 class _FormButtonState extends State<FormButton> {

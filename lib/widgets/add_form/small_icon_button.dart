@@ -7,7 +7,7 @@ class SmallIconButton extends StatefulWidget {
   final Color? color;
 
   @override
-  _SmallIconButtonState createState() => _SmallIconButtonState();
+  State<SmallIconButton> createState() => _SmallIconButtonState();
 }
 
 class _SmallIconButtonState extends State<SmallIconButton> {

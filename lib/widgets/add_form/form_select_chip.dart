@@ -27,7 +27,7 @@ class FormSelectChip<T> extends StatefulWidget {
   }
 
   @override
-  _FormSelectChipState createState() => _FormSelectChipState();
+  State<FormSelectChip> createState() => _FormSelectChipState();
 }
 
 class _FormSelectChipState extends State<FormSelectChip> {

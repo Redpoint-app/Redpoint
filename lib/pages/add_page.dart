@@ -6,7 +6,6 @@ import 'package:redpoint/model/status.dart';
 import 'package:redpoint/model/tag.dart';
 import 'package:redpoint/widgets/add_form/form_multi_select_chip.dart';
 import 'package:redpoint/model/route.dart';
-import 'package:redpoint/widgets/add_form/small_icon_button.dart';
 import 'package:redpoint/widgets/add_form/takes_counter.dart';
 
 import '../model/completed_status.dart';
@@ -48,7 +47,7 @@ class AddPage extends StatefulWidget {
   const AddPage({super.key});
 
   @override
-  _AddPageState createState() => _AddPageState();
+  State<AddPage> createState() => _AddPageState();
 }
 
 class _AddPageState extends State<AddPage> {

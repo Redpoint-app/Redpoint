@@ -5,7 +5,7 @@ class SocialPage extends StatefulWidget {
   const SocialPage({super.key});
 
   @override
-  _SocialPageState createState() => _SocialPageState();
+  State<SocialPage> createState() => _SocialPageState();
 }
 
 class _SocialPageState extends State<SocialPage> {

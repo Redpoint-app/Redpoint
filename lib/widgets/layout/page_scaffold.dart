@@ -12,7 +12,7 @@ class PageScaffold extends StatefulWidget {
   final Widget body;
 
   @override
-  _PageScaffoldState createState() => _PageScaffoldState();
+  State<PageScaffold> createState() => _PageScaffoldState();
 }
 
 class _PageScaffoldState extends State<PageScaffold> {

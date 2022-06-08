@@ -14,7 +14,7 @@ class BottomNavbar extends StatefulWidget {
   final String pageTitle;
 
   @override
-  _BottomNavbarState createState() => _BottomNavbarState();
+  State<BottomNavbar> createState() => _BottomNavbarState();
 }
 
 class _BottomNavbarState extends State<BottomNavbar> {

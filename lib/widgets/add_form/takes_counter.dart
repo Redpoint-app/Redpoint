@@ -5,7 +5,7 @@ class TakesCounter extends StatefulWidget {
   const TakesCounter({super.key});
 
   @override
-  _TakesCounterState createState() => _TakesCounterState();
+  State<TakesCounter> createState() => _TakesCounterState();
 }
 
 class _TakesCounterState extends State<TakesCounter> {

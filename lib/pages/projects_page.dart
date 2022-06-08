@@ -5,7 +5,7 @@ class ProjectsPage extends StatefulWidget {
   const ProjectsPage({super.key});
 
   @override
-  _ProjectsPageState createState() => _ProjectsPageState();
+  State<ProjectsPage> createState() => _ProjectsPageState();
 }
 
 class _ProjectsPageState extends State<ProjectsPage> {
