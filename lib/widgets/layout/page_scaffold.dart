@@ -1,4 +1,3 @@
-
 /// A basic page template that includes the bottom navbar. Avoids code reuse.
 
 import 'package:flutter/material.dart';
@@ -19,10 +18,13 @@ class _PageScaffoldState extends State<PageScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: widget.body,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: const AddButton(),
-      bottomNavigationBar: BottomNavbar(pageTitle: widget.title)
-    );
+        extendBody: true,
+        body: SafeArea(
+          bottom: false,
+          child: SingleChildScrollView(child: widget.body),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: const AddButton(),
+        bottomNavigationBar: BottomNavbar(pageTitle: widget.title));
   }
 }

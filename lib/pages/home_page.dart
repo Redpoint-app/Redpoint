@@ -75,31 +75,27 @@ class _HomePageState extends State<HomePage> {
 
     return PageScaffold(
       title: "Home",
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 40, left: 30, bottom: 20),
-                child: Text(
-                  "Good ${(DateTime.now().hour >= 12) ? "afternoon" : "morning"},\nUser",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: min(MediaQuery.of(context).size.width,
-                              MediaQuery.of(context).size.height) *
-                          .08),
-                ),
-              ),
-              RouteCarousel(title: "Projects", routes: routes),
-              RouteCarousel(title: "Recent climbs", routes: routes),
-              RouteCarousel(title: "Friend activity", routes: routes),
-              const Padding(
-                padding: EdgeInsets.only(bottom: 50),
-              ),
-            ],
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 40, left: 30, bottom: 20),
+            child: Text(
+              "Good ${(DateTime.now().hour >= 12) ? "afternoon" : "morning"},\nUser",
+              style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: min(MediaQuery.of(context).size.width,
+                          MediaQuery.of(context).size.height) *
+                      .08),
+            ),
           ),
-        ),
+          RouteCarousel(title: "Projects", routes: routes),
+          RouteCarousel(title: "Recent climbs", routes: routes),
+          RouteCarousel(title: "Friend activity", routes: routes),
+          const Padding(
+            padding: EdgeInsets.only(bottom: 50),
+          ),
+        ],
       ),
     );
   }
