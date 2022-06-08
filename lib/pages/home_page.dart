@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:redpoint/model/yds.dart';
 import 'package:redpoint/widgets/layout/page_scaffold.dart';
+import 'package:redpoint/widgets/route_widgets/add_route_card.dart';
 import 'package:redpoint/widgets/route_widgets/route_carousel.dart';
 
 import '../model/difficulty.dart';
@@ -91,9 +92,24 @@ class _HomePageState extends State<HomePage> {
                       .08),
             ),
           ),
-          RouteCarousel(title: "Projects", routes: routes),
-          RouteCarousel(title: "Recent climbs", routes: routes),
-          RouteCarousel(title: "Friend activity", routes: routes),
+          RouteCarousel(
+            title: "Projects",
+            routes: routes,
+            emptyWidget: const AddRouteCard(),
+          ),
+          RouteCarousel(
+            title: "Recent climbs",
+            routes: routes,
+            emptyWidget: const AddRouteCard(),
+          ),
+          RouteCarousel(
+            title: "Friend activity",
+            routes: routes,
+            emptyWidget: const Padding(
+              padding: EdgeInsets.only(left: 30),
+              child: Text("No friend activity yet."),
+            ),
+          ),
           const Padding(
             padding: EdgeInsets.only(bottom: 120),
           ),
