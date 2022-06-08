@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redpoint/model/route.dart';
+import 'package:redpoint/widgets/route_widgets/add_route_card.dart';
 import 'package:redpoint/widgets/route_widgets/route_card.dart';
 
 class RouteCarousel extends StatefulWidget {
@@ -46,19 +47,21 @@ class _RouteCarouselState extends State<RouteCarousel> {
               ],
             ),
           ),
-          SizedBox(
-            height: 250.0,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: widget.routes.length,
-              itemBuilder: (BuildContext context, int index) {
-                return RouteCard(
-                    route: widget.routes[index],
-                    first: index == 0,
-                    last: index == (widget.routes.length - 1));
-              },
+          if (widget.routes.isEmpty) const AddRouteCard(),
+          if (widget.routes.isNotEmpty)
+            SizedBox(
+              height: 250.0,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: widget.routes.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return RouteCard(
+                      route: widget.routes[index],
+                      first: index == 0,
+                      last: index == (widget.routes.length - 1));
+                },
+              ),
             ),
-          ),
         ],
       ),
     );
