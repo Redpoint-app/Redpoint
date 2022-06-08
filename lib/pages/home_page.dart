@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
             routes: routes,
             emptyWidget: const Padding(
               padding: EdgeInsets.only(left: 30),
-              child: Text("No friend activity yet."),
+              child: Text("No friend activity yet"),
             ),
           ),
           const Padding(
