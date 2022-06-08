@@ -3,8 +3,9 @@ import 'package:redpoint/model/route.dart';
 import 'package:redpoint/widgets/route_widgets/route_card.dart';
 
 class RouteCarousel extends StatefulWidget {
-  const RouteCarousel({super.key, required this.routes});
+  const RouteCarousel({super.key, required this.routes, required this.title});
   final List<ClimbingRoute> routes;
+  final String title;
 
   @override
   State<RouteCarousel> createState() => _RouteCarouselState();
@@ -13,19 +14,52 @@ class RouteCarousel extends StatefulWidget {
 class _RouteCarouselState extends State<RouteCarousel> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 200.0,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: widget.routes.length,
-        itemBuilder: (BuildContext context, int index) {
-          double leftPadding = index == 0 ? 30 : 0;
-          double rightPadding = index == (widget.routes.length - 1) ? 30 : 0;
-
-          return Padding(
-            padding: EdgeInsets.only(left: leftPadding, right: rightPadding),
-            child: RouteCard(route: widget.routes[index]));
-        },
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  widget.title,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "View all",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 250.0,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: widget.routes.length,
+              itemBuilder: (BuildContext context, int index) {
+                return RouteCard(
+                    route: widget.routes[index],
+                    first: index == 0,
+                    last: index == (widget.routes.length - 1));
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
