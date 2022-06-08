@@ -32,7 +32,7 @@ class _AddRouteCardState extends State<AddRouteCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30),
+      padding: const EdgeInsets.only(left: 34, top: 4),
       child: InkWell(
         highlightColor: Theme.of(context).primaryColor.withOpacity(0.2),
         splashColor: Theme.of(context).primaryColor.withOpacity(0.2),
@@ -44,8 +44,8 @@ class _AddRouteCardState extends State<AddRouteCard> {
           strokeWidth: 2,
           dashPattern: const [10, 10],
           child: SizedBox(
-            width: 250,
-            height: 250,
+            width: 260,
+            height: 238,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,

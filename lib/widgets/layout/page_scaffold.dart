@@ -23,7 +23,11 @@ class _PageScaffoldState extends State<PageScaffold> {
         body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle(
             statusBarBrightness: Theme.of(context).brightness,
-            statusBarColor: const Color.fromRGBO(0, 0, 0, 0.2),
+            statusBarIconBrightness:
+                Theme.of(context).brightness == Brightness.dark
+                    ? Brightness.light
+                    : Brightness.dark,
+            statusBarColor: Colors.transparent,
           ),
           child: SafeArea(
             bottom: false,
