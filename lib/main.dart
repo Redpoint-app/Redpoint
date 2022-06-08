@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:redpoint/pages/home_page.dart';
 
 void main() {
@@ -19,16 +18,17 @@ class App extends StatelessWidget {
         primaryColor: Colors.blue,
         disabledColor: const Color.fromRGBO(220, 220, 220, 1),
         chipTheme: const ChipThemeData(
-            selectedColor: Colors.blue,
-            backgroundColor: Color.fromRGBO(220, 220, 220, 1),
-            labelStyle: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w500,
-            ),
-            secondaryLabelStyle: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w500,
-            )),
+          selectedColor: Colors.blue,
+          backgroundColor: Color.fromRGBO(220, 220, 220, 1),
+          labelStyle: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w500,
+          ),
+          secondaryLabelStyle: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
             backgroundColor: Colors.blue, foregroundColor: Colors.white),
       ),
@@ -38,12 +38,19 @@ class App extends StatelessWidget {
           primaryColor: Colors.blue,
           disabledColor: const Color.fromRGBO(73, 73, 73, 1),
           chipTheme: const ChipThemeData(
-              selectedColor: Colors.blue,
-              backgroundColor: Color.fromRGBO(73, 73, 73, 1),
-              labelStyle: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
-              )),
+            selectedColor: Colors.blue,
+            backgroundColor: Color.fromRGBO(73, 73, 73, 1),
+            labelStyle: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          cardTheme: const CardTheme(
+            color: Color.fromRGBO(58, 58, 58, 1),
+          ),
+          sliderTheme: const SliderThemeData(
+            valueIndicatorColor: Color.fromRGBO(73, 73, 73, 1),
+          ),
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
               backgroundColor: Colors.blue, foregroundColor: Colors.white)),
       themeMode: ThemeMode.system,

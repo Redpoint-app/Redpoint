@@ -19,7 +19,7 @@ class FormMultiSelectChip<T> extends StatefulWidget {
   final void Function() callback;
 
   @override
-  _FormMultiSelectChipState<T> createState() => _FormMultiSelectChipState();
+  State<FormMultiSelectChip> createState() => _FormMultiSelectChipState<T>();
 }
 
 class _FormMultiSelectChipState<T> extends State<FormMultiSelectChip> {

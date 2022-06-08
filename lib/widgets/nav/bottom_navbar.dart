@@ -14,28 +14,42 @@ class BottomNavbar extends StatefulWidget {
   final String pageTitle;
 
   @override
-  _BottomNavbarState createState() => _BottomNavbarState();
+  State<BottomNavbar> createState() => _BottomNavbarState();
 }
 
 class _BottomNavbarState extends State<BottomNavbar> {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 6.0, // Margin between FAB and navbar
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 10, top: 5),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                NavButton(active: widget.pageTitle == "Home", buttonIcon: Icons.home, page: const HomePage()),
-                NavButton(active: widget.pageTitle == "Projects", buttonIcon: Icons.list, page: const ProjectsPage()),
-                const FABPlaceholder(),
-                NavButton(active: widget.pageTitle == "Social", buttonIcon: Icons.show_chart, page: const SocialPage()),
-                NavButton(active: widget.pageTitle == "Profile", buttonIcon: Icons.person, page: const ProfilePage()),
-              ],
-            )));
+      shape: const CircularNotchedRectangle(),
+      notchMargin: 6.0, // Margin between FAB and navbar
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 10, top: 5),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            NavButton(
+                active: widget.pageTitle == "Home",
+                buttonIcon: Icons.home,
+                page: const HomePage()),
+            NavButton(
+                active: widget.pageTitle == "Projects",
+                buttonIcon: Icons.list,
+                page: const ProjectsPage()),
+            const FABPlaceholder(),
+            NavButton(
+                active: widget.pageTitle == "Social",
+                buttonIcon: Icons.show_chart,
+                page: const SocialPage()),
+            NavButton(
+                active: widget.pageTitle == "Profile",
+                buttonIcon: Icons.person,
+                page: const ProfilePage()),
+          ],
+        ),
+      ),
+    );
   }
 }

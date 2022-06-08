@@ -6,7 +6,8 @@ import 'package:redpoint/pages/add_page.dart';
 class AddButton extends StatefulWidget {
   const AddButton({super.key});
 
-  _AddButtonState createState() => _AddButtonState();
+  @override
+  State<AddButton> createState() => _AddButtonState();
 }
 
 Route _createRoute() {
