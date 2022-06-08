@@ -19,9 +19,27 @@ class _PageScaffoldState extends State<PageScaffold> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBody: true,
-        body: SafeArea(
-          bottom: false,
-          child: SingleChildScrollView(child: widget.body),
+        body: Stack(
+          children: [
+            Container(
+              height: 60,
+              width: MediaQuery.of(context).size.width,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color.fromRGBO(0, 0, 0, .5),
+                    Color.fromRGBO(0, 0, 0, 0)
+                  ],
+                ),
+              ),
+            ),
+            SafeArea(
+              bottom: false,
+              child: SingleChildScrollView(child: widget.body),
+            ),
+          ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: const AddButton(),
