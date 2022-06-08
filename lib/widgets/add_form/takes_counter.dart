@@ -9,7 +9,7 @@ class TakesCounter extends StatefulWidget {
 }
 
 class _TakesCounterState extends State<TakesCounter> {
-  int count = 2;
+  int count = 1;
 
   @override
   Widget build(BuildContext context) {
