@@ -43,6 +43,9 @@ class App extends StatelessWidget {
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
               )),
+              cardTheme: const CardTheme(
+              color: Color.fromRGBO(58, 58, 58, 1),
+              ),
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
               backgroundColor: Colors.blue, foregroundColor: Colors.white)),
       themeMode: ThemeMode.system,
