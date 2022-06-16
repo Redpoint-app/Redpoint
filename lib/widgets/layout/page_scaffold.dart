@@ -7,9 +7,10 @@ import 'package:flutter/services.dart';
 import '../nav/bottom_navbar.dart';
 
 class PageScaffold extends StatefulWidget {
-  const PageScaffold({super.key, required this.title, required this.body});
+  const PageScaffold({super.key, required this.title, required this.body, this.scrollable});
   final String title;
   final Widget body;
+  final bool? scrollable;
 
   @override
   State<PageScaffold> createState() => _PageScaffoldState();
@@ -31,7 +32,7 @@ class _PageScaffoldState extends State<PageScaffold> {
           ),
           child: SafeArea(
             bottom: false,
-            child: SingleChildScrollView(child: widget.body),
+            child: (widget.scrollable == true) ? SingleChildScrollView(child: widget.body) : widget.body,
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

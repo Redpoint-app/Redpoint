@@ -78,6 +78,7 @@ class _HomePageState extends State<HomePage> {
 
     return PageScaffold(
       title: "Home",
+      scrollable: true,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
