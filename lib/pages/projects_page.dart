@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:redpoint/widgets/layout/page_scaffold.dart';
+import 'package:redpoint/widgets/route_widgets/route_list_element.dart';
 
 import '../model/difficulty.dart';
 import '../model/route.dart';
@@ -75,16 +76,17 @@ class _ProjectsPageState extends State<ProjectsPage> {
       title: "Projects",
       body: Column(
         children: <Widget>[
-          Text("data"),
-            ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
+          const Text("data"),
+          Expanded(
+            child: ListView.builder(
               scrollDirection: Axis.vertical,
+              shrinkWrap: true,
               itemCount: routes.length,
               itemBuilder: (BuildContext context, int index) {
-                return Container(height: 500, width: 100, color: Colors.red,);
+                return RouteListElement(route: routes[index],);
               },
             ),
+          ),
         ],
       ),
     );

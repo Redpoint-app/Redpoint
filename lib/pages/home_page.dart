@@ -32,7 +32,6 @@ class _HomePageState extends State<HomePage> {
     tags.add(Tag("Comp"));
 
     List<ClimbingRoute> routes = [
-      /*
       ClimbingRoute(
           "Big Orange",
           DateTime.parse("2019-06-26"),
@@ -73,7 +72,6 @@ class _HomePageState extends State<HomePage> {
           Difficulty.easy,
           tags,
           "This askjasklj"),
-          */
     ];
 
     return PageScaffold(
