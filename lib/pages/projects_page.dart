@@ -74,16 +74,33 @@ class _ProjectsPageState extends State<ProjectsPage> {
 
     return PageScaffold(
       title: "Projects",
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        toolbarHeight: 120, // Set this height
+        flexibleSpace: Container(
+          color: Theme.of(context).canvasColor,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Row(children: [
+              ChoiceChip(label: Text("In Progress"), selected: false),
+              ChoiceChip(label: Text("In Progress"), selected: false),
+              ],)
+            ],
+          ),
+        ),
+      ),
       body: Column(
         children: <Widget>[
-          const Text("data"),
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               itemCount: routes.length,
               itemBuilder: (BuildContext context, int index) {
-                return RouteListElement(route: routes[index],);
+                return RouteListElement(
+                  route: routes[index],
+                );
               },
             ),
           ),

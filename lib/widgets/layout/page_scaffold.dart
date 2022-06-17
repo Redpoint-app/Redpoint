@@ -7,10 +7,11 @@ import 'package:flutter/services.dart';
 import '../nav/bottom_navbar.dart';
 
 class PageScaffold extends StatefulWidget {
-  const PageScaffold({super.key, required this.title, required this.body, this.scrollable});
+  const PageScaffold({super.key, required this.title, required this.body, this.scrollable, this.appBar});
   final String title;
   final Widget body;
   final bool? scrollable;
+  final PreferredSizeWidget? appBar;
 
   @override
   State<PageScaffold> createState() => _PageScaffoldState();
@@ -21,6 +22,7 @@ class _PageScaffoldState extends State<PageScaffold> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBody: true,
+        appBar: widget.appBar,
         body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle(
             statusBarBrightness: Theme.of(context).brightness,
