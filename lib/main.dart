@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:redpoint/pages/home_page.dart';
+import 'package:redpoint/pages/projects_page.dart';
+import 'package:redpoint/widgets/layout/page_scaffold.dart';
+import 'package:redpoint/widgets/nav/add_button.dart';
+import 'package:redpoint/widgets/nav/bottom_navbar.dart';
 
 void main() {
   runApp(const App());
@@ -8,6 +12,8 @@ void main() {
 
 class App extends StatelessWidget {
   const App({super.key});
+
+  // TODO: Could probably persist pages so you don't have to rebuild each time pages switch. Could increase performance.
 
   @override
   Widget build(BuildContext context) {
@@ -68,8 +74,38 @@ class InitialPage extends StatefulWidget {
 }
 
 class _InitialPageState extends State<InitialPage> {
+  PageTemplate currentPage = HomePage();
+
   @override
   Widget build(BuildContext context) {
-    return const HomePage();
+    void setPage(PageTemplate page) {
+      setState(() {
+        currentPage = page;
+      });
+    }
+
+    return Scaffold(
+        extendBody: true,
+        body: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle(
+            systemNavigationBarColor: Colors.transparent,
+            statusBarBrightness: Theme.of(context).brightness,
+            statusBarIconBrightness:
+                Theme.of(context).brightness == Brightness.dark
+                    ? Brightness.light
+                    : Brightness.dark,
+            statusBarColor: Colors.transparent,
+          ),
+          child: SafeArea(
+            bottom: false,
+            child: (currentPage.scrollable == true)
+                ? SingleChildScrollView(child: currentPage.body)
+                : currentPage.body,
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: const AddButton(),
+        bottomNavigationBar:
+            BottomNavbar(pageTitle: currentPage.title, callback: setPage));
   }
 }

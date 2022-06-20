@@ -14,14 +14,18 @@ import '../model/status.dart';
 import '../model/tag.dart';
 import '../model/v_scale.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
+class HomePage extends PageTemplate {
+  HomePage() : super(title: "Home", body: const _HomePageBody(), scrollable: true);
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageBody extends StatefulWidget {
+  const _HomePageBody({super.key});
+
+  @override
+  State<_HomePageBody> createState() => _HomePageBodyState();
+}
+
+class _HomePageBodyState extends State<_HomePageBody> {
   @override
   Widget build(BuildContext context) {
     ListQueue<Tag> tags = ListQueue();
@@ -74,10 +78,7 @@ class _HomePageState extends State<HomePage> {
           "This askjasklj"),
     ];
 
-    return PageScaffold(
-      title: "Home",
-      scrollable: true,
-      body: Column(
+    return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
@@ -113,7 +114,6 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.only(bottom: 120),
           ),
         ],
-      ),
     );
   }
 }

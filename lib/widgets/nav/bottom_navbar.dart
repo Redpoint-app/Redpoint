@@ -5,19 +5,24 @@ import 'package:redpoint/pages/home_page.dart';
 import 'package:redpoint/pages/profile_page.dart';
 import 'package:redpoint/pages/projects_page.dart';
 import 'package:redpoint/pages/social_page.dart';
+import 'package:redpoint/widgets/layout/page_scaffold.dart';
 import 'package:redpoint/widgets/nav/fab_placeholder.dart';
 
 import 'nav_button.dart';
 
 class BottomNavbar extends StatefulWidget {
-  const BottomNavbar({super.key, required this.pageTitle});
+  const BottomNavbar(
+      {super.key, required this.pageTitle, required this.callback});
   final String pageTitle;
+  final void Function(PageTemplate) callback;
 
   @override
   State<BottomNavbar> createState() => _BottomNavbarState();
 }
 
 class _BottomNavbarState extends State<BottomNavbar> {
+  final PageTemplate homePage = HomePage();
+
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
@@ -31,26 +36,31 @@ class _BottomNavbarState extends State<BottomNavbar> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             NavButton(
-                label: "Home",
-                active: widget.pageTitle == "Home",
-                buttonIcon: Icons.home,
-                page: const HomePage()),
+              label: "Home",
+              active: widget.pageTitle == "Home",
+              buttonIcon: Icons.home,
+                callback: widget.callback,
+              page: homePage,
+            ),
             NavButton(
-              label: "Projects",
+                label: "Projects",
                 active: widget.pageTitle == "Projects",
                 buttonIcon: Icons.list,
-                page: const ProjectsPage()),
+                callback: widget.callback,
+                page: ProjectsPage()),
             const FABPlaceholder(),
             NavButton(
-              label: "Social",
+                label: "Social",
                 active: widget.pageTitle == "Social",
                 buttonIcon: Icons.show_chart,
-                page: const SocialPage()),
+                callback: widget.callback,
+                page: SocialPage()),
             NavButton(
-              label: "Profile",
+                label: "Profile",
                 active: widget.pageTitle == "Profile",
                 buttonIcon: Icons.person,
-                page: const ProfilePage()),
+                callback: widget.callback,
+                page: ProfilePage()),
           ],
         ),
       ),

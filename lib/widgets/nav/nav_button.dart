@@ -1,6 +1,7 @@
 /// A button in the bottom navbar. This widget makes reuse and styling easy.
 
 import 'package:flutter/material.dart';
+import 'package:redpoint/widgets/layout/page_scaffold.dart';
 
 class NavButton extends StatefulWidget {
   const NavButton(
@@ -8,11 +9,12 @@ class NavButton extends StatefulWidget {
       required this.buttonIcon,
       required this.page,
       required this.active,
-      required this.label});
+      required this.label, required this.callback});
   final IconData buttonIcon;
-  final Widget page;
+  final PageTemplate page;
   final bool active;
   final String label;
+  final void Function(PageTemplate) callback;
 
   @override
   State<NavButton> createState() => _NavButtonState();
@@ -32,6 +34,7 @@ class _NavButtonState extends State<NavButton> {
         child: InkResponse(
             onTap: () {
               // navigate to given page
+              /*
               Navigator.push(
                   context,
                   PageRouteBuilder(
@@ -40,6 +43,8 @@ class _NavButtonState extends State<NavButton> {
                     transitionDuration: Duration.zero,
                     reverseTransitionDuration: Duration.zero,
                   ));
+                  */
+                  widget.callback(widget.page);
             },
             highlightColor: inkColor,
             splashColor: inkColor,

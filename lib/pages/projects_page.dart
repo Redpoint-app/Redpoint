@@ -12,14 +12,18 @@ import '../model/tag.dart';
 import '../model/v_scale.dart';
 import '../model/yds.dart';
 
-class ProjectsPage extends StatefulWidget {
-  const ProjectsPage({super.key});
-
-  @override
-  State<ProjectsPage> createState() => _ProjectsPageState();
+class ProjectsPage extends PageTemplate {
+  ProjectsPage() : super(title: "Projects", body: const _ProjectsPageBody());
 }
 
-class _ProjectsPageState extends State<ProjectsPage> {
+class _ProjectsPageBody extends StatefulWidget {
+  const _ProjectsPageBody({super.key});
+
+  @override
+  State<_ProjectsPageBody> createState() => _ProjectsPageBodyState();
+}
+
+class _ProjectsPageBodyState extends State<_ProjectsPageBody> {
   @override
   Widget build(BuildContext context) {
     ListQueue<Tag> tags = ListQueue();
@@ -72,9 +76,8 @@ class _ProjectsPageState extends State<ProjectsPage> {
           "This askjasklj"),
     ];
 
-    return PageScaffold(
-      title: "Projects",
-      body: Column(
+    return 
+      Column(
         children: <Widget>[
           Row(children: [
             ChoiceChip(label: Text("On sight"), selected: false),
@@ -93,7 +96,6 @@ class _ProjectsPageState extends State<ProjectsPage> {
             ),
           ),
         ],
-      ),
     );
   }
 }

@@ -6,40 +6,10 @@ import 'package:flutter/services.dart';
 
 import '../nav/bottom_navbar.dart';
 
-class PageScaffold extends StatefulWidget {
-  const PageScaffold({super.key, required this.title, required this.body, this.scrollable, this.appBar});
+abstract class PageTemplate {
+  const PageTemplate({required this.title, required this.body, this.scrollable, this.appBar});
   final String title;
   final Widget body;
   final bool? scrollable;
   final PreferredSizeWidget? appBar;
-
-  @override
-  State<PageScaffold> createState() => _PageScaffoldState();
-}
-
-class _PageScaffoldState extends State<PageScaffold> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        extendBody: true,
-        appBar: widget.appBar,
-        body: AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle(
-            systemNavigationBarColor: Colors.transparent,
-            statusBarBrightness: Theme.of(context).brightness,
-            statusBarIconBrightness:
-                Theme.of(context).brightness == Brightness.dark
-                    ? Brightness.light
-                    : Brightness.dark,
-            statusBarColor: Colors.transparent,
-          ),
-          child: SafeArea(
-            bottom: false,
-            child: (widget.scrollable == true) ? SingleChildScrollView(child: widget.body) : widget.body,
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: const AddButton(),
-        bottomNavigationBar: BottomNavbar(pageTitle: widget.title));
-  }
 }
