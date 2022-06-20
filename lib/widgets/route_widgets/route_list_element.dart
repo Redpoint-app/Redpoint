@@ -13,7 +13,6 @@ class _RouteListElementState extends State<RouteListElement> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Theme.of(context).cardColor,
         child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Column(children: [

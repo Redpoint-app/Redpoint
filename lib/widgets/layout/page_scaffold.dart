@@ -25,6 +25,7 @@ class _PageScaffoldState extends State<PageScaffold> {
         appBar: widget.appBar,
         body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle(
+            systemNavigationBarColor: Colors.transparent,
             statusBarBrightness: Theme.of(context).brightness,
             statusBarIconBrightness:
                 Theme.of(context).brightness == Brightness.dark

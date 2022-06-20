@@ -3,10 +3,16 @@
 import 'package:flutter/material.dart';
 
 class NavButton extends StatefulWidget {
-  const NavButton({super.key, required this.buttonIcon, required this.page, required this.active});
+  const NavButton(
+      {super.key,
+      required this.buttonIcon,
+      required this.page,
+      required this.active,
+      required this.label});
   final IconData buttonIcon;
   final Widget page;
   final bool active;
+  final String label;
 
   @override
   State<NavButton> createState() => _NavButtonState();
@@ -15,21 +21,41 @@ class NavButton extends StatefulWidget {
 class _NavButtonState extends State<NavButton> {
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-        onPressed: () {
-          // navigate to given page
-          Navigator.push(
-              context,
-              PageRouteBuilder(
-                pageBuilder: (context, animation, secondaryAnimation) =>
-                    widget.page,
-                transitionDuration: Duration.zero,
-                reverseTransitionDuration: Duration.zero,
-              ));
-        },
-        icon: Icon(
-          widget.buttonIcon,
-          color: widget.active ? Theme.of(context).primaryColor : Theme.of(context).iconTheme.color,
-        ));
+    final Color inkColor = widget.active
+        ? Theme.of(context).primaryColor.withOpacity(0.2)
+        : Theme.of(context).highlightColor;
+    final Color? color = widget.active
+        ? Theme.of(context).primaryColor
+        : Theme.of(context).iconTheme.color;
+
+    return Ink(
+        child: InkResponse(
+            onTap: () {
+              // navigate to given page
+              Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        widget.page,
+                    transitionDuration: Duration.zero,
+                    reverseTransitionDuration: Duration.zero,
+                  ));
+            },
+            highlightColor: inkColor,
+            splashColor: inkColor,
+            splashFactory: InkRipple.splashFactory,
+            radius: 40,
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
+              Icon(
+                widget.buttonIcon,
+                color: color,
+              ),
+              Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    widget.label,
+                    style: TextStyle(color: color, fontSize: 14),
+                  ))
+            ])));
   }
 }
