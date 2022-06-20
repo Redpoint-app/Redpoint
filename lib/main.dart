@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:redpoint/pages/home_page.dart';
+import 'package:redpoint/pages/profile_page.dart';
 import 'package:redpoint/pages/projects_page.dart';
-import 'package:redpoint/widgets/layout/page_scaffold.dart';
+import 'package:redpoint/pages/social_page.dart';
+import 'package:redpoint/widgets/layout/page_template.dart';
 import 'package:redpoint/widgets/nav/add_button.dart';
 import 'package:redpoint/widgets/nav/bottom_navbar.dart';
 
@@ -12,8 +14,6 @@ void main() {
 
 class App extends StatelessWidget {
   const App({super.key});
-
-  // TODO: Could probably persist pages so you don't have to rebuild each time pages switch. Could increase performance.
 
   @override
   Widget build(BuildContext context) {
@@ -74,13 +74,19 @@ class InitialPage extends StatefulWidget {
 }
 
 class _InitialPageState extends State<InitialPage> {
-  PageTemplate currentPage = HomePage();
+  int pageIndex = 0;
+  final List<PageTemplate> pages = [
+    HomePage(),
+    ProjectsPage(),
+    SocialPage(),
+    ProfilePage()
+  ];
 
   @override
   Widget build(BuildContext context) {
-    void setPage(PageTemplate page) {
+    void setPage(int index) {
       setState(() {
-        currentPage = page;
+        pageIndex = index;
       });
     }
 
@@ -98,14 +104,19 @@ class _InitialPageState extends State<InitialPage> {
           ),
           child: SafeArea(
             bottom: false,
-            child: (currentPage.scrollable == true)
-                ? SingleChildScrollView(child: currentPage.body)
-                : currentPage.body,
+            child: IndexedStack(
+              index: pageIndex,
+              children: pages
+                  .map((page) => (page.scrollable == true)
+                      ? SingleChildScrollView(child: page.body)
+                      : page.body)
+                  .toList(),
+            ),
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: const AddButton(),
         bottomNavigationBar:
-            BottomNavbar(pageTitle: currentPage.title, callback: setPage));
+            BottomNavbar(pageTitle: pages[pageIndex].title, callback: setPage));
   }
 }

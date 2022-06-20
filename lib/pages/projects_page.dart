@@ -1,7 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:redpoint/widgets/layout/page_scaffold.dart';
+import 'package:redpoint/widgets/layout/page_template.dart';
 import 'package:redpoint/widgets/route_widgets/route_list_element.dart';
 
 import '../model/difficulty.dart';
@@ -87,10 +87,10 @@ class _ProjectsPageBodyState extends State<_ProjectsPageBody> {
             child: ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
-              itemCount: routes.length,
+              itemCount: routes.length * 10,
               itemBuilder: (BuildContext context, int index) {
                 return RouteListElement(
-                  route: routes[index],
+                  route: routes[index % 4],
                 );
               },
             ),

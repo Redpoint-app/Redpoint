@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:redpoint/model/yds.dart';
-import 'package:redpoint/widgets/layout/page_scaffold.dart';
+import 'package:redpoint/widgets/layout/page_template.dart';
 import 'package:redpoint/widgets/route_widgets/add_route_card.dart';
 import 'package:redpoint/widgets/route_widgets/route_carousel.dart';
 
@@ -26,6 +26,11 @@ class _HomePageBody extends StatefulWidget {
 }
 
 class _HomePageBodyState extends State<_HomePageBody> {
+  @override
+  void initState() {
+    print("widget created");
+  }
+
   @override
   Widget build(BuildContext context) {
     ListQueue<Tag> tags = ListQueue();
