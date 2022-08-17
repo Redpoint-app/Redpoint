@@ -1,20 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:redpoint/widgets/layout/page_scaffold.dart';
+import 'package:redpoint/widgets/layout/page_template.dart';
 
-class SocialPage extends StatefulWidget {
-  const SocialPage({super.key});
-
-  @override
-  State<SocialPage> createState() => _SocialPageState();
-}
-
-class _SocialPageState extends State<SocialPage> {
-  @override
-  Widget build(BuildContext context) {
-    return const PageScaffold(
-        title: "Social",
-        body: Center(
-          child: Text("Social"),
-        ));
-  }
+class SocialPage extends PageTemplate {
+  SocialPage() : super(title: "Social", body: const Center(child: Text("Social")));
 }

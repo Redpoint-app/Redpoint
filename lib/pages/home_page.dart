@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:redpoint/model/yds.dart';
-import 'package:redpoint/widgets/layout/page_scaffold.dart';
+import 'package:redpoint/widgets/layout/page_template.dart';
 import 'package:redpoint/widgets/route_widgets/add_route_card.dart';
 import 'package:redpoint/widgets/route_widgets/route_carousel.dart';
 
@@ -14,14 +14,23 @@ import '../model/status.dart';
 import '../model/tag.dart';
 import '../model/v_scale.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
+class HomePage extends PageTemplate {
+  HomePage() : super(title: "Home", body: const _HomePageBody(), scrollable: true);
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageBody extends StatefulWidget {
+  const _HomePageBody({super.key});
+
+  @override
+  State<_HomePageBody> createState() => _HomePageBodyState();
+}
+
+class _HomePageBodyState extends State<_HomePageBody> {
+  @override
+  void initState() {
+    print("widget created");
+  }
+
   @override
   Widget build(BuildContext context) {
     ListQueue<Tag> tags = ListQueue();
@@ -32,7 +41,6 @@ class _HomePageState extends State<HomePage> {
     tags.add(Tag("Comp"));
 
     List<ClimbingRoute> routes = [
-      /*
       ClimbingRoute(
           "Big Orange",
           DateTime.parse("2019-06-26"),
@@ -73,12 +81,9 @@ class _HomePageState extends State<HomePage> {
           Difficulty.easy,
           tags,
           "This askjasklj"),
-          */
     ];
 
-    return PageScaffold(
-      title: "Home",
-      body: Column(
+    return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
@@ -114,7 +119,6 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.only(bottom: 120),
           ),
         ],
-      ),
     );
   }
 }
