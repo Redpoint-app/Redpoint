@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:redpoint/home/home_page.dart';
 import 'package:redpoint/profile/profile_page.dart';
 import 'package:redpoint/projects/projects_page.dart';
@@ -8,8 +10,35 @@ import 'package:redpoint/shared/widgets/nav/add_button.dart';
 import 'package:redpoint/shared/widgets/nav/bottom_navbar.dart';
 import 'package:redpoint/social/social_page.dart';
 
-void main() {
-  runApp(const App());
+import 'package:storage_inspector/storage_inspector.dart';
+import 'package:drift_local_storage_inspector/drift_local_storage_inspector.dart';
+
+import 'database/database.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final driftDb = AppDatabase();
+
+  // Run storage_inspector in debug mode only
+  if (kDebugMode) {
+    final driver = StorageServerDriver(bundleId: 'com.example.redpoint');
+    final sqlServer =
+        DriftSQLDatabaseServer(id: "1", name: "SQL Server", database: driftDb);
+
+    driver.addSQLServer(sqlServer);
+    await driver.start();
+  }
+
+  var providers = MultiProvider(
+    providers: [
+      Provider<AppDatabase>(
+          create: (context) => driftDb, dispose: (context, db) => db.close())
+    ],
+    child: const App(),
+  );
+
+  runApp(providers);
 }
 
 class App extends StatelessWidget {
