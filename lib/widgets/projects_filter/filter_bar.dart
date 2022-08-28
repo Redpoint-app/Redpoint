@@ -15,7 +15,7 @@ class _FilterBarState extends State<FilterBar> {
   @override
   Widget build(Object context) {
     return SizedBox(
-      height: 40,
+      height: 44,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: RouteType.values.length + 1,
