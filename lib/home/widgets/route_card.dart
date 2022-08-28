@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:redpoint/model/route.dart';
+import 'package:redpoint/shared/model/route.dart';
 
 class RouteCard extends StatefulWidget {
   const RouteCard({super.key, required this.route, this.first, this.last});
@@ -12,8 +12,6 @@ class RouteCard extends StatefulWidget {
 }
 
 class _RouteCardState extends State<RouteCard> {
-
-
   @override
   Widget build(BuildContext context) {
     double padding = 4;

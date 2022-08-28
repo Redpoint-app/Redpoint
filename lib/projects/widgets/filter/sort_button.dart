@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:redpoint/widgets/projects_filter/filter_button.dart';
+import 'package:redpoint/projects/widgets/filter/filter_button.dart';
 
 class SortButton extends StatefulWidget {
   const SortButton({super.key, required this.label, this.first});

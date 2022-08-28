@@ -1,17 +1,17 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:redpoint/model/difficulty.dart';
-import 'package:redpoint/model/status.dart';
-import 'package:redpoint/model/tag.dart';
-import 'package:redpoint/widgets/add_form/form_multi_select_chip.dart';
-import 'package:redpoint/model/route.dart';
-import 'package:redpoint/widgets/add_form/takes_counter.dart';
+import 'package:redpoint/add_route/widgets/form_button.dart';
+import 'package:redpoint/add_route/widgets/form_multi_select_chip.dart';
+import 'package:redpoint/add_route/widgets/form_select_chip.dart';
+import 'package:redpoint/add_route/widgets/takes_counter.dart';
+import 'package:redpoint/shared/model/difficulty.dart';
+import 'package:redpoint/shared/model/status.dart';
+import 'package:redpoint/shared/model/tag.dart';
+import 'package:redpoint/shared/model/route.dart';
 
-import '../model/completed_status.dart';
-import '../model/route_type.dart';
-import '../widgets/add_form/form_button.dart';
-import '../widgets/add_form/form_select_chip.dart';
+import 'package:redpoint/shared/model/completed_status.dart';
+import 'package:redpoint/shared/model/route_type.dart';
 
 final months = [
   'January',
@@ -337,7 +337,8 @@ class _AddPageState extends State<AddPage> {
                   child: Text("Difficulty"),
                 ),
                 Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 20, bottom: 5),
+                    padding:
+                        const EdgeInsets.only(left: 20, right: 20, bottom: 5),
                     child: Slider(
                         value: _difficultyIndex,
                         min: 0,

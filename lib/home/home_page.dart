@@ -2,17 +2,17 @@ import 'dart:collection';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:redpoint/model/yds.dart';
-import 'package:redpoint/widgets/layout/page_template.dart';
-import 'package:redpoint/widgets/route_widgets/add_route_card.dart';
-import 'package:redpoint/widgets/route_widgets/route_carousel.dart';
+import 'package:redpoint/home/widgets/add_route_card.dart';
+import 'package:redpoint/home/widgets/route_carousel.dart';
+import 'package:redpoint/shared/model/yds.dart';
 
-import '../model/difficulty.dart';
-import '../model/route.dart';
-import '../model/route_type.dart';
-import '../model/status.dart';
-import '../model/tag.dart';
-import '../model/v_scale.dart';
+import 'package:redpoint/shared/model/difficulty.dart';
+import 'package:redpoint/shared/model/route.dart';
+import 'package:redpoint/shared/model/route_type.dart';
+import 'package:redpoint/shared/model/status.dart';
+import 'package:redpoint/shared/model/tag.dart';
+import 'package:redpoint/shared/model/v_scale.dart';
+import 'package:redpoint/shared/widgets/layout/page_template.dart';
 
 class HomePage extends PageTemplate {
   HomePage()

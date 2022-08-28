@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:redpoint/model/route.dart';
-import 'package:redpoint/widgets/route_widgets/route_card.dart';
+import 'package:redpoint/home/widgets/route_card.dart';
+import 'package:redpoint/shared/model/route.dart';
 
 class RouteCarousel extends StatefulWidget {
   const RouteCarousel(

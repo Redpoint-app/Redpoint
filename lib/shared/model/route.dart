@@ -1,10 +1,10 @@
 import 'dart:collection';
 
-import 'package:redpoint/model/completed_status.dart';
-import 'package:redpoint/model/difficulty.dart';
-import 'package:redpoint/model/route_type.dart';
-import 'package:redpoint/model/status.dart';
-import 'package:redpoint/model/tag.dart';
+import 'package:redpoint/shared/model/completed_status.dart';
+import 'package:redpoint/shared/model/difficulty.dart';
+import 'package:redpoint/shared/model/route_type.dart';
+import 'package:redpoint/shared/model/status.dart';
+import 'package:redpoint/shared/model/tag.dart';
 
 class ClimbingRoute {
   ClimbingRoute(this.title, this.date, this.type, this.grade, this.status,

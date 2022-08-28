@@ -1,4 +1,4 @@
-import 'package:redpoint/model/grade.dart';
+import 'package:redpoint/shared/model/grade.dart';
 
 class VScale extends Grade {
   const VScale();

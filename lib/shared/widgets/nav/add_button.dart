@@ -1,7 +1,7 @@
 /// The add button in the bottom navbar.
 
 import 'package:flutter/material.dart';
-import 'package:redpoint/pages/add_page.dart';
+import 'package:redpoint/add_route/add_page.dart';
 
 class AddButton extends StatefulWidget {
   const AddButton({super.key});

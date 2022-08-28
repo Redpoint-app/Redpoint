@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:redpoint/pages/home_page.dart';
-import 'package:redpoint/pages/profile_page.dart';
-import 'package:redpoint/pages/projects_page.dart';
-import 'package:redpoint/pages/social_page.dart';
-import 'package:redpoint/widgets/layout/page_template.dart';
-import 'package:redpoint/widgets/nav/add_button.dart';
-import 'package:redpoint/widgets/nav/bottom_navbar.dart';
+import 'package:redpoint/home/home_page.dart';
+import 'package:redpoint/profile/profile_page.dart';
+import 'package:redpoint/projects/projects_page.dart';
+import 'package:redpoint/shared/widgets/layout/page_template.dart';
+import 'package:redpoint/shared/widgets/nav/add_button.dart';
+import 'package:redpoint/shared/widgets/nav/bottom_navbar.dart';
+import 'package:redpoint/social/social_page.dart';
 
 void main() {
   runApp(const App());

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:redpoint/model/route.dart';
-import 'package:redpoint/widgets/shared/custom_icon_button.dart';
+import 'package:redpoint/shared/model/route.dart';
+import 'package:redpoint/shared/widgets/custom_icon_button.dart';
 
 class RouteListElement extends StatefulWidget {
   const RouteListElement({super.key, required this.route});

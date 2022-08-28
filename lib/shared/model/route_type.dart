@@ -1,5 +1,5 @@
-import 'package:redpoint/model/v_scale.dart';
-import 'package:redpoint/model/yds.dart';
+import 'package:redpoint/shared/model/v_scale.dart';
+import 'package:redpoint/shared/model/yds.dart';
 import 'grade.dart';
 
 enum RouteType {
