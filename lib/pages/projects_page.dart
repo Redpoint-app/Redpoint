@@ -333,9 +333,11 @@ class _ProjectsPageBodyState extends State<_ProjectsPageBody> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              LargeIconButton(icon: Icons.filter_alt_outlined, onTap: () {}),
-              LargeIconButton(
+              CustomIconButton(
+                  icon: Icons.filter_alt_outlined, size: 28, onTap: () {}),
+              CustomIconButton(
                 icon: Icons.search,
+                size: 28,
                 onTap: () {},
               )
             ],
@@ -353,7 +355,7 @@ class _ProjectsPageBodyState extends State<_ProjectsPageBody> {
             ],
           ),
         ),
-        const Padding(padding: EdgeInsets.only(bottom: 8), child: FilterBar()),
+        const Padding(padding: EdgeInsets.only(bottom: 20), child: FilterBar()),
         Padding(
           padding: const EdgeInsets.only(bottom: 140),
           child: Column(

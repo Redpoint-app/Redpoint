@@ -2,27 +2,31 @@
 
 import 'package:flutter/material.dart';
 
-class LargeIconButton extends StatefulWidget {
-  const LargeIconButton(
-      {super.key,
-      required this.icon,
-      required this.onTap,
-      this.color,
-      this.inkColor});
+class CustomIconButton extends StatefulWidget {
+  const CustomIconButton({
+    super.key,
+    required this.icon,
+    required this.size,
+    required this.onTap,
+    this.color,
+    this.inkColor,
+    this.inkRadius,
+  });
   final IconData icon;
+  final double size;
   final void Function() onTap;
   final Color? color;
   final Color? inkColor;
+  final double? inkRadius;
 
   @override
-  State<LargeIconButton> createState() => _LargeIconButtonState();
+  State<CustomIconButton> createState() => _CustomIconButtonState();
 }
 
-class _LargeIconButtonState extends State<LargeIconButton> {
+class _CustomIconButtonState extends State<CustomIconButton> {
   @override
   Widget build(BuildContext context) {
     final Color inkColor = widget.inkColor ?? Theme.of(context).highlightColor;
-    final Color? color = widget.color ?? Theme.of(context).iconTheme.color;
 
     return Ink(
         child: InkResponse(
@@ -30,11 +34,11 @@ class _LargeIconButtonState extends State<LargeIconButton> {
       highlightColor: inkColor,
       splashColor: inkColor,
       splashFactory: InkRipple.splashFactory,
-      radius: 20,
+      radius: widget.inkRadius ?? (widget.size / 1.4),
       child: Icon(
         widget.icon,
-        color: color,
-        size: 28,
+        color: widget.color ?? Theme.of(context).iconTheme.color,
+        size: widget.size,
       ),
     ));
   }
