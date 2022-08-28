@@ -1,12 +1,9 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:redpoint/widgets/add_form/form_select_chip.dart';
 import 'package:redpoint/widgets/layout/page_template.dart';
 import 'package:redpoint/widgets/projects_filter/filter_bar.dart';
-import 'package:redpoint/widgets/projects_filter/filter_button.dart';
-import 'package:redpoint/widgets/projects_filter/sort_button.dart';
-import 'package:redpoint/widgets/shared/large_icon_button.dart';
+import 'package:redpoint/widgets/shared/custom_icon_button.dart';
 import 'package:redpoint/widgets/route_widgets/route_list_element.dart';
 
 import '../model/difficulty.dart';
