@@ -7,11 +7,13 @@ class FilterButton extends StatefulWidget {
       required this.onTap,
       this.first,
       this.last,
+      this.active,
       this.icon});
   final String label;
   final void Function() onTap;
   final bool? first;
   final bool? last;
+  final bool? active;
   final IconData? icon;
 
   @override
@@ -21,18 +23,24 @@ class FilterButton extends StatefulWidget {
 class _FilterButtonState extends State<FilterButton> {
   @override
   Widget build(BuildContext context) {
+    bool active = widget.active ?? false;
+
     return Padding(
       padding: EdgeInsets.only(
-          left: (widget.first ?? false) ? 30.0 : 4.0,
-          right: (widget.last ?? false) ? 30.0 : 4.0,
+          left: (widget.first ?? false) ? 30.0 : 2.0,
+          right: (widget.last ?? false) ? 30.0 : 2.0,
           bottom: 4),
       child: SizedBox(
         height: 40,
         child: TextButton(
           onPressed: widget.onTap,
           style: TextButton.styleFrom(
-              primary: Theme.of(context).highlightColor,
-              backgroundColor: Theme.of(context).cardColor,
+              primary: active
+                  ? Theme.of(context).colorScheme.onPrimary
+                  : Theme.of(context).highlightColor,
+              backgroundColor: active
+                  ? Theme.of(context).primaryColor
+                  : Theme.of(context).cardColor,
               elevation: .5,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12))),
@@ -44,7 +52,9 @@ class _FilterButtonState extends State<FilterButton> {
                   child: Icon(
                     widget.icon,
                     size: 16,
-                    color: Theme.of(context).iconTheme.color,
+                    color: active
+                        ? Theme.of(context).colorScheme.onPrimary
+                        : Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
               Padding(
@@ -52,7 +62,9 @@ class _FilterButtonState extends State<FilterButton> {
                 child: Text(
                   widget.label,
                   style: TextStyle(
-                      color: Theme.of(context).textTheme.bodyText1?.color,
+                      color: active
+                          ? Theme.of(context).colorScheme.onPrimary
+                          : Theme.of(context).colorScheme.onSurface,
                       fontSize: 14),
                 ),
               ),

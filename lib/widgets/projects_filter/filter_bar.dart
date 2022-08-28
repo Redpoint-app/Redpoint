@@ -12,6 +12,8 @@ class FilterBar extends StatefulWidget {
 }
 
 class _FilterBarState extends State<FilterBar> {
+  RouteType? _selectedType;
+
   @override
   Widget build(Object context) {
     return SizedBox(
@@ -30,10 +32,17 @@ class _FilterBarState extends State<FilterBar> {
             );
           } else {
             RouteType type = RouteType.values[index - 1];
+            bool active = type == _selectedType;
+
             return FilterButton(
               label: type.label,
               last: index == RouteType.values.length,
-              onTap: () {},
+              onTap: () {
+                setState(() {
+                  _selectedType = active ? null : type;
+                });
+              },
+              active: active,
             );
           }
         },
