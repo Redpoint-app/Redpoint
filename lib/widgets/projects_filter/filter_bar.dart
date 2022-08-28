@@ -31,7 +31,10 @@ class _FilterBarState extends State<FilterBar> {
           } else {
             RouteType type = RouteType.values[index - 1];
             return FilterButton(
-                label: type.label, last: index == RouteType.values.length);
+              label: type.label,
+              last: index == RouteType.values.length,
+              onTap: () {},
+            );
           }
         },
       ),

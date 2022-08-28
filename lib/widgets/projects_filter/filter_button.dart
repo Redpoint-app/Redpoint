@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 
 class FilterButton extends StatefulWidget {
   const FilterButton(
-      {super.key, required this.label, this.first, this.last, this.icon});
+      {super.key,
+      required this.label,
+      required this.onTap,
+      this.first,
+      this.last,
+      this.icon});
   final String label;
+  final void Function() onTap;
   final bool? first;
   final bool? last;
   final IconData? icon;
@@ -23,7 +29,7 @@ class _FilterButtonState extends State<FilterButton> {
       child: SizedBox(
         height: 40,
         child: TextButton(
-          onPressed: () {},
+          onPressed: widget.onTap,
           style: TextButton.styleFrom(
               primary: Theme.of(context).highlightColor,
               backgroundColor: Theme.of(context).cardColor,
