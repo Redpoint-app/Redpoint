@@ -3,7 +3,9 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:redpoint/widgets/add_form/form_select_chip.dart';
 import 'package:redpoint/widgets/layout/page_template.dart';
+import 'package:redpoint/widgets/projects_filter/filter_bar.dart';
 import 'package:redpoint/widgets/projects_filter/filter_button.dart';
+import 'package:redpoint/widgets/projects_filter/sort_button.dart';
 import 'package:redpoint/widgets/shared/large_icon_button.dart';
 import 'package:redpoint/widgets/route_widgets/route_list_element.dart';
 
@@ -331,7 +333,7 @@ class _ProjectsPageBodyState extends State<_ProjectsPageBody> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              LargeIconButton(icon: Icons.menu, onTap: () {}),
+              LargeIconButton(icon: Icons.filter_alt_outlined, onTap: () {}),
               LargeIconButton(
                 icon: Icons.search,
                 onTap: () {},
@@ -351,18 +353,7 @@ class _ProjectsPageBodyState extends State<_ProjectsPageBody> {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 24),
-          child: Row(
-              children: RouteType.values.map((RouteType type) {
-            int i = RouteType.values.indexOf(type);
-
-            return FilterButton(
-              label: type.label,
-              first: i == 0,
-            );
-          }).toList()),
-        ),
+        const Padding(padding: EdgeInsets.only(bottom: 12), child: FilterBar()),
         Padding(
           padding: const EdgeInsets.only(bottom: 140),
           child: Column(

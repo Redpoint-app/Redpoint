@@ -12,24 +12,23 @@ class RouteListElement extends StatefulWidget {
 class _RouteListElementState extends State<RouteListElement> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Column(children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      widget.route.title,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Text(widget.route.getDateMessage()),
-                  )
-                ],
+    return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+        child: Column(children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  widget.route.title,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Text(widget.route.getDateMessage()),
               )
-            ])));
+            ],
+          )
+        ]));
   }
 }
