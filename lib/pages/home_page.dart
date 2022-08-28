@@ -15,7 +15,8 @@ import '../model/tag.dart';
 import '../model/v_scale.dart';
 
 class HomePage extends PageTemplate {
-  HomePage() : super(title: "Home", body: const _HomePageBody(), scrollable: true);
+  HomePage()
+      : super(title: "Home", body: const _HomePageBody(), scrollable: true);
 }
 
 class _HomePageBody extends StatefulWidget {
@@ -26,11 +27,6 @@ class _HomePageBody extends StatefulWidget {
 }
 
 class _HomePageBodyState extends State<_HomePageBody> {
-  @override
-  void initState() {
-    print("widget created");
-  }
-
   @override
   Widget build(BuildContext context) {
     ListQueue<Tag> tags = ListQueue();
@@ -84,41 +80,41 @@ class _HomePageBodyState extends State<_HomePageBody> {
     ];
 
     return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 40, left: 30, bottom: 20),
-            child: Text(
-              "Good ${(DateTime.now().hour >= 12) ? "afternoon" : "morning"},\nUser",
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: min(MediaQuery.of(context).size.width,
-                          MediaQuery.of(context).size.height) *
-                      .08),
-            ),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 40, left: 30, bottom: 20),
+          child: Text(
+            "Good ${(DateTime.now().hour >= 12) ? "afternoon" : "morning"},\nUser",
+            style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: min(MediaQuery.of(context).size.width,
+                        MediaQuery.of(context).size.height) *
+                    .08),
           ),
-          RouteCarousel(
-            title: "Projects",
-            routes: routes,
-            emptyWidget: const AddRouteCard(),
+        ),
+        RouteCarousel(
+          title: "Projects",
+          routes: routes,
+          emptyWidget: const AddRouteCard(),
+        ),
+        RouteCarousel(
+          title: "Recent climbs",
+          routes: routes,
+          emptyWidget: const AddRouteCard(),
+        ),
+        RouteCarousel(
+          title: "Friend activity",
+          routes: routes,
+          emptyWidget: const Padding(
+            padding: EdgeInsets.only(left: 30),
+            child: Text("No friend activity yet"),
           ),
-          RouteCarousel(
-            title: "Recent climbs",
-            routes: routes,
-            emptyWidget: const AddRouteCard(),
-          ),
-          RouteCarousel(
-            title: "Friend activity",
-            routes: routes,
-            emptyWidget: const Padding(
-              padding: EdgeInsets.only(left: 30),
-              child: Text("No friend activity yet"),
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(bottom: 120),
-          ),
-        ],
+        ),
+        const Padding(
+          padding: EdgeInsets.only(bottom: 120),
+        ),
+      ],
     );
   }
 }
