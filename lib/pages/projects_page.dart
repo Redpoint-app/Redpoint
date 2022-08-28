@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:redpoint/widgets/layout/page_template.dart';
+import 'package:redpoint/widgets/shared/large_icon_button.dart';
 import 'package:redpoint/widgets/route_widgets/route_list_element.dart';
 
 import '../model/difficulty.dart';
@@ -76,26 +77,53 @@ class _ProjectsPageBodyState extends State<_ProjectsPageBody> {
           "This askjasklj"),
     ];
 
-    return 
-      Column(
-        children: <Widget>[
-          Row(children: [
-            ChoiceChip(label: Text("On sight"), selected: false),
-          ],),
-          Divider(),
-          Expanded(
-            child: ListView.builder(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemCount: routes.length * 10,
-              itemBuilder: (BuildContext context, int index) {
-                return RouteListElement(
-                  route: routes[index % 4],
-                );
-              },
-            ),
+    return Column(
+      children: <Widget>[
+        Padding(
+          padding:
+              const EdgeInsets.only(top: 24, bottom: 20, right: 24, left: 24),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              LargeIconButton(icon: Icons.arrow_back, onTap: () {}),
+              LargeIconButton(
+                icon: Icons.search,
+                onTap: () {},
+              )
+            ],
           ),
-        ],
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 24, bottom: 12),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: const [
+              Text(
+                "Projects",
+                style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
+              ),
+            ],
+          ),
+        ),
+        Row(
+          children: [
+            ChoiceChip(label: Text("On sight"), selected: false),
+          ],
+        ),
+        Divider(),
+        Expanded(
+          child: ListView.builder(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            itemCount: routes.length * 10,
+            itemBuilder: (BuildContext context, int index) {
+              return RouteListElement(
+                route: routes[index % 4],
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
