@@ -1,7 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
-import '../../pages/add_page.dart';
+import '../../add_route/add_page.dart';
 
 class AddRouteCard extends StatefulWidget {
   const AddRouteCard({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:redpoint/widgets/projects_filter/sort_button.dart';
+import 'package:redpoint/shared/model/route_type.dart';
+import 'package:redpoint/projects/widgets/filter/sort_button.dart';
 
-import '../../model/route_type.dart';
 import 'filter_button.dart';
 
 class FilterBar extends StatefulWidget {

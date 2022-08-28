@@ -1,12 +1,7 @@
 /// The navigation bar at the bottom of the screen
 
 import 'package:flutter/material.dart';
-import 'package:redpoint/pages/home_page.dart';
-import 'package:redpoint/pages/profile_page.dart';
-import 'package:redpoint/pages/projects_page.dart';
-import 'package:redpoint/pages/social_page.dart';
-import 'package:redpoint/widgets/layout/page_template.dart';
-import 'package:redpoint/widgets/nav/fab_placeholder.dart';
+import 'package:redpoint/shared/widgets/nav/fab_placeholder.dart';
 
 import 'nav_button.dart';
 
@@ -37,7 +32,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
               label: "Home",
               active: widget.pageTitle == "Home",
               buttonIcon: Icons.home,
-                callback: widget.callback,
+              callback: widget.callback,
               page: 0,
             ),
             NavButton(

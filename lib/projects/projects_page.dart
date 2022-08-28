@@ -1,18 +1,18 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:redpoint/widgets/layout/page_template.dart';
-import 'package:redpoint/widgets/projects_filter/filter_bar.dart';
-import 'package:redpoint/widgets/shared/custom_icon_button.dart';
-import 'package:redpoint/widgets/route_widgets/route_list_element.dart';
+import 'package:redpoint/projects/widgets/filter/filter_bar.dart';
+import 'package:redpoint/projects/widgets/route_list_element.dart';
 
-import '../model/difficulty.dart';
-import '../model/route.dart';
-import '../model/route_type.dart';
-import '../model/status.dart';
-import '../model/tag.dart';
-import '../model/v_scale.dart';
-import '../model/yds.dart';
+import 'package:redpoint/shared/model/difficulty.dart';
+import 'package:redpoint/shared/model/route.dart';
+import 'package:redpoint/shared/model/route_type.dart';
+import 'package:redpoint/shared/model/status.dart';
+import 'package:redpoint/shared/model/tag.dart';
+import 'package:redpoint/shared/model/v_scale.dart';
+import 'package:redpoint/shared/model/yds.dart';
+import 'package:redpoint/shared/widgets/custom_icon_button.dart';
+import 'package:redpoint/shared/widgets/layout/page_template.dart';
 
 class ProjectsPage extends PageTemplate {
   ProjectsPage()
