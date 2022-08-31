@@ -6,7 +6,7 @@ import 'grade_system.dart';
 part 'grade.g.dart';
 
 class Grade extends Table {
-  TextColumn get systemId => text().references(GradeSystem, #id)();
+  IntColumn get systemId => integer().references(GradeSystem, #id)();
   TextColumn get grade => text()();
 
   @override
@@ -17,11 +17,25 @@ class Grade extends Table {
 class GradeDao extends DatabaseAccessor<AppDatabase> with _$GradeDaoMixin {
   GradeDao(AppDatabase db) : super(db);
 
+  initializeData() { _init().forEach((element) async { await add(element); }); }
+
   Future<List<GradeData>> get all => select(grade).get();
 
   Future<int> add(GradeCompanion entry) {
     return into(grade).insert(entry);
   }
 }
+
+List<GradeCompanion> _init() {
+  String gradeString;
+  List<GradeCompanion> grades = [];
+  for (var gradeSystemEnum in GradeSystemEnum.values) {
+    for (gradeString in gradeSystemEnum.grades) {
+      grades.add(GradeCompanion(systemId: Value(gradeSystemEnum.id), grade: Value(gradeString)));
+    }
+  }
+  return grades;
+}
+
 
 

@@ -14,8 +14,24 @@ class TagDao extends DatabaseAccessor<AppDatabase> with _$TagDaoMixin {
 
   Future<List<TagData>> get all => select(tag).get();
 
-  Future<int> add(TagCompanion entry) {
-    return into(tag).insert(entry);
+  Future<TagData> insertReturning(TagCompanion entry) {
+    return into(tag).insertReturning(entry);
+  }
+
+  Future<TagData?> getById(int id) {
+    return (select(tag)..where((tbl) => tbl.id.equals(id))).getSingleOrNull();
+  }
+
+  Stream<TagData?> watchById(int id) {
+    return (select(tag)..where((tbl) => tbl.id.equals(id))).watchSingleOrNull();
+  }
+
+  Future<int> updateById(int id, TagCompanion entry) {
+    return (update(tag)..where((tbl) => tbl.id.equals(id))).write(entry);
+  }
+
+  Future<int> deleteById(int id) {
+    return (delete(tag)..where((tbl) => tbl.id.equals(id))).go();
   }
 }
 

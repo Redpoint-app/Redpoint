@@ -12,7 +12,7 @@ class Route extends Table {
   TextColumn get title => text()();
   DateTimeColumn get date => dateTime()();
   IntColumn get climbTypeId => integer()();
-  TextColumn get gradeSystemId => text()();
+  IntColumn get gradeSystemId => integer()();
   TextColumn get grade => text()();
   IntColumn get status => integer().references(RouteStatus, #id)();
   IntColumn get completedStatus => integer().nullable().references(RouteCompletedStatus, #id)();
@@ -33,12 +33,24 @@ class RouteDao extends DatabaseAccessor<AppDatabase> with _$RouteDaoMixin {
   Future<List<RouteData>> get all => select(route).get();
   Stream<List<RouteData>> get watchAll => select(route).watch();
 
-  Future<int> add(RouteCompanion entry) {
-    return into(route).insert(entry);
+  Future<RouteData> insertReturning(RouteCompanion entry) {
+    return into(route).insertReturning(entry);
   }
 
   Future<RouteData?> getById(int id) {
     return (select(route)..where((tbl) => tbl.id.equals(id))).getSingleOrNull();
+  }
+
+  Stream<RouteData?> watchById(int id) {
+    return (select(route)..where((tbl) => tbl.id.equals(id))).watchSingleOrNull();
+  }
+
+  Future<int> updateById(int id, RouteCompanion entry) {
+    return (update(route)..where((tbl) => tbl.id.equals(id))).write(entry);
+  }
+
+  Future<int> deleteById(int id) {
+    return (delete(route)..where((tbl) => tbl.id.equals(id))).go();
   }
 }
 

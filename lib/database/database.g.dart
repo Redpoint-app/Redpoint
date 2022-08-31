@@ -126,9 +126,7 @@ class $ClimbTypeTable extends ClimbType
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      type: DriftSqlType.int, requiredDuringInsert: false);
   final VerificationMeta _labelMeta = const VerificationMeta('label');
   @override
   late final GeneratedColumn<String> label = GeneratedColumn<String>(
@@ -177,13 +175,13 @@ class $ClimbTypeTable extends ClimbType
 }
 
 class GradeSystemData extends DataClass implements Insertable<GradeSystemData> {
-  final String id;
+  final int id;
   final String label;
   const GradeSystemData({required this.id, required this.label});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    map['id'] = Variable<String>(id);
+    map['id'] = Variable<int>(id);
     map['label'] = Variable<String>(label);
     return map;
   }
@@ -199,7 +197,7 @@ class GradeSystemData extends DataClass implements Insertable<GradeSystemData> {
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return GradeSystemData(
-      id: serializer.fromJson<String>(json['id']),
+      id: serializer.fromJson<int>(json['id']),
       label: serializer.fromJson<String>(json['label']),
     );
   }
@@ -207,12 +205,12 @@ class GradeSystemData extends DataClass implements Insertable<GradeSystemData> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<String>(id),
+      'id': serializer.toJson<int>(id),
       'label': serializer.toJson<String>(label),
     };
   }
 
-  GradeSystemData copyWith({String? id, String? label}) => GradeSystemData(
+  GradeSystemData copyWith({int? id, String? label}) => GradeSystemData(
         id: id ?? this.id,
         label: label ?? this.label,
       );
@@ -236,19 +234,18 @@ class GradeSystemData extends DataClass implements Insertable<GradeSystemData> {
 }
 
 class GradeSystemCompanion extends UpdateCompanion<GradeSystemData> {
-  final Value<String> id;
+  final Value<int> id;
   final Value<String> label;
   const GradeSystemCompanion({
     this.id = const Value.absent(),
     this.label = const Value.absent(),
   });
   GradeSystemCompanion.insert({
-    required String id,
+    this.id = const Value.absent(),
     required String label,
-  })  : id = Value(id),
-        label = Value(label);
+  }) : label = Value(label);
   static Insertable<GradeSystemData> custom({
-    Expression<String>? id,
+    Expression<int>? id,
     Expression<String>? label,
   }) {
     return RawValuesInsertable({
@@ -257,7 +254,7 @@ class GradeSystemCompanion extends UpdateCompanion<GradeSystemData> {
     });
   }
 
-  GradeSystemCompanion copyWith({Value<String>? id, Value<String>? label}) {
+  GradeSystemCompanion copyWith({Value<int>? id, Value<String>? label}) {
     return GradeSystemCompanion(
       id: id ?? this.id,
       label: label ?? this.label,
@@ -268,7 +265,7 @@ class GradeSystemCompanion extends UpdateCompanion<GradeSystemData> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<String>(id.value);
+      map['id'] = Variable<int>(id.value);
     }
     if (label.present) {
       map['label'] = Variable<String>(label.value);
@@ -294,9 +291,9 @@ class $GradeSystemTable extends GradeSystem
   $GradeSystemTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: false);
   final VerificationMeta _labelMeta = const VerificationMeta('label');
   @override
   late final GeneratedColumn<String> label = GeneratedColumn<String>(
@@ -315,8 +312,6 @@ class $GradeSystemTable extends GradeSystem
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    } else if (isInserting) {
-      context.missing(_idMeta);
     }
     if (data.containsKey('label')) {
       context.handle(
@@ -334,7 +329,7 @@ class $GradeSystemTable extends GradeSystem
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return GradeSystemData(
       id: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       label: attachedDatabase.options.types
           .read(DriftSqlType.string, data['${effectivePrefix}label'])!,
     );
@@ -349,14 +344,14 @@ class $GradeSystemTable extends GradeSystem
 class ClimbTypeToGradeSystemData extends DataClass
     implements Insertable<ClimbTypeToGradeSystemData> {
   final int climbTypeId;
-  final String gradeSystemId;
+  final int gradeSystemId;
   const ClimbTypeToGradeSystemData(
       {required this.climbTypeId, required this.gradeSystemId});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['climb_type_id'] = Variable<int>(climbTypeId);
-    map['grade_system_id'] = Variable<String>(gradeSystemId);
+    map['grade_system_id'] = Variable<int>(gradeSystemId);
     return map;
   }
 
@@ -372,7 +367,7 @@ class ClimbTypeToGradeSystemData extends DataClass
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return ClimbTypeToGradeSystemData(
       climbTypeId: serializer.fromJson<int>(json['climbTypeId']),
-      gradeSystemId: serializer.fromJson<String>(json['gradeSystemId']),
+      gradeSystemId: serializer.fromJson<int>(json['gradeSystemId']),
     );
   }
   @override
@@ -380,12 +375,11 @@ class ClimbTypeToGradeSystemData extends DataClass
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'climbTypeId': serializer.toJson<int>(climbTypeId),
-      'gradeSystemId': serializer.toJson<String>(gradeSystemId),
+      'gradeSystemId': serializer.toJson<int>(gradeSystemId),
     };
   }
 
-  ClimbTypeToGradeSystemData copyWith(
-          {int? climbTypeId, String? gradeSystemId}) =>
+  ClimbTypeToGradeSystemData copyWith({int? climbTypeId, int? gradeSystemId}) =>
       ClimbTypeToGradeSystemData(
         climbTypeId: climbTypeId ?? this.climbTypeId,
         gradeSystemId: gradeSystemId ?? this.gradeSystemId,
@@ -412,19 +406,19 @@ class ClimbTypeToGradeSystemData extends DataClass
 class ClimbTypeToGradeSystemCompanion
     extends UpdateCompanion<ClimbTypeToGradeSystemData> {
   final Value<int> climbTypeId;
-  final Value<String> gradeSystemId;
+  final Value<int> gradeSystemId;
   const ClimbTypeToGradeSystemCompanion({
     this.climbTypeId = const Value.absent(),
     this.gradeSystemId = const Value.absent(),
   });
   ClimbTypeToGradeSystemCompanion.insert({
     required int climbTypeId,
-    required String gradeSystemId,
+    required int gradeSystemId,
   })  : climbTypeId = Value(climbTypeId),
         gradeSystemId = Value(gradeSystemId);
   static Insertable<ClimbTypeToGradeSystemData> custom({
     Expression<int>? climbTypeId,
-    Expression<String>? gradeSystemId,
+    Expression<int>? gradeSystemId,
   }) {
     return RawValuesInsertable({
       if (climbTypeId != null) 'climb_type_id': climbTypeId,
@@ -433,7 +427,7 @@ class ClimbTypeToGradeSystemCompanion
   }
 
   ClimbTypeToGradeSystemCompanion copyWith(
-      {Value<int>? climbTypeId, Value<String>? gradeSystemId}) {
+      {Value<int>? climbTypeId, Value<int>? gradeSystemId}) {
     return ClimbTypeToGradeSystemCompanion(
       climbTypeId: climbTypeId ?? this.climbTypeId,
       gradeSystemId: gradeSystemId ?? this.gradeSystemId,
@@ -447,7 +441,7 @@ class ClimbTypeToGradeSystemCompanion
       map['climb_type_id'] = Variable<int>(climbTypeId.value);
     }
     if (gradeSystemId.present) {
-      map['grade_system_id'] = Variable<String>(gradeSystemId.value);
+      map['grade_system_id'] = Variable<int>(gradeSystemId.value);
     }
     return map;
   }
@@ -479,9 +473,9 @@ class $ClimbTypeToGradeSystemTable extends ClimbTypeToGradeSystem
   final VerificationMeta _gradeSystemIdMeta =
       const VerificationMeta('gradeSystemId');
   @override
-  late final GeneratedColumn<String> gradeSystemId = GeneratedColumn<String>(
+  late final GeneratedColumn<int> gradeSystemId = GeneratedColumn<int>(
       'grade_system_id', aliasedName, false,
-      type: DriftSqlType.string,
+      type: DriftSqlType.int,
       requiredDuringInsert: true,
       defaultConstraints: 'REFERENCES grade_system (id)');
   @override
@@ -524,8 +518,8 @@ class $ClimbTypeToGradeSystemTable extends ClimbTypeToGradeSystem
     return ClimbTypeToGradeSystemData(
       climbTypeId: attachedDatabase.options.types
           .read(DriftSqlType.int, data['${effectivePrefix}climb_type_id'])!,
-      gradeSystemId: attachedDatabase.options.types.read(
-          DriftSqlType.string, data['${effectivePrefix}grade_system_id'])!,
+      gradeSystemId: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}grade_system_id'])!,
     );
   }
 
@@ -536,13 +530,13 @@ class $ClimbTypeToGradeSystemTable extends ClimbTypeToGradeSystem
 }
 
 class GradeData extends DataClass implements Insertable<GradeData> {
-  final String systemId;
+  final int systemId;
   final String grade;
   const GradeData({required this.systemId, required this.grade});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    map['system_id'] = Variable<String>(systemId);
+    map['system_id'] = Variable<int>(systemId);
     map['grade'] = Variable<String>(grade);
     return map;
   }
@@ -558,7 +552,7 @@ class GradeData extends DataClass implements Insertable<GradeData> {
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return GradeData(
-      systemId: serializer.fromJson<String>(json['systemId']),
+      systemId: serializer.fromJson<int>(json['systemId']),
       grade: serializer.fromJson<String>(json['grade']),
     );
   }
@@ -566,12 +560,12 @@ class GradeData extends DataClass implements Insertable<GradeData> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'systemId': serializer.toJson<String>(systemId),
+      'systemId': serializer.toJson<int>(systemId),
       'grade': serializer.toJson<String>(grade),
     };
   }
 
-  GradeData copyWith({String? systemId, String? grade}) => GradeData(
+  GradeData copyWith({int? systemId, String? grade}) => GradeData(
         systemId: systemId ?? this.systemId,
         grade: grade ?? this.grade,
       );
@@ -595,19 +589,19 @@ class GradeData extends DataClass implements Insertable<GradeData> {
 }
 
 class GradeCompanion extends UpdateCompanion<GradeData> {
-  final Value<String> systemId;
+  final Value<int> systemId;
   final Value<String> grade;
   const GradeCompanion({
     this.systemId = const Value.absent(),
     this.grade = const Value.absent(),
   });
   GradeCompanion.insert({
-    required String systemId,
+    required int systemId,
     required String grade,
   })  : systemId = Value(systemId),
         grade = Value(grade);
   static Insertable<GradeData> custom({
-    Expression<String>? systemId,
+    Expression<int>? systemId,
     Expression<String>? grade,
   }) {
     return RawValuesInsertable({
@@ -616,7 +610,7 @@ class GradeCompanion extends UpdateCompanion<GradeData> {
     });
   }
 
-  GradeCompanion copyWith({Value<String>? systemId, Value<String>? grade}) {
+  GradeCompanion copyWith({Value<int>? systemId, Value<String>? grade}) {
     return GradeCompanion(
       systemId: systemId ?? this.systemId,
       grade: grade ?? this.grade,
@@ -627,7 +621,7 @@ class GradeCompanion extends UpdateCompanion<GradeData> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (systemId.present) {
-      map['system_id'] = Variable<String>(systemId.value);
+      map['system_id'] = Variable<int>(systemId.value);
     }
     if (grade.present) {
       map['grade'] = Variable<String>(grade.value);
@@ -652,9 +646,9 @@ class $GradeTable extends Grade with TableInfo<$GradeTable, GradeData> {
   $GradeTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _systemIdMeta = const VerificationMeta('systemId');
   @override
-  late final GeneratedColumn<String> systemId = GeneratedColumn<String>(
+  late final GeneratedColumn<int> systemId = GeneratedColumn<int>(
       'system_id', aliasedName, false,
-      type: DriftSqlType.string,
+      type: DriftSqlType.int,
       requiredDuringInsert: true,
       defaultConstraints: 'REFERENCES grade_system (id)');
   final VerificationMeta _gradeMeta = const VerificationMeta('grade');
@@ -695,7 +689,7 @@ class $GradeTable extends Grade with TableInfo<$GradeTable, GradeData> {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return GradeData(
       systemId: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}system_id'])!,
+          .read(DriftSqlType.int, data['${effectivePrefix}system_id'])!,
       grade: attachedDatabase.options.types
           .read(DriftSqlType.string, data['${effectivePrefix}grade'])!,
     );
@@ -826,9 +820,7 @@ class $RouteStatusTable extends RouteStatus
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      type: DriftSqlType.int, requiredDuringInsert: false);
   final VerificationMeta _labelMeta = const VerificationMeta('label');
   @override
   late final GeneratedColumn<String> label = GeneratedColumn<String>(
@@ -999,9 +991,7 @@ class $RouteCompletedStatusTable extends RouteCompletedStatus
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      type: DriftSqlType.int, requiredDuringInsert: false);
   final VerificationMeta _labelMeta = const VerificationMeta('label');
   @override
   late final GeneratedColumn<String> label = GeneratedColumn<String>(
@@ -1171,9 +1161,7 @@ class $RouteDifficultyTable extends RouteDifficulty
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      type: DriftSqlType.int, requiredDuringInsert: false);
   final VerificationMeta _labelMeta = const VerificationMeta('label');
   @override
   late final GeneratedColumn<String> label = GeneratedColumn<String>(
@@ -1227,7 +1215,7 @@ class RouteData extends DataClass implements Insertable<RouteData> {
   final String title;
   final DateTime date;
   final int climbTypeId;
-  final String gradeSystemId;
+  final int gradeSystemId;
   final String grade;
   final int status;
   final int? completedStatus;
@@ -1251,7 +1239,7 @@ class RouteData extends DataClass implements Insertable<RouteData> {
     map['title'] = Variable<String>(title);
     map['date'] = Variable<DateTime>(date);
     map['climb_type_id'] = Variable<int>(climbTypeId);
-    map['grade_system_id'] = Variable<String>(gradeSystemId);
+    map['grade_system_id'] = Variable<int>(gradeSystemId);
     map['grade'] = Variable<String>(grade);
     map['status'] = Variable<int>(status);
     if (!nullToAbsent || completedStatus != null) {
@@ -1291,7 +1279,7 @@ class RouteData extends DataClass implements Insertable<RouteData> {
       title: serializer.fromJson<String>(json['title']),
       date: serializer.fromJson<DateTime>(json['date']),
       climbTypeId: serializer.fromJson<int>(json['climbTypeId']),
-      gradeSystemId: serializer.fromJson<String>(json['gradeSystemId']),
+      gradeSystemId: serializer.fromJson<int>(json['gradeSystemId']),
       grade: serializer.fromJson<String>(json['grade']),
       status: serializer.fromJson<int>(json['status']),
       completedStatus: serializer.fromJson<int?>(json['completedStatus']),
@@ -1307,7 +1295,7 @@ class RouteData extends DataClass implements Insertable<RouteData> {
       'title': serializer.toJson<String>(title),
       'date': serializer.toJson<DateTime>(date),
       'climbTypeId': serializer.toJson<int>(climbTypeId),
-      'gradeSystemId': serializer.toJson<String>(gradeSystemId),
+      'gradeSystemId': serializer.toJson<int>(gradeSystemId),
       'grade': serializer.toJson<String>(grade),
       'status': serializer.toJson<int>(status),
       'completedStatus': serializer.toJson<int?>(completedStatus),
@@ -1321,7 +1309,7 @@ class RouteData extends DataClass implements Insertable<RouteData> {
           String? title,
           DateTime? date,
           int? climbTypeId,
-          String? gradeSystemId,
+          int? gradeSystemId,
           String? grade,
           int? status,
           Value<int?> completedStatus = const Value.absent(),
@@ -1382,7 +1370,7 @@ class RouteCompanion extends UpdateCompanion<RouteData> {
   final Value<String> title;
   final Value<DateTime> date;
   final Value<int> climbTypeId;
-  final Value<String> gradeSystemId;
+  final Value<int> gradeSystemId;
   final Value<String> grade;
   final Value<int> status;
   final Value<int?> completedStatus;
@@ -1405,7 +1393,7 @@ class RouteCompanion extends UpdateCompanion<RouteData> {
     required String title,
     required DateTime date,
     required int climbTypeId,
-    required String gradeSystemId,
+    required int gradeSystemId,
     required String grade,
     required int status,
     this.completedStatus = const Value.absent(),
@@ -1423,7 +1411,7 @@ class RouteCompanion extends UpdateCompanion<RouteData> {
     Expression<String>? title,
     Expression<DateTime>? date,
     Expression<int>? climbTypeId,
-    Expression<String>? gradeSystemId,
+    Expression<int>? gradeSystemId,
     Expression<String>? grade,
     Expression<int>? status,
     Expression<int>? completedStatus,
@@ -1449,7 +1437,7 @@ class RouteCompanion extends UpdateCompanion<RouteData> {
       Value<String>? title,
       Value<DateTime>? date,
       Value<int>? climbTypeId,
-      Value<String>? gradeSystemId,
+      Value<int>? gradeSystemId,
       Value<String>? grade,
       Value<int>? status,
       Value<int?>? completedStatus,
@@ -1485,7 +1473,7 @@ class RouteCompanion extends UpdateCompanion<RouteData> {
       map['climb_type_id'] = Variable<int>(climbTypeId.value);
     }
     if (gradeSystemId.present) {
-      map['grade_system_id'] = Variable<String>(gradeSystemId.value);
+      map['grade_system_id'] = Variable<int>(gradeSystemId.value);
     }
     if (grade.present) {
       map['grade'] = Variable<String>(grade.value);
@@ -1554,9 +1542,9 @@ class $RouteTable extends Route with TableInfo<$RouteTable, RouteData> {
   final VerificationMeta _gradeSystemIdMeta =
       const VerificationMeta('gradeSystemId');
   @override
-  late final GeneratedColumn<String> gradeSystemId = GeneratedColumn<String>(
+  late final GeneratedColumn<int> gradeSystemId = GeneratedColumn<int>(
       'grade_system_id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: true);
   final VerificationMeta _gradeMeta = const VerificationMeta('grade');
   @override
   late final GeneratedColumn<String> grade = GeneratedColumn<String>(
@@ -1689,8 +1677,8 @@ class $RouteTable extends Route with TableInfo<$RouteTable, RouteData> {
           .read(DriftSqlType.dateTime, data['${effectivePrefix}date'])!,
       climbTypeId: attachedDatabase.options.types
           .read(DriftSqlType.int, data['${effectivePrefix}climb_type_id'])!,
-      gradeSystemId: attachedDatabase.options.types.read(
-          DriftSqlType.string, data['${effectivePrefix}grade_system_id'])!,
+      gradeSystemId: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}grade_system_id'])!,
       grade: attachedDatabase.options.types
           .read(DriftSqlType.string, data['${effectivePrefix}grade'])!,
       status: attachedDatabase.options.types
