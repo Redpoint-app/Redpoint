@@ -12,15 +12,24 @@ import 'package:redpoint/shared/model/route_type.dart';
 import 'package:redpoint/shared/model/status.dart';
 import 'package:redpoint/shared/model/tag.dart';
 import 'package:redpoint/shared/model/v_scale.dart';
+import 'package:redpoint/shared/nav/navigation.dart';
 import 'package:redpoint/shared/widgets/layout/page_template.dart';
 
 class HomePage extends PageTemplate {
-  HomePage()
-      : super(title: "Home", body: const _HomePageBody(), scrollable: true);
+  final void Function(int) setPageCallback;
+
+  HomePage({required this.setPageCallback})
+      : super(
+            title: "Home",
+            body: _HomePageBody(
+              setPageCallback: setPageCallback,
+            ),
+            scrollable: true);
 }
 
 class _HomePageBody extends StatefulWidget {
-  const _HomePageBody({super.key});
+  const _HomePageBody({required this.setPageCallback});
+  final void Function(int) setPageCallback;
 
   @override
   State<_HomePageBody> createState() => _HomePageBodyState();
@@ -79,6 +88,10 @@ class _HomePageBodyState extends State<_HomePageBody> {
           "This askjasklj"),
     ];
 
+    void viewAllProjects() {
+      widget.setPageCallback(projectsPageIndex);
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -97,11 +110,13 @@ class _HomePageBodyState extends State<_HomePageBody> {
           title: "Projects",
           routes: routes,
           emptyWidget: const AddRouteCard(),
+          onTapViewAll: viewAllProjects,
         ),
         RouteCarousel(
           title: "Recent climbs",
           routes: routes,
           emptyWidget: const AddRouteCard(),
+          onTapViewAll: () {},
         ),
         RouteCarousel(
           title: "Friend activity",
@@ -110,6 +125,7 @@ class _HomePageBodyState extends State<_HomePageBody> {
             padding: EdgeInsets.only(left: 30),
             child: Text("No friend activity yet"),
           ),
+          onTapViewAll: () {},
         ),
         const Padding(
           padding: EdgeInsets.only(bottom: 120),
