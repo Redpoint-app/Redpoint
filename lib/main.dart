@@ -75,20 +75,21 @@ class InitialPage extends StatefulWidget {
 
 class _InitialPageState extends State<InitialPage> {
   int pageIndex = 0;
-  final List<PageTemplate> pages = [
-    HomePage(),
-    ProjectsPage(),
-    SocialPage(),
-    ProfilePage()
-  ];
+
+  void setPage(int index) {
+    setState(() {
+      pageIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    void setPage(int index) {
-      setState(() {
-        pageIndex = index;
-      });
-    }
+    final List<PageTemplate> pages = [
+      HomePage(setPageCallback: setPage),
+      ProjectsPage(),
+      SocialPage(),
+      ProfilePage()
+    ];
 
     return Scaffold(
         extendBody: true,
