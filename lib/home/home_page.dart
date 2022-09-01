@@ -12,7 +12,7 @@ import 'package:redpoint/shared/model/route_type.dart';
 import 'package:redpoint/shared/model/status.dart';
 import 'package:redpoint/shared/model/tag.dart';
 import 'package:redpoint/shared/model/v_scale.dart';
-import 'package:redpoint/shared/nav/navigation.dart';
+import 'package:redpoint/shared/navigation/navigation.dart';
 import 'package:redpoint/shared/widgets/layout/page_template.dart';
 
 class HomePage extends PageTemplate {
