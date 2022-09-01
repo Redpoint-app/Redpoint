@@ -3,14 +3,17 @@ import 'package:redpoint/home/widgets/route_card.dart';
 import 'package:redpoint/shared/model/route.dart';
 
 class RouteCarousel extends StatefulWidget {
-  const RouteCarousel(
-      {super.key,
-      required this.routes,
-      required this.title,
-      required this.emptyWidget});
+  const RouteCarousel({
+    super.key,
+    required this.routes,
+    required this.title,
+    required this.emptyWidget,
+    required this.onTapViewAll,
+  });
   final List<ClimbingRoute> routes;
   final String title;
   final Widget emptyWidget;
+  final void Function() onTapViewAll;
 
   @override
   State<RouteCarousel> createState() => _RouteCarouselState();
@@ -38,7 +41,7 @@ class _RouteCarouselState extends State<RouteCarousel> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: widget.onTapViewAll,
                   child: Text(
                     "View all",
                     style: TextStyle(
