@@ -99,10 +99,10 @@ class App extends StatelessWidget {
 class InitialPage extends StatefulWidget {
   const InitialPage({super.key});
   @override
-  State<InitialPage> createState() => _InitialPageState();
+  State<InitialPage> createState() => InitialPageState();
 }
 
-class _InitialPageState extends State<InitialPage> {
+class InitialPageState extends State<InitialPage> {
   int pageIndex = 0;
 
   void setPage(int index) {
@@ -120,33 +120,36 @@ class _InitialPageState extends State<InitialPage> {
       ProfilePage()
     ];
 
-    return Scaffold(
-        extendBody: true,
-        body: AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle(
-            systemNavigationBarColor: Colors.transparent,
-            statusBarBrightness: Theme.of(context).brightness,
-            statusBarIconBrightness:
-                Theme.of(context).brightness == Brightness.dark
-                    ? Brightness.light
-                    : Brightness.dark,
-            statusBarColor: Colors.transparent,
-          ),
-          child: SafeArea(
-            bottom: false,
-            child: IndexedStack(
-              index: pageIndex,
-              children: pages
-                  .map((page) => (page.scrollable == true)
-                      ? SingleChildScrollView(child: page.body)
-                      : page.body)
-                  .toList(),
+    return Provider<InitialPageState>(
+        create: (context) => this,
+        child: Scaffold(
+            extendBody: true,
+            body: AnnotatedRegion<SystemUiOverlayStyle>(
+              value: SystemUiOverlayStyle(
+                systemNavigationBarColor: Colors.transparent,
+                statusBarBrightness: Theme.of(context).brightness,
+                statusBarIconBrightness:
+                    Theme.of(context).brightness == Brightness.dark
+                        ? Brightness.light
+                        : Brightness.dark,
+                statusBarColor: Colors.transparent,
+              ),
+              child: SafeArea(
+                bottom: false,
+                child: IndexedStack(
+                  index: pageIndex,
+                  children: pages
+                      .map((page) => (page.scrollable == true)
+                          ? SingleChildScrollView(child: page.body)
+                          : page.body)
+                      .toList(),
+                ),
+              ),
             ),
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: const AddButton(),
-        bottomNavigationBar:
-            BottomNavbar(pageTitle: pages[pageIndex].title, callback: setPage));
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: const AddButton(),
+            bottomNavigationBar: BottomNavbar(
+                pageTitle: pages[pageIndex].title, callback: setPage)));
   }
 }
