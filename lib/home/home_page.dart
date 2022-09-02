@@ -18,20 +18,12 @@ import 'package:redpoint/shared/navigation/navigation.dart';
 import 'package:redpoint/shared/widgets/layout/page_template.dart';
 
 class HomePage extends PageTemplate {
-  final void Function(int) setPageCallback;
-
-  HomePage({required this.setPageCallback})
-      : super(
-            title: "Home",
-            body: _HomePageBody(
-              setPageCallback: setPageCallback,
-            ),
-            scrollable: true);
+  HomePage()
+      : super(title: "Home", body: const _HomePageBody(), scrollable: true);
 }
 
 class _HomePageBody extends StatefulWidget {
-  const _HomePageBody({required this.setPageCallback});
-  final void Function(int) setPageCallback;
+  const _HomePageBody();
 
   @override
   State<_HomePageBody> createState() => _HomePageBodyState();

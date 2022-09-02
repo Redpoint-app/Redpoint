@@ -114,7 +114,7 @@ class InitialPageState extends State<InitialPage> {
   @override
   Widget build(BuildContext context) {
     final List<PageTemplate> pages = [
-      HomePage(setPageCallback: setPage),
+      HomePage(),
       ProjectsPage(),
       SocialPage(),
       ProfilePage()
