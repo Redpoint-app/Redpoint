@@ -29,7 +29,7 @@ void main() async {
     providers: [
       Provider<AppDatabase>(
           create: (context) => driftDb, dispose: (context, db) => db.close()),
-      Provider<FilterChangeNotifier>(
+      ChangeNotifierProvider<FilterChangeNotifier>(
           create: (context) => FilterChangeNotifier()),
     ],
     child: const App(),

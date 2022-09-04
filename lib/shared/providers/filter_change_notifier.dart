@@ -11,11 +11,19 @@ class FilterChangeNotifier extends ChangeNotifier {
   void add<T>(Filter filter) {
     if (_filters.every((currentFilter) => currentFilter is! T)) {
       _filters.add(filter);
-      print('adding filter');
+      notifyListeners();
     }
   }
 
-  void remove(Filter filter) {}
+  void remove<T>() {
+    for (var filter in _filters) {
+      if (filter is T) {
+        _filters.remove(filter);
+      }
+    }
+  }
 
-  void clear() {}
+  void clear() {
+    _filters.clear();
+  }
 }
