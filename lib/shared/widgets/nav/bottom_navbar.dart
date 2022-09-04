@@ -36,8 +36,8 @@ class _BottomNavbarState extends State<BottomNavbar> {
               page: 0,
             ),
             NavButton(
-                label: "Projects",
-                active: widget.pageTitle == "Projects",
+                label: "Routes",
+                active: widget.pageTitle == "Routes",
                 buttonIcon: Icons.list,
                 callback: widget.callback,
                 page: 1),

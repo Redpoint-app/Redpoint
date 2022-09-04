@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:redpoint/home/widgets/add_route_card.dart';
 import 'package:redpoint/home/widgets/route_carousel.dart';
 import 'package:redpoint/main.dart';
-import 'package:redpoint/projects/filters/project_filter.dart';
+import 'package:redpoint/routes/filters/project_filter.dart';
 import 'package:redpoint/shared/model/yds.dart';
 
 import 'package:redpoint/shared/model/difficulty.dart';
@@ -90,8 +90,8 @@ class _HomePageBodyState extends State<_HomePageBody> {
         Provider.of<FilterChangeNotifier>(context, listen: false);
 
     void viewAllProjects() {
+      initialPageState.setPage(routesPageIndex);
       filterNotifier.add<ProjectFilter>(ProjectFilter());
-      initialPageState.setPage(projectsPageIndex);
     }
 
     return Column(
