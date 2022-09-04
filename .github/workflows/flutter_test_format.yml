@@ -1,0 +1,27 @@
+name: Flutter Test/Format
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      # Consider passing '--fatal-infos' for slightly stricter analysis.
+      - name: Analyze project source
+        run: dart analyze
+
+      - name: Run tests
+        run: flutter test
