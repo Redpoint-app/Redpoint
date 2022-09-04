@@ -16,8 +16,6 @@ import 'package:redpoint/shared/providers/filter_change_notifier.dart';
 import 'package:redpoint/shared/widgets/custom_icon_button.dart';
 import 'package:redpoint/shared/widgets/layout/page_template.dart';
 
-import 'filters/filter.dart';
-
 class ProjectsPage extends PageTemplate {
   ProjectsPage()
       : super(
@@ -327,7 +325,6 @@ class _ProjectsPageBodyState extends State<_ProjectsPageBody> {
     ];
 
     var filters = Provider.of<FilterChangeNotifier>(context, listen: true);
-    print(filters.filters);
 
     return Column(
       children: <Widget>[
@@ -364,7 +361,6 @@ class _ProjectsPageBodyState extends State<_ProjectsPageBody> {
             padding: const EdgeInsets.only(bottom: 140),
             child: Consumer<FilterChangeNotifier>(
                 builder: (context, filterChangeNotifier, child) {
-              print(filterChangeNotifier.filters);
               return Column(
                   children: routes
                       .where((route) => filterChangeNotifier.filters

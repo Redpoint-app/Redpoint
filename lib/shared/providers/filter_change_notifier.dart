@@ -21,9 +21,12 @@ class FilterChangeNotifier extends ChangeNotifier {
         _filters.remove(filter);
       }
     }
+
+    notifyListeners();
   }
 
   void clear() {
     _filters.clear();
+    notifyListeners();
   }
 }

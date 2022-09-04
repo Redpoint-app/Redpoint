@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:redpoint/home/widgets/add_route_card.dart';
 import 'package:redpoint/home/widgets/route_carousel.dart';
 import 'package:redpoint/main.dart';
-import 'package:redpoint/projects/filters/filter.dart';
 import 'package:redpoint/projects/filters/project_filter.dart';
 import 'package:redpoint/shared/model/yds.dart';
 
