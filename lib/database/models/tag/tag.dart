@@ -14,6 +14,10 @@ class TagDao extends DatabaseAccessor<AppDatabase> with _$TagDaoMixin {
 
   Future<List<TagData>> get all => select(tag).get();
 
+  Future<int> insert(TagCompanion entry) {
+    return into(tag).insert(entry);
+  }
+
   Future<TagData> insertReturning(TagCompanion entry) {
     return into(tag).insertReturning(entry);
   }

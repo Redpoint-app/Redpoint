@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:redpoint/debug/storage_inspector.dart';
 import 'package:redpoint/home/home_page.dart';
 import 'package:redpoint/profile/profile_page.dart';
 import 'package:redpoint/projects/projects_page.dart';
@@ -10,9 +11,6 @@ import 'package:redpoint/shared/widgets/nav/add_button.dart';
 import 'package:redpoint/shared/widgets/nav/bottom_navbar.dart';
 import 'package:redpoint/social/social_page.dart';
 
-import 'package:storage_inspector/storage_inspector.dart';
-import 'package:drift_local_storage_inspector/drift_local_storage_inspector.dart';
-
 import 'database/database.dart';
 
 void main() async {
@@ -20,14 +18,9 @@ void main() async {
 
   final driftDb = AppDatabase();
 
-  // Run storage_inspector in debug mode only
+  // Run in debug mode only
   if (kDebugMode) {
-    final driver = StorageServerDriver(bundleId: 'com.example.redpoint');
-    final sqlServer =
-        DriftSQLDatabaseServer(id: "1", name: "SQL Server", database: driftDb);
-
-    driver.addSQLServer(sqlServer);
-    await driver.start();
+    runStorageInspector(driftDb);
   }
 
   var providers = MultiProvider(
