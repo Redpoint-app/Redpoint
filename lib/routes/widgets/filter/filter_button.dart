@@ -5,14 +5,10 @@ class FilterButton extends StatefulWidget {
       {super.key,
       required this.label,
       required this.onTap,
-      this.first,
-      this.last,
       this.active,
       this.icon});
   final String label;
   final void Function() onTap;
-  final bool? first;
-  final bool? last;
   final bool? active;
   final IconData? icon;
 
@@ -26,16 +22,13 @@ class _FilterButtonState extends State<FilterButton> {
     bool active = widget.active ?? false;
 
     return Padding(
-      padding: EdgeInsets.only(
-          left: (widget.first ?? false) ? 30.0 : 2.0,
-          right: (widget.last ?? false) ? 30.0 : 2.0,
-          bottom: 4),
+      padding: const EdgeInsets.only(left: 2, right: 2, bottom: 4),
       child: SizedBox(
         height: 40,
         child: TextButton(
           onPressed: widget.onTap,
           style: TextButton.styleFrom(
-              primary: active
+              foregroundColor: active
                   ? Theme.of(context).colorScheme.onPrimary
                   : Theme.of(context).highlightColor,
               backgroundColor: active
