@@ -86,7 +86,7 @@ class _HomePageBodyState extends State<_HomePageBody> {
         Provider.of<InitialPageState>(context, listen: false);
 
     void viewAllProjects() {
-      initialPageState.setPage(projectsPageIndex);
+      initialPageState.setPage(routesPageIndex);
     }
 
     return Column(

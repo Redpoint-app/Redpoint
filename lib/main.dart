@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:redpoint/debug/storage_inspector.dart';
 import 'package:redpoint/home/home_page.dart';
 import 'package:redpoint/profile/profile_page.dart';
-import 'package:redpoint/projects/projects_page.dart';
+import 'package:redpoint/routes/routes_page.dart';
 import 'package:redpoint/shared/widgets/layout/page_template.dart';
 import 'package:redpoint/shared/widgets/nav/add_button.dart';
 import 'package:redpoint/shared/widgets/nav/bottom_navbar.dart';
@@ -108,7 +108,7 @@ class InitialPageState extends State<InitialPage> {
   Widget build(BuildContext context) {
     final List<PageTemplate> pages = [
       HomePage(),
-      ProjectsPage(),
+      RoutesPage(),
       SocialPage(),
       ProfilePage()
     ];

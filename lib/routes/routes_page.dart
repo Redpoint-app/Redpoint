@@ -1,8 +1,8 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:redpoint/projects/widgets/filter/filter_bar.dart';
-import 'package:redpoint/projects/widgets/route_list_element.dart';
+import 'package:redpoint/routes/widgets/filter/filter_bar.dart';
+import 'package:redpoint/routes/widgets/route_list_element.dart';
 
 import 'package:redpoint/shared/model/difficulty.dart';
 import 'package:redpoint/shared/model/route.dart';
@@ -14,22 +14,19 @@ import 'package:redpoint/shared/model/yds.dart';
 import 'package:redpoint/shared/widgets/custom_icon_button.dart';
 import 'package:redpoint/shared/widgets/layout/page_template.dart';
 
-class ProjectsPage extends PageTemplate {
-  ProjectsPage()
-      : super(
-            title: "Projects",
-            body: const _ProjectsPageBody(),
-            scrollable: true);
+class RoutesPage extends PageTemplate {
+  RoutesPage()
+      : super(title: "Routes", body: const _RoutesPageBody(), scrollable: true);
 }
 
-class _ProjectsPageBody extends StatefulWidget {
-  const _ProjectsPageBody({super.key});
+class _RoutesPageBody extends StatefulWidget {
+  const _RoutesPageBody({super.key});
 
   @override
-  State<_ProjectsPageBody> createState() => _ProjectsPageBodyState();
+  State<_RoutesPageBody> createState() => _RoutesPageBodyState();
 }
 
-class _ProjectsPageBodyState extends State<_ProjectsPageBody> {
+class _RoutesPageBodyState extends State<_RoutesPageBody> {
   @override
   Widget build(BuildContext context) {
     ListQueue<Tag> tags = ListQueue();
@@ -346,7 +343,7 @@ class _ProjectsPageBodyState extends State<_ProjectsPageBody> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: const [
               Text(
-                "Projects",
+                "Routes",
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
               ),
             ],
