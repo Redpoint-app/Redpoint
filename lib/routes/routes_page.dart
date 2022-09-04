@@ -1,8 +1,14 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+<<<<<<< HEAD:lib/routes/routes_page.dart
 import 'package:redpoint/routes/widgets/filter/filter_bar.dart';
 import 'package:redpoint/routes/widgets/route_list_element.dart';
+=======
+import 'package:provider/provider.dart';
+import 'package:redpoint/projects/widgets/filter/filter_bar.dart';
+import 'package:redpoint/projects/widgets/route_list_element.dart';
+>>>>>>> 2a6cb781a47d53b9a83282cc1db4aa06599e156e:lib/projects/projects_page.dart
 
 import 'package:redpoint/shared/model/difficulty.dart';
 import 'package:redpoint/shared/model/route.dart';
@@ -11,6 +17,7 @@ import 'package:redpoint/shared/model/status.dart';
 import 'package:redpoint/shared/model/tag.dart';
 import 'package:redpoint/shared/model/v_scale.dart';
 import 'package:redpoint/shared/model/yds.dart';
+import 'package:redpoint/shared/providers/filter_change_notifier.dart';
 import 'package:redpoint/shared/widgets/custom_icon_button.dart';
 import 'package:redpoint/shared/widgets/layout/page_template.dart';
 
@@ -52,7 +59,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2022-06-07"),
           RouteType.topRope,
           const YDS().getScale()[8],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           tags,
@@ -62,7 +69,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2022-05-29"),
           RouteType.lead,
           const YDS().getScale()[10],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           ListQueue(),
@@ -72,7 +79,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2022-01-29"),
           RouteType.boulder,
           const VScale().getScale()[8],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           tags,
@@ -82,7 +89,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2019-06-26"),
           RouteType.boulder,
           const VScale().getScale()[5],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           tags,
@@ -92,7 +99,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2022-06-07"),
           RouteType.topRope,
           const YDS().getScale()[8],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           tags,
@@ -102,7 +109,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2022-05-29"),
           RouteType.lead,
           const YDS().getScale()[10],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           ListQueue(),
@@ -112,7 +119,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2022-01-29"),
           RouteType.boulder,
           const VScale().getScale()[8],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           tags,
@@ -122,7 +129,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2019-06-26"),
           RouteType.boulder,
           const VScale().getScale()[5],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           tags,
@@ -132,7 +139,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2022-06-07"),
           RouteType.topRope,
           const YDS().getScale()[8],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           tags,
@@ -142,7 +149,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2022-05-29"),
           RouteType.lead,
           const YDS().getScale()[10],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           ListQueue(),
@@ -152,7 +159,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2022-01-29"),
           RouteType.boulder,
           const VScale().getScale()[8],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           tags,
@@ -162,7 +169,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2019-06-26"),
           RouteType.boulder,
           const VScale().getScale()[5],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           tags,
@@ -172,7 +179,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2022-06-07"),
           RouteType.topRope,
           const YDS().getScale()[8],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           tags,
@@ -182,7 +189,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2022-05-29"),
           RouteType.lead,
           const YDS().getScale()[10],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           ListQueue(),
@@ -192,7 +199,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2022-01-29"),
           RouteType.boulder,
           const VScale().getScale()[8],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           tags,
@@ -202,7 +209,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2019-06-26"),
           RouteType.boulder,
           const VScale().getScale()[5],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           tags,
@@ -212,7 +219,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2022-06-07"),
           RouteType.topRope,
           const YDS().getScale()[8],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           tags,
@@ -222,7 +229,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2022-05-29"),
           RouteType.lead,
           const YDS().getScale()[10],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           ListQueue(),
@@ -232,7 +239,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2022-01-29"),
           RouteType.boulder,
           const VScale().getScale()[8],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           tags,
@@ -242,7 +249,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2019-06-26"),
           RouteType.boulder,
           const VScale().getScale()[5],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           tags,
@@ -252,7 +259,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2022-06-07"),
           RouteType.topRope,
           const YDS().getScale()[8],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           tags,
@@ -262,7 +269,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2022-05-29"),
           RouteType.lead,
           const YDS().getScale()[10],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           ListQueue(),
@@ -272,7 +279,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2022-01-29"),
           RouteType.boulder,
           const VScale().getScale()[8],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           tags,
@@ -282,7 +289,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2019-06-26"),
           RouteType.boulder,
           const VScale().getScale()[5],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           tags,
@@ -292,7 +299,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2022-06-07"),
           RouteType.topRope,
           const YDS().getScale()[8],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           tags,
@@ -302,7 +309,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2022-05-29"),
           RouteType.lead,
           const YDS().getScale()[10],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           ListQueue(),
@@ -312,7 +319,7 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           DateTime.parse("2022-01-29"),
           RouteType.boulder,
           const VScale().getScale()[8],
-          Status.inProgress,
+          Status.wantToTry,
           null,
           Difficulty.easy,
           tags,
@@ -351,12 +358,17 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
         ),
         const Padding(padding: EdgeInsets.only(bottom: 20), child: FilterBar()),
         Padding(
-          padding: const EdgeInsets.only(bottom: 140),
-          child: Column(
-              children: routes
-                  .map((ClimbingRoute route) => RouteListElement(route: route))
-                  .toList()),
-        )
+            padding: const EdgeInsets.only(bottom: 140),
+            child: Consumer<FilterChangeNotifier>(
+                builder: (context, filterChangeNotifier, child) {
+              return Column(
+                  children: routes
+                      .where((route) => filterChangeNotifier.filters
+                          .every((filter) => filter.isValid(route)))
+                      .map((ClimbingRoute route) =>
+                          RouteListElement(route: route))
+                      .toList());
+            }))
       ],
     );
   }

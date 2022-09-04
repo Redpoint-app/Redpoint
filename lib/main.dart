@@ -6,6 +6,7 @@ import 'package:redpoint/debug/storage_inspector.dart';
 import 'package:redpoint/home/home_page.dart';
 import 'package:redpoint/profile/profile_page.dart';
 import 'package:redpoint/routes/routes_page.dart';
+import 'package:redpoint/shared/providers/filter_change_notifier.dart';
 import 'package:redpoint/shared/widgets/layout/page_template.dart';
 import 'package:redpoint/shared/widgets/nav/add_button.dart';
 import 'package:redpoint/shared/widgets/nav/bottom_navbar.dart';
@@ -26,7 +27,7 @@ void main() async {
   var providers = MultiProvider(
     providers: [
       Provider<AppDatabase>(
-          create: (context) => driftDb, dispose: (context, db) => db.close())
+          create: (context) => driftDb, dispose: (context, db) => db.close()),
     ],
     child: const App(),
   );
@@ -113,36 +114,39 @@ class InitialPageState extends State<InitialPage> {
       ProfilePage()
     ];
 
-    return Provider<InitialPageState>(
-        create: (context) => this,
-        child: Scaffold(
-            extendBody: true,
-            body: AnnotatedRegion<SystemUiOverlayStyle>(
-              value: SystemUiOverlayStyle(
-                systemNavigationBarColor: Colors.transparent,
-                statusBarBrightness: Theme.of(context).brightness,
-                statusBarIconBrightness:
-                    Theme.of(context).brightness == Brightness.dark
-                        ? Brightness.light
-                        : Brightness.dark,
-                statusBarColor: Colors.transparent,
-              ),
-              child: SafeArea(
-                bottom: false,
-                child: IndexedStack(
+    return Scaffold(
+        extendBody: true,
+        body: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle(
+            systemNavigationBarColor: Colors.transparent,
+            statusBarBrightness: Theme.of(context).brightness,
+            statusBarIconBrightness:
+                Theme.of(context).brightness == Brightness.dark
+                    ? Brightness.light
+                    : Brightness.dark,
+            statusBarColor: Colors.transparent,
+          ),
+          child: SafeArea(
+            bottom: false,
+            child: MultiProvider(
+              providers: [
+                Provider<InitialPageState>(create: (context) => this),
+                ChangeNotifierProvider<FilterChangeNotifier>(
+                    create: (context) => FilterChangeNotifier()),
+              ],
+              child: IndexedStack(
                   index: pageIndex,
                   children: pages
-                      .map((page) => (page.scrollable == true)
+                      .map((page) => page.scrollable == true
                           ? SingleChildScrollView(child: page.body)
                           : page.body)
-                      .toList(),
-                ),
-              ),
+                      .toList()),
             ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
-            floatingActionButton: const AddButton(),
-            bottomNavigationBar: BottomNavbar(
-                pageTitle: pages[pageIndex].title, callback: setPage)));
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: const AddButton(),
+        bottomNavigationBar:
+            BottomNavbar(pageTitle: pages[pageIndex].title, callback: setPage));
   }
 }
