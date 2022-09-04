@@ -324,8 +324,6 @@ class _ProjectsPageBodyState extends State<_ProjectsPageBody> {
           "This askjasklj"),
     ];
 
-    var filters = Provider.of<FilterChangeNotifier>(context, listen: true);
-
     return Column(
       children: <Widget>[
         Padding(
