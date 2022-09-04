@@ -29,8 +29,6 @@ void main() async {
     providers: [
       Provider<AppDatabase>(
           create: (context) => driftDb, dispose: (context, db) => db.close()),
-      ChangeNotifierProvider<FilterChangeNotifier>(
-          create: (context) => FilterChangeNotifier()),
     ],
     child: const App(),
   );
@@ -134,6 +132,8 @@ class InitialPageState extends State<InitialPage> {
             child: MultiProvider(
               providers: [
                 Provider<InitialPageState>(create: (context) => this),
+                ChangeNotifierProvider<FilterChangeNotifier>(
+                    create: (context) => FilterChangeNotifier()),
               ],
               child: IndexedStack(
                   index: pageIndex,
