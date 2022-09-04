@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:redpoint/home/widgets/add_route_card.dart';
 import 'package:redpoint/home/widgets/route_carousel.dart';
 import 'package:redpoint/main.dart';
+import 'package:redpoint/projects/filters/filter.dart';
+import 'package:redpoint/projects/filters/project_filter.dart';
 import 'package:redpoint/shared/model/yds.dart';
 
 import 'package:redpoint/shared/model/difficulty.dart';
@@ -15,6 +17,7 @@ import 'package:redpoint/shared/model/status.dart';
 import 'package:redpoint/shared/model/tag.dart';
 import 'package:redpoint/shared/model/v_scale.dart';
 import 'package:redpoint/shared/navigation/navigation.dart';
+import 'package:redpoint/shared/providers/filter_change_notifier.dart';
 import 'package:redpoint/shared/widgets/layout/page_template.dart';
 
 class HomePage extends PageTemplate {
@@ -84,8 +87,11 @@ class _HomePageBodyState extends State<_HomePageBody> {
 
     var initialPageState =
         Provider.of<InitialPageState>(context, listen: false);
+    var filterNotifier =
+        Provider.of<FilterChangeNotifier>(context, listen: false);
 
     void viewAllProjects() {
+      filterNotifier.add<ProjectFilter>(ProjectFilter());
       initialPageState.setPage(projectsPageIndex);
     }
 
