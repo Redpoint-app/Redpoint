@@ -7,6 +7,7 @@ class FilterChangeNotifier extends ChangeNotifier {
   final List<Filter> _filters = List.empty(growable: true);
 
   UnmodifiableListView<Filter> get filters => UnmodifiableListView(_filters);
+  int get numFilters => _filters.length;
 
   void add<T>(Filter filter) {
     if (_filters.every((currentFilter) => currentFilter is! T)) {

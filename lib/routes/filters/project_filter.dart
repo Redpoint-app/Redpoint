@@ -7,4 +7,7 @@ class ProjectFilter implements Filter {
   bool isValid(ClimbingRoute route) {
     return route.status == Status.inProgress;
   }
+
+  @override
+  String get label => 'Project';
 }
