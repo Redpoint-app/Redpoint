@@ -1,14 +1,9 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-<<<<<<< HEAD:lib/routes/routes_page.dart
 import 'package:redpoint/routes/widgets/filter/filter_bar.dart';
 import 'package:redpoint/routes/widgets/route_list_element.dart';
-=======
 import 'package:provider/provider.dart';
-import 'package:redpoint/projects/widgets/filter/filter_bar.dart';
-import 'package:redpoint/projects/widgets/route_list_element.dart';
->>>>>>> 2a6cb781a47d53b9a83282cc1db4aa06599e156e:lib/projects/projects_page.dart
 
 import 'package:redpoint/shared/model/difficulty.dart';
 import 'package:redpoint/shared/model/route.dart';

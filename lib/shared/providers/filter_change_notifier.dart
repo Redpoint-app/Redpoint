@@ -1,7 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:redpoint/projects/filters/filter.dart';
+import 'package:redpoint/routes/filters/filter.dart';
 
 class FilterChangeNotifier extends ChangeNotifier {
   final List<Filter> _filters = List.empty(growable: true);
