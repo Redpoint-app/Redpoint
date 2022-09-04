@@ -18,7 +18,6 @@ jobs:
          cache: true
       - run: flutter --version
 
-      - run: sqlite --version
       - run: sqlite3 --version
 
       - name: Install dependencies
