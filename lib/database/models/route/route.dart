@@ -33,6 +33,10 @@ class RouteDao extends DatabaseAccessor<AppDatabase> with _$RouteDaoMixin {
   Future<List<RouteData>> get all => select(route).get();
   Stream<List<RouteData>> get watchAll => select(route).watch();
 
+  Future<int> insert(RouteCompanion entry) {
+    return into(route).insert(entry);
+  }
+
   Future<RouteData> insertReturning(RouteCompanion entry) {
     return into(route).insertReturning(entry);
   }

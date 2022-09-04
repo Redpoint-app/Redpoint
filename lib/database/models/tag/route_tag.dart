@@ -20,7 +20,7 @@ class RouteTagDao extends DatabaseAccessor<AppDatabase> with _$RouteTagDaoMixin 
 
   Future<List<RouteTagData>> get all => select(routeTag).get();
 
-  Future<int> add(RouteTagCompanion entry) {
+  Future<int> insert(RouteTagCompanion entry) {
     return into(routeTag).insert(entry);
   }
 }

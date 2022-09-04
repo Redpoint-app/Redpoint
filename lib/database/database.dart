@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
+import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
+import 'package:redpoint/debug/load_test_data.dart';
 
 import 'models/climb_type/climb_type.dart';
 import 'models/climb_type/climb_type_to_grade_system.dart';
@@ -72,6 +74,10 @@ class AppDatabase extends _$AppDatabase {
         routeCompletedStatusDao.initializeData();
         routeDifficultyDao.initializeData();
         routeStatusDao.initializeData();
+
+        if (kDebugMode) {
+          loadTestData(this);
+        }
       },
     );
   }
