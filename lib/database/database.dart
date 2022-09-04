@@ -50,9 +50,13 @@ const List<Type> daos = [
 
 @DriftDatabase(tables: tables, daos: daos)
 class AppDatabase extends _$AppDatabase {
+  bool testMode = false;
+
   // we tell the database where to store the data with this constructor
   AppDatabase() : super(_openConnection());
-  AppDatabase.test(QueryExecutor executor) : super(executor);
+  AppDatabase.test(super.executor) {
+    testMode = true;
+  }
 
   @override
   int get schemaVersion => 1;
@@ -75,7 +79,7 @@ class AppDatabase extends _$AppDatabase {
         routeDifficultyDao.initializeData();
         routeStatusDao.initializeData();
 
-        if (kDebugMode) {
+        if (kDebugMode && !testMode) {
           loadTestData(this);
         }
       },
