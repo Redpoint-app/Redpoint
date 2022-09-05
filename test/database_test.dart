@@ -60,22 +60,5 @@ void main() {
     await database.routeDao.deleteById(insertedRoute.id); // DELETE
     retrievedRoute = await database.routeDao.getById(insertedRoute.id);
     expect(retrievedRoute, null);
-
-  });
-
-  test('Tag CRUD', () async {
-    TagCompanion tag = const TagCompanion(label: Value("Crimpy"));  // CREATE
-    final insertedTag =  await database.tagDao.insertReturning(tag);
-
-    TagData? retrievedTag = await database.tagDao.getById(insertedTag.id); // READ
-    expect(retrievedTag?.label, "Crimpy");
-
-    await database.tagDao.updateById(insertedTag.id, const TagCompanion(label: Value("Juggy"))); // UPDATE
-    retrievedTag = await database.tagDao.getById(insertedTag.id);
-    expect(retrievedTag?.label, "Juggy");
-
-    await database.tagDao.deleteById(insertedTag.id); // DELETE
-    retrievedTag = await database.tagDao.getById(insertedTag.id);
-    expect(retrievedTag, null);
   });
 }

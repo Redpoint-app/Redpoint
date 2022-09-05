@@ -1,3 +1,18 @@
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
+
 String pastDateMessage(DateTime date) {
   DateTime now = DateTime.now();
   Duration diff = now.difference(date).abs();
