@@ -30,7 +30,7 @@ class _CustomIconButtonState extends State<CustomIconButton> {
 
     return Ink(
         child: InkResponse(
-      onTap: () {},
+      onTap: widget.onTap,
       highlightColor: inkColor,
       splashColor: inkColor,
       splashFactory: InkRipple.splashFactory,

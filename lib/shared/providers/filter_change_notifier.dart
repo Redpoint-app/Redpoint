@@ -16,11 +16,33 @@ class FilterChangeNotifier extends ChangeNotifier {
     }
   }
 
-  void remove<T>() {
-    for (var filter in _filters) {
-      if (filter is T) {
-        _filters.remove(filter);
+  void removeByType(Type t) {
+    var index;
+
+    for (var i = 0; i < numFilters; i++) {
+      if (_filters[i].runtimeType == t) {
+        index = i;
       }
+    }
+
+    if (index != null) {
+      _filters.removeAt(index);
+    }
+
+    notifyListeners();
+  }
+
+  void removeByLabel(String label) {
+    var index;
+
+    for (var i = 0; i < numFilters; i++) {
+      if (_filters[i].label == label) {
+        index = i;
+      }
+    }
+
+    if (index != null) {
+      _filters.removeAt(index);
     }
 
     notifyListeners();

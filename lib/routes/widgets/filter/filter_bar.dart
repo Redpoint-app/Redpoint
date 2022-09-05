@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:redpoint/routes/widgets/filter/removeable_filter_label.dart';
 import 'package:redpoint/shared/model/route_type.dart';
@@ -30,20 +29,23 @@ class _FilterBarState extends State<FilterBar> {
           ),
         ),
         Consumer<FilterChangeNotifier>(
-          builder: (context, filterChangeNotifier, child) =>
-              filterChangeNotifier.numFilters == 0
-                  ? const SizedBox.shrink()
-                  : Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Row(
-                        children: filterChangeNotifier.filters
-                            .map((filter) => RemoveableFilterLabel(
-                                  label: filter.label,
-                                ))
-                            .toList(),
-                      ),
-                    ),
-        ),
+            builder: (context, filterChangeNotifier, child) {
+          return filterChangeNotifier.numFilters == 0
+              ? const SizedBox.shrink()
+              : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: Row(
+                    children: filterChangeNotifier.filters
+                        .map((filter) => RemoveableFilterLabel(
+                            label: filter.label,
+                            onTap: () {
+                              filterChangeNotifier
+                                  .removeByType(filter.runtimeType);
+                            }))
+                        .toList(),
+                  ),
+                );
+        }),
         Padding(
             padding: const EdgeInsets.only(left: 5, right: 30),
             child: Row(
