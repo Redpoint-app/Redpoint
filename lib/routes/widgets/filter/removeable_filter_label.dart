@@ -37,7 +37,7 @@ class _RemoveableFilterLabelState extends State<RemoveableFilterLabel> {
                 Padding(
                   padding: const EdgeInsets.only(right: 4),
                   child: CustomIconButton(
-                      icon: Icons.cancel_outlined,
+                      icon: Icons.cancel_rounded,
                       size: 17,
                       inkRadius: 10,
                       inkColor: Theme.of(context).colorScheme.onPrimary,
