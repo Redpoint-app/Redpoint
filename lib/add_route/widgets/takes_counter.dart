@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redpoint/add_route/widgets/small_icon_button.dart';
+import 'package:redpoint/shared/widgets/custom_icon_button.dart';
 
 class TakesCounter extends StatefulWidget {
   const TakesCounter({super.key});
@@ -20,18 +21,19 @@ class _TakesCounterState extends State<TakesCounter> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: SmallIconButton(
-                  color: Theme.of(context).disabledColor,
-                  icon: Icons.remove,
-                  onPressed: () {
-                    setState(() {
-                      if (count >= 2) {
-                        count--;
-                      }
-                    });
-                  },
-                )),
+              padding: const EdgeInsets.only(right: 8),
+              child: SmallIconButton(
+                color: Theme.of(context).disabledColor,
+                icon: Icons.remove,
+                onPressed: () {
+                  setState(() {
+                    if (count >= 2) {
+                      count--;
+                    }
+                  });
+                },
+              ),
+            ),
             Text("$count ${count == 1 ? 'take' : 'takes'}"),
             Padding(
                 padding: const EdgeInsets.only(left: 8),
