@@ -7,6 +7,7 @@ class FilterChangeNotifier extends ChangeNotifier {
   final List<Filter> _filters = List.empty(growable: true);
 
   UnmodifiableListView<Filter> get filters => UnmodifiableListView(_filters);
+  int get numFilters => _filters.length;
 
   void add<T>(Filter filter) {
     if (_filters.every((currentFilter) => currentFilter is! T)) {
@@ -15,11 +16,33 @@ class FilterChangeNotifier extends ChangeNotifier {
     }
   }
 
-  void remove<T>() {
-    for (var filter in _filters) {
-      if (filter is T) {
-        _filters.remove(filter);
+  void removeByType(Type t) {
+    var index;
+
+    for (var i = 0; i < numFilters; i++) {
+      if (_filters[i].runtimeType == t) {
+        index = i;
       }
+    }
+
+    if (index != null) {
+      _filters.removeAt(index);
+    }
+
+    notifyListeners();
+  }
+
+  void removeByLabel(String label) {
+    var index;
+
+    for (var i = 0; i < numFilters; i++) {
+      if (_filters[i].label == label) {
+        index = i;
+      }
+    }
+
+    if (index != null) {
+      _filters.removeAt(index);
     }
 
     notifyListeners();
