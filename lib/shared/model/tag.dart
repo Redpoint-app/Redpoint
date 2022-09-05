@@ -8,7 +8,8 @@ class Tag {
   }
 
   @override
-  bool operator == (Object other) {
+  // ignore: hash_and_equals
+  bool operator ==(Object other) {
     if (other is Tag) {
       Tag o = other;
       return o._label == _label;

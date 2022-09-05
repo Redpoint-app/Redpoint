@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:redpoint/database/database.dart';
 import 'package:storage_inspector/storage_inspector.dart';
 import 'package:drift_local_storage_inspector/drift_local_storage_inspector.dart';
