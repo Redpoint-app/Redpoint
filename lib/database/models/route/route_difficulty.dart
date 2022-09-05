@@ -13,10 +13,15 @@ class RouteDifficulty extends Table {
 }
 
 @DriftAccessor(tables: [RouteDifficulty])
-class RouteDifficultyDao extends DatabaseAccessor<AppDatabase> with _$RouteDifficultyDaoMixin {
+class RouteDifficultyDao extends DatabaseAccessor<AppDatabase>
+    with _$RouteDifficultyDaoMixin {
   RouteDifficultyDao(AppDatabase db) : super(db);
 
-  initializeData() { _init().forEach((element) async { await add(element); }); }
+  initializeData() {
+    _init().forEach((element) async {
+      await add(element);
+    });
+  }
 
   Future<List<RouteDifficultyData>> get all => select(routeDifficulty).get();
 
@@ -38,7 +43,9 @@ enum RouteDifficultyEnum {
 
 List<RouteDifficultyCompanion> _init() {
   return [
-    for (var routeDifficultyEnum in RouteDifficultyEnum.values) RouteDifficultyCompanion(id: Value(routeDifficultyEnum.index), label: Value(routeDifficultyEnum.label))
+    for (var routeDifficultyEnum in RouteDifficultyEnum.values)
+      RouteDifficultyCompanion(
+          id: Value(routeDifficultyEnum.index),
+          label: Value(routeDifficultyEnum.label))
   ];
 }
-

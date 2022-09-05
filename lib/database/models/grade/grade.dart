@@ -17,7 +17,11 @@ class Grade extends Table {
 class GradeDao extends DatabaseAccessor<AppDatabase> with _$GradeDaoMixin {
   GradeDao(AppDatabase db) : super(db);
 
-  initializeData() { _init().forEach((element) async { await add(element); }); }
+  initializeData() {
+    _init().forEach((element) async {
+      await add(element);
+    });
+  }
 
   Future<List<GradeData>> get all => select(grade).get();
 
@@ -31,11 +35,9 @@ List<GradeCompanion> _init() {
   List<GradeCompanion> grades = [];
   for (var gradeSystemEnum in GradeSystemEnum.values) {
     for (gradeString in gradeSystemEnum.grades) {
-      grades.add(GradeCompanion(systemId: Value(gradeSystemEnum.index), grade: Value(gradeString)));
+      grades.add(GradeCompanion(
+          systemId: Value(gradeSystemEnum.index), grade: Value(gradeString)));
     }
   }
   return grades;
 }
-
-
-

@@ -13,10 +13,15 @@ class RouteStatus extends Table {
 }
 
 @DriftAccessor(tables: [RouteStatus])
-class RouteStatusDao extends DatabaseAccessor<AppDatabase> with _$RouteStatusDaoMixin {
+class RouteStatusDao extends DatabaseAccessor<AppDatabase>
+    with _$RouteStatusDaoMixin {
   RouteStatusDao(AppDatabase db) : super(db);
 
-  initializeData() { _init().forEach((element) async { await add(element); }); }
+  initializeData() {
+    _init().forEach((element) async {
+      await add(element);
+    });
+  }
 
   Future<List<RouteStatusData>> get all => select(routeStatus).get();
 
@@ -36,7 +41,8 @@ enum RouteStatusEnum {
 
 List<RouteStatusCompanion> _init() {
   return [
-    for (var routeStatusEnum in RouteStatusEnum.values) RouteStatusCompanion(id: Value(routeStatusEnum.index), label: Value(routeStatusEnum.label))
+    for (var routeStatusEnum in RouteStatusEnum.values)
+      RouteStatusCompanion(
+          id: Value(routeStatusEnum.index), label: Value(routeStatusEnum.label))
   ];
 }
-

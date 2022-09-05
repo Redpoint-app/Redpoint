@@ -1,4 +1,3 @@
-
 /// A blank icon button that doesn't do anything. Strictly for the purpose of evenly
 /// spacing elements in the bottom app bar. Takes the place of the FAB, since the FAB
 /// isn't considered when spacing elements.

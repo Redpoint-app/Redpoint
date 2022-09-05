@@ -15,12 +15,18 @@ class ClimbTypeToGradeSystem extends Table {
 }
 
 @DriftAccessor(tables: [ClimbTypeToGradeSystem])
-class ClimbTypeToGradeSystemDao extends DatabaseAccessor<AppDatabase> with _$ClimbTypeToGradeSystemDaoMixin {
+class ClimbTypeToGradeSystemDao extends DatabaseAccessor<AppDatabase>
+    with _$ClimbTypeToGradeSystemDaoMixin {
   ClimbTypeToGradeSystemDao(AppDatabase db) : super(db);
 
-  initializeData() { _init().forEach((element) async { await add(element); }); }
+  initializeData() {
+    _init().forEach((element) async {
+      await add(element);
+    });
+  }
 
-  Future<List<ClimbTypeToGradeSystemData>> get all => select(climbTypeToGradeSystem).get();
+  Future<List<ClimbTypeToGradeSystemData>> get all =>
+      select(climbTypeToGradeSystem).get();
 
   add(ClimbTypeToGradeSystemCompanion entry) {
     return into(climbTypeToGradeSystem).insert(entry);
@@ -32,10 +38,10 @@ List<ClimbTypeToGradeSystemCompanion> _init() {
   List<ClimbTypeToGradeSystemCompanion> climbTypeToGradeSystems = [];
   for (var climbTypeEnum in ClimbTypeEnum.values) {
     for (gradeSystem in climbTypeEnum.validGradeSystems) {
-      climbTypeToGradeSystems.add(ClimbTypeToGradeSystemCompanion(climbTypeId: Value(climbTypeEnum.index), gradeSystemId: Value(gradeSystem.index)));
+      climbTypeToGradeSystems.add(ClimbTypeToGradeSystemCompanion(
+          climbTypeId: Value(climbTypeEnum.index),
+          gradeSystemId: Value(gradeSystem.index)));
     }
   }
   return climbTypeToGradeSystems;
 }
-
-

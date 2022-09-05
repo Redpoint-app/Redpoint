@@ -1,8 +1,7 @@
 import 'package:dart_date/dart_date.dart';
 import 'package:drift/drift.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:drift/native.dart';
-
+import 'package:flutter_test/flutter_test.dart';
 import 'package:redpoint/database/database.dart';
 import 'package:redpoint/database/models/climb_type/climb_type.dart';
 import 'package:redpoint/database/models/grade/grade_system.dart';
@@ -28,8 +27,7 @@ void main() {
       status: Value(RouteStatusEnum.completed.index),
       completedStatus: Value(RouteCompletedStatusEnum.onsight.index),
       difficulty: Value(RouteDifficultyEnum.intermediate.index),
-      thoughts: Value(routeThoughts)
-  );
+      thoughts: Value(routeThoughts));
 
   setUp(() async {
     database = AppDatabase.test(NativeDatabase.memory(logStatements: true));
@@ -40,9 +38,11 @@ void main() {
   });
 
   test('Routes CRUD', () async {
-    final insertedRoute = await database.routeDao.insertReturning(route); // CREATE
+    final insertedRoute =
+        await database.routeDao.insertReturning(route); // CREATE
 
-    RouteData? retrievedRoute = await database.routeDao.getById(insertedRoute.id); // READ
+    RouteData? retrievedRoute =
+        await database.routeDao.getById(insertedRoute.id); // READ
     expect(retrievedRoute?.title, route.title.value);
     expect(retrievedRoute?.date.isSameDay(route.date.value), true);
     expect(retrievedRoute?.climbTypeId, route.climbTypeId.value);
@@ -53,7 +53,8 @@ void main() {
     expect(retrievedRoute?.difficulty, route.difficulty.value);
     expect(retrievedRoute?.thoughts, route.thoughts.value);
 
-    await database.routeDao.updateById(insertedRoute.id, const RouteCompanion(title: Value("Test Route 2"))); // UPDATE
+    await database.routeDao.updateById(insertedRoute.id,
+        const RouteCompanion(title: Value("Test Route 2"))); // UPDATE
     retrievedRoute = await database.routeDao.getById(insertedRoute.id);
     expect(retrievedRoute?.title, "Test Route 2");
 

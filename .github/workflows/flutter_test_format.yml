@@ -1,4 +1,4 @@
-name: Flutter Test/Format
+name: Flutter Test/Format/Analyze
 
 on:
   push:
@@ -16,12 +16,15 @@ jobs:
         with:
          channel: 'stable' # or: 'beta', 'dev' or 'master'
          cache: true
-      - run: flutter --version
-
-      - run: sqlite3 --version
 
       - name: Install dependencies
         run: flutter pub get
+
+      - name: Analyze code
+        run: flutter analyze
+
+      - name: Verify formatting
+        run: flutter format --output=none --set-exit-if-changed .
 
       - name: Run tests
         run: flutter test

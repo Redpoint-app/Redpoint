@@ -12,7 +12,11 @@ class Tag extends Table {
 class TagDao extends DatabaseAccessor<AppDatabase> with _$TagDaoMixin {
   TagDao(AppDatabase db) : super(db);
 
-  initializeData() { _init().forEach((element) async { await insert(element); }); }
+  initializeData() {
+    _init().forEach((element) async {
+      await insert(element);
+    });
+  }
 
   Future<List<TagData>> get all => select(tag).get();
 
@@ -59,8 +63,7 @@ enum TagEnum {
 
 List<TagCompanion> _init() {
   return [
-    for (var tagEnum in TagEnum.values) TagCompanion(id: Value(tagEnum.index), label: Value(tagEnum.label))
+    for (var tagEnum in TagEnum.values)
+      TagCompanion(id: Value(tagEnum.index), label: Value(tagEnum.label))
   ];
 }
-
-

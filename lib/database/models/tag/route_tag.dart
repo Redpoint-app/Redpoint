@@ -15,7 +15,8 @@ class RouteTag extends Table {
 }
 
 @DriftAccessor(tables: [RouteTag])
-class RouteTagDao extends DatabaseAccessor<AppDatabase> with _$RouteTagDaoMixin {
+class RouteTagDao extends DatabaseAccessor<AppDatabase>
+    with _$RouteTagDaoMixin {
   RouteTagDao(AppDatabase db) : super(db);
 
   Future<List<RouteTagData>> get all => select(routeTag).get();
@@ -24,5 +25,3 @@ class RouteTagDao extends DatabaseAccessor<AppDatabase> with _$RouteTagDaoMixin 
     return into(routeTag).insert(entry);
   }
 }
-
-

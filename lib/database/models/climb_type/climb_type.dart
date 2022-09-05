@@ -13,10 +13,15 @@ class ClimbType extends Table {
 }
 
 @DriftAccessor(tables: [ClimbType])
-class ClimbTypeDao extends DatabaseAccessor<AppDatabase> with _$ClimbTypeDaoMixin {
+class ClimbTypeDao extends DatabaseAccessor<AppDatabase>
+    with _$ClimbTypeDaoMixin {
   ClimbTypeDao(AppDatabase db) : super(db);
 
-  initializeData() { _init().forEach((element) async { await add(element); }); }
+  initializeData() {
+    _init().forEach((element) async {
+      await add(element);
+    });
+  }
 
   Future<List<ClimbTypeData>> get all => select(climbType).get();
 
@@ -25,7 +30,8 @@ class ClimbTypeDao extends DatabaseAccessor<AppDatabase> with _$ClimbTypeDaoMixi
   }
 
   Future<ClimbTypeData?> getById(int id) {
-    return (select(climbType)..where((tbl) => tbl.id.equals(id))).getSingleOrNull();
+    return (select(climbType)..where((tbl) => tbl.id.equals(id)))
+        .getSingleOrNull();
   }
 }
 
@@ -41,8 +47,8 @@ enum ClimbTypeEnum {
 
 List<ClimbTypeCompanion> _init() {
   return [
-    for (var climbTypeEnum in ClimbTypeEnum.values) ClimbTypeCompanion(id: Value(climbTypeEnum.index), label: Value(climbTypeEnum.label))
+    for (var climbTypeEnum in ClimbTypeEnum.values)
+      ClimbTypeCompanion(
+          id: Value(climbTypeEnum.index), label: Value(climbTypeEnum.label))
   ];
 }
-
-

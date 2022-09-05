@@ -4,7 +4,6 @@ import 'package:redpoint/database/models/route/route_completed_status.dart';
 import 'package:redpoint/database/models/route/route_difficulty.dart';
 import 'package:redpoint/database/models/route/route_status.dart';
 
-
 part 'route.g.dart';
 
 class Route extends Table {
@@ -15,15 +14,16 @@ class Route extends Table {
   IntColumn get gradeSystemId => integer()();
   TextColumn get grade => text()();
   IntColumn get status => integer().references(RouteStatus, #id)();
-  IntColumn get completedStatus => integer().nullable().references(RouteCompletedStatus, #id)();
+  IntColumn get completedStatus =>
+      integer().nullable().references(RouteCompletedStatus, #id)();
   IntColumn get difficulty => integer().references(RouteDifficulty, #id)();
   TextColumn get thoughts => text().nullable()();
 
   @override
   List<String> get customConstraints => [
-    'FOREIGN KEY (climb_type_id, grade_system_id) REFERENCES climb_type_to_grade_system (climb_type_id, grade_system_id)',
-    'FOREIGN KEY (grade_system_id, grade) REFERENCES grade (system_id, grade)'
-  ];
+        'FOREIGN KEY (climb_type_id, grade_system_id) REFERENCES climb_type_to_grade_system (climb_type_id, grade_system_id)',
+        'FOREIGN KEY (grade_system_id, grade) REFERENCES grade (system_id, grade)'
+      ];
 }
 
 @DriftAccessor(tables: [Route])
@@ -46,7 +46,8 @@ class RouteDao extends DatabaseAccessor<AppDatabase> with _$RouteDaoMixin {
   }
 
   Stream<RouteData?> watchById(int id) {
-    return (select(route)..where((tbl) => tbl.id.equals(id))).watchSingleOrNull();
+    return (select(route)..where((tbl) => tbl.id.equals(id)))
+        .watchSingleOrNull();
   }
 
   Future<int> updateById(int id, RouteCompanion entry) {
@@ -57,5 +58,3 @@ class RouteDao extends DatabaseAccessor<AppDatabase> with _$RouteDaoMixin {
     return (delete(route)..where((tbl) => tbl.id.equals(id))).go();
   }
 }
-
-

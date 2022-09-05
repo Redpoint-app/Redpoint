@@ -3,14 +3,14 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 
 class FormMultiSelectChip<T> extends StatefulWidget {
-  const FormMultiSelectChip(
-      {super.key,
-      required this.label,
-      required this.value,
-      required this.values,
-      required this.maxLength,
-      required this.callback,
-      });
+  const FormMultiSelectChip({
+    super.key,
+    required this.label,
+    required this.value,
+    required this.values,
+    required this.maxLength,
+    required this.callback,
+  });
 
   final String label;
   final T value;
