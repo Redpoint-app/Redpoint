@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:redpoint/routes/widgets/filter/removeable_filter_label.dart';
 import 'package:redpoint/shared/model/route_type.dart';
 import 'package:redpoint/routes/widgets/filter/sort_button.dart';
+import 'package:redpoint/shared/providers/filter_change_notifier.dart';
 
 import 'filter_button.dart';
 
@@ -16,37 +19,51 @@ class _FilterBarState extends State<FilterBar> {
 
   @override
   Widget build(Object context) {
-    return SizedBox(
-      height: 44,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: RouteType.values.length + 1,
-        itemBuilder: (BuildContext context, int index) {
-          if (index == 0) {
-            return const Padding(
-              padding: EdgeInsets.only(right: 8),
-              child: SortButton(
-                label: "Latest",
-                first: true,
-              ),
-            );
-          } else {
-            RouteType type = RouteType.values[index - 1];
-            bool active = type == _selectedType;
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 30, right: 5),
+          child: SortButton(
+            label: "Latest",
+          ),
+        ),
+        Consumer<FilterChangeNotifier>(
+            builder: (context, filterChangeNotifier, child) {
+          return filterChangeNotifier.numFilters == 0
+              ? const SizedBox.shrink()
+              : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: Row(
+                    children: filterChangeNotifier.filters
+                        .map((filter) => RemoveableFilterLabel(
+                            label: filter.label,
+                            onTap: () {
+                              filterChangeNotifier
+                                  .removeByType(filter.runtimeType);
+                            }))
+                        .toList(),
+                  ),
+                );
+        }),
+        Padding(
+            padding: const EdgeInsets.only(left: 5, right: 30),
+            child: Row(
+              children: RouteType.values.map((type) {
+                bool active = type == _selectedType;
 
-            return FilterButton(
-              label: type.label,
-              last: index == RouteType.values.length,
-              onTap: () {
-                setState(() {
-                  _selectedType = active ? null : type;
-                });
-              },
-              active: active,
-            );
-          }
-        },
-      ),
+                return FilterButton(
+                  label: type.label,
+                  onTap: () {
+                    setState(() {
+                      _selectedType = active ? null : type;
+                    });
+                  },
+                  active: active,
+                );
+              }).toList(),
+            ))
+      ]),
     );
   }
 }
