@@ -39,7 +39,7 @@ class _RemoveableFilterLabelState extends State<RemoveableFilterLabel> {
                   child: CustomIconButton(
                       icon: Icons.cancel_rounded,
                       size: 17,
-                      inkRadius: 10,
+                      color: Theme.of(context).colorScheme.onPrimary,
                       inkColor: Theme.of(context).colorScheme.onPrimary,
                       onTap: widget.onTap),
                 ),
