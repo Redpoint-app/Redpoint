@@ -54,7 +54,8 @@ class _AddPageState extends State<AddPage> {
     });
   }
 
-  void _setCompletedStatusIndex(RouteCompletedStatusEnum? selectedCompletedStatus) {
+  void _setCompletedStatusIndex(
+      RouteCompletedStatusEnum? selectedCompletedStatus) {
     setState(() {
       _completedStatus = selectedCompletedStatus;
     });
@@ -122,9 +123,8 @@ class _AddPageState extends State<AddPage> {
 
                 for (var tag in _selectedTags) {
                   db.routeTagDao.insert(RouteTagCompanion(
-                    routeId: drift.Value(insertedRoute.id),
-                    tagId: drift.Value(tag.index)
-                  ));
+                      routeId: drift.Value(insertedRoute.id),
+                      tagId: drift.Value(tag.index)));
                 }
 
                 if (!mounted) return;

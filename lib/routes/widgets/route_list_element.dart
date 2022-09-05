@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:redpoint/database/database.dart';
 import 'package:redpoint/database/models/climb_type/climb_type.dart';
 import 'package:redpoint/shared/methods/local_date_util.dart';
-import 'package:redpoint/shared/model/route.dart';
 import 'package:redpoint/shared/widgets/custom_icon_button.dart';
 
 class RouteListElement extends StatefulWidget {
@@ -57,7 +55,8 @@ class _RouteListElementState extends State<RouteListElement> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text('${ClimbTypeEnum.values[widget.route.climbTypeId].label}, ${widget.route.grade}'),
+                    Text(
+                        '${ClimbTypeEnum.values[widget.route.climbTypeId].label}, ${widget.route.grade}'),
                     Text(pastDateMessage(widget.route.date)),
                   ],
                 ),
