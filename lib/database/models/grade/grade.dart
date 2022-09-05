@@ -31,7 +31,7 @@ List<GradeCompanion> _init() {
   List<GradeCompanion> grades = [];
   for (var gradeSystemEnum in GradeSystemEnum.values) {
     for (gradeString in gradeSystemEnum.grades) {
-      grades.add(GradeCompanion(systemId: Value(gradeSystemEnum.id), grade: Value(gradeString)));
+      grades.add(GradeCompanion(systemId: Value(gradeSystemEnum.index), grade: Value(gradeString)));
     }
   }
   return grades;

@@ -26,18 +26,17 @@ class RouteStatusDao extends DatabaseAccessor<AppDatabase> with _$RouteStatusDao
 }
 
 enum RouteStatusEnum {
-  wantToTry(1, "Want to try"),
-  inProgress(2, "In progress"),
-  completed(3, "Completed");
+  wantToTry("Want to try"),
+  inProgress("In progress"),
+  completed("Completed");
 
-  const RouteStatusEnum(this.id, this.label);
-  final int id;
+  const RouteStatusEnum(this.label);
   final String label;
 }
 
 List<RouteStatusCompanion> _init() {
   return [
-    for (var routeStatusEnum in RouteStatusEnum.values) RouteStatusCompanion(id: Value(routeStatusEnum.id), label: Value(routeStatusEnum.label))
+    for (var routeStatusEnum in RouteStatusEnum.values) RouteStatusCompanion(id: Value(routeStatusEnum.index), label: Value(routeStatusEnum.label))
   ];
 }
 

@@ -26,20 +26,19 @@ class RouteDifficultyDao extends DatabaseAccessor<AppDatabase> with _$RouteDiffi
 }
 
 enum RouteDifficultyEnum {
-  extremelyEasy(1, "Extremely Easy"),
-  easy(2, "Easy"),
-  intermediate(3, "Intermediate"),
-  challenging(4, "Challenging"),
-  extremelyChallenging(5, "Extremely Challenging");
+  extremelyEasy("Extremely Easy"),
+  easy("Easy"),
+  intermediate("Intermediate"),
+  challenging("Challenging"),
+  extremelyChallenging("Extremely Challenging");
 
-  const RouteDifficultyEnum(this.id, this.label);
-  final int id;
+  const RouteDifficultyEnum(this.label);
   final String label;
 }
 
 List<RouteDifficultyCompanion> _init() {
   return [
-    for (var routeDifficultyEnum in RouteDifficultyEnum.values) RouteDifficultyCompanion(id: Value(routeDifficultyEnum.id), label: Value(routeDifficultyEnum.label))
+    for (var routeDifficultyEnum in RouteDifficultyEnum.values) RouteDifficultyCompanion(id: Value(routeDifficultyEnum.index), label: Value(routeDifficultyEnum.label))
   ];
 }
 

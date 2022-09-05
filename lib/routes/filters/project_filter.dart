@@ -1,11 +1,11 @@
+import 'package:redpoint/database/database.dart';
+import 'package:redpoint/database/models/route/route_status.dart';
 import 'package:redpoint/routes/filters/filter.dart';
-import 'package:redpoint/shared/model/route.dart';
-import 'package:redpoint/shared/model/status.dart';
 
 class ProjectFilter implements Filter {
   @override
-  bool isValid(ClimbingRoute route) {
-    return route.status == Status.inProgress;
+  bool isValid(RouteData route) {
+    return route.status == RouteStatusEnum.inProgress.index;
   }
 
   @override

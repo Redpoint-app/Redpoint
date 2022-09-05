@@ -30,8 +30,7 @@ class _FilterButtonState extends State<FilterButton> {
           style: TextButton.styleFrom(
               foregroundColor: active
                   ? Theme.of(context).colorScheme.onPrimary
-                  : Theme.of(context).highlightColor,
-              backgroundColor: active
+                  : Theme.of(context).highlightColor, backgroundColor: active
                   ? Theme.of(context).primaryColor
                   : Theme.of(context).cardColor,
               elevation: .5,

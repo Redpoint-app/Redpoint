@@ -78,6 +78,7 @@ class AppDatabase extends _$AppDatabase {
         routeCompletedStatusDao.initializeData();
         routeDifficultyDao.initializeData();
         routeStatusDao.initializeData();
+        tagDao.initializeData();
 
         if (kDebugMode && !testMode) {
           loadTestData(this);

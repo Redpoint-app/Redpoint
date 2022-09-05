@@ -23,22 +23,25 @@ class ClimbTypeDao extends DatabaseAccessor<AppDatabase> with _$ClimbTypeDaoMixi
   Future<int> add(ClimbTypeCompanion entry) {
     return into(climbType).insert(entry);
   }
+
+  Future<ClimbTypeData?> getById(int id) {
+    return (select(climbType)..where((tbl) => tbl.id.equals(id))).getSingleOrNull();
+  }
 }
 
 enum ClimbTypeEnum {
-  topRope(1, "Top Rope", [GradeSystemEnum.yds]),
-  boulder(2, "Boulder", [GradeSystemEnum.vScale]),
-  lead(3, "Lead", [GradeSystemEnum.yds]);
+  topRope("Top Rope", [GradeSystemEnum.yds]),
+  boulder("Boulder", [GradeSystemEnum.vScale]),
+  lead("Lead", [GradeSystemEnum.yds]);
 
-  const ClimbTypeEnum(this.id, this.label, this.validGradeSystems);
-  final int id;
+  const ClimbTypeEnum(this.label, this.validGradeSystems);
   final String label;
   final List<GradeSystemEnum> validGradeSystems;
 }
 
 List<ClimbTypeCompanion> _init() {
   return [
-    for (var climbTypeEnum in ClimbTypeEnum.values) ClimbTypeCompanion(id: Value(climbTypeEnum.id), label: Value(climbTypeEnum.label))
+    for (var climbTypeEnum in ClimbTypeEnum.values) ClimbTypeCompanion(id: Value(climbTypeEnum.index), label: Value(climbTypeEnum.label))
   ];
 }
 

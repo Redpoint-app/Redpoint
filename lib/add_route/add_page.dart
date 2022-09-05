@@ -1,45 +1,20 @@
 import 'dart:collection';
 
+import 'package:drift/drift.dart' as drift;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:redpoint/add_route/widgets/form_button.dart';
 import 'package:redpoint/add_route/widgets/form_multi_select_chip.dart';
 import 'package:redpoint/add_route/widgets/form_select_chip.dart';
 import 'package:redpoint/add_route/widgets/takes_counter.dart';
-import 'package:redpoint/shared/model/difficulty.dart';
-import 'package:redpoint/shared/model/status.dart';
-import 'package:redpoint/shared/model/tag.dart';
-import 'package:redpoint/shared/model/route.dart';
-
-import 'package:redpoint/shared/model/completed_status.dart';
-import 'package:redpoint/shared/model/route_type.dart';
-
-final months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December'
-];
-
-final tagOptions = [
-  Tag("Dynamic"),
-  Tag("Static"),
-  Tag("Slopey"),
-  Tag("Crimpy"),
-  Tag("Juggy"),
-  Tag("Crack"),
-  Tag("Slab"),
-  Tag("Comp"),
-  Tag("Overhang"),
-  Tag("Chimney"),
-];
+import 'package:redpoint/database/database.dart';
+import 'package:redpoint/database/models/climb_type/climb_type.dart';
+import 'package:redpoint/database/models/grade/grade_system.dart';
+import 'package:redpoint/database/models/route/route_completed_status.dart';
+import 'package:redpoint/database/models/route/route_difficulty.dart';
+import 'package:redpoint/database/models/route/route_status.dart';
+import 'package:redpoint/database/models/tag/tag.dart';
+import 'package:redpoint/shared/methods/local_date_util.dart';
 
 const int maxTags = 5;
 
@@ -54,16 +29,17 @@ class _AddPageState extends State<AddPage> {
   // The selected date of the route
   DateTime? _date;
 
-  RouteType? _selectedType;
+  ClimbTypeEnum? _selectedType;
+  GradeSystemEnum? _selectedGradeSystem;
   String? _grade;
 
   // The selected progress value of the route
-  Status? _status;
-  CompletedStatus? _completedStatus;
+  RouteStatusEnum? _status;
+  RouteCompletedStatusEnum? _completedStatus;
 
   double _difficultyIndex = 0;
 
-  final _selectedTags = ListQueue<Tag>();
+  final _selectedTags = ListQueue<TagEnum>();
 
   // Controllers for the text fields, to retrieve the text values
   final TextEditingController _titleController = TextEditingController();
@@ -72,13 +48,13 @@ class _AddPageState extends State<AddPage> {
   bool _snackbarActive = false;
 
   // Updates the status index
-  void _setStatusIndex(Status? selectedProgress) {
+  void _setStatusIndex(RouteStatusEnum? selectedStatus) {
     setState(() {
-      _status = selectedProgress;
+      _status = selectedStatus;
     });
   }
 
-  void _setCompletedStatusIndex(CompletedStatus? selectedCompletedStatus) {
+  void _setCompletedStatusIndex(RouteCompletedStatusEnum? selectedCompletedStatus) {
     setState(() {
       _completedStatus = selectedCompletedStatus;
     });
@@ -116,35 +92,43 @@ class _AddPageState extends State<AddPage> {
     }
   }
 
-  void _save() {
+  Future<void> _save() async {
     if (_titleController.text != "") {
       if (_date != null) {
-        DateTime date = _date!;
         if (_selectedType != null) {
-          RouteType type = _selectedType!;
           if (_grade != null) {
-            String grade = _grade!;
             if (_status != null) {
-              Status status = _status!;
-              if ((_status == Status.completed && _completedStatus != null) ||
-                  _status != Status.completed) {
-                if (_status != Status.completed) {
+              if ((_status == RouteStatusEnum.completed &&
+                      _completedStatus != null) ||
+                  _status != RouteStatusEnum.completed) {
+                if (_status != RouteStatusEnum.completed) {
                   _completedStatus = null;
                 }
 
-                ClimbingRoute route = ClimbingRoute(
-                    _titleController.text,
-                    date,
-                    type,
-                    grade,
-                    status,
-                    _completedStatus,
-                    Difficulty.values[_difficultyIndex.round()],
-                    _selectedTags,
-                    _thoughtsController.text);
-                print(route.toString());
+                var db = Provider.of<AppDatabase>(context, listen: false);
 
-                Navigator.pop(context);
+                RouteCompanion newRoute = RouteCompanion(
+                  title: drift.Value(_titleController.text),
+                  date: drift.Value(_date!),
+                  climbTypeId: drift.Value(_selectedType!.index),
+                  gradeSystemId: drift.Value(_selectedGradeSystem!.index),
+                  grade: drift.Value(_grade!),
+                  status: drift.Value(_status!.index),
+                  completedStatus: drift.Value(_completedStatus?.index),
+                  difficulty: drift.Value(_difficultyIndex.toInt()),
+                  thoughts: drift.Value(_thoughtsController.text),
+                );
+                var insertedRoute = await db.routeDao.insertReturning(newRoute);
+
+                for (var tag in _selectedTags) {
+                  db.routeTagDao.insert(RouteTagCompanion(
+                    routeId: drift.Value(insertedRoute.id),
+                    tagId: drift.Value(tag.index)
+                  ));
+                }
+
+                if (!mounted) return;
+                Navigator.of(context).pop();
               } else {
                 showSnackbar("Select a send type to save");
               }
@@ -243,21 +227,22 @@ class _AddPageState extends State<AddPage> {
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: DropdownButton(
                         hint: const Text("Type"),
-                        value: _selectedType?.label,
-                        items: RouteType.values.map((RouteType type) {
-                          return DropdownMenuItem<String>(
-                            value: type.label,
+                        value: _selectedType,
+                        items: ClimbTypeEnum.values.map((ClimbTypeEnum type) {
+                          return DropdownMenuItem<ClimbTypeEnum>(
+                            value: type,
                             child: Text(type.label),
                           );
                         }).toList(),
-                        onChanged: (String? selected) {
-                          for (RouteType value in RouteType.values) {
-                            if (value.label == selected) {
-                              setState(() {
-                                _grade = null;
-                                _selectedType = value;
-                              });
-                            }
+                        onChanged: (ClimbTypeEnum? selectedType) {
+                          if (selectedType != null) {
+                            setState(() {
+                              _grade = null;
+                              _selectedGradeSystem =
+                                  selectedType.validGradeSystems[
+                                      0]; // TODO: Fix this in RCJ-48
+                              _selectedType = selectedType;
+                            });
                           }
                         },
                       ),
@@ -267,7 +252,7 @@ class _AddPageState extends State<AddPage> {
                       child: DropdownButton(
                         hint: const Text("Grade"),
                         value: _grade,
-                        items: _selectedType?.grade.getScale().map((s) {
+                        items: _selectedGradeSystem?.grades.map((s) {
                           return DropdownMenuItem<String>(
                             value: s,
                             child: Text(s),
@@ -292,28 +277,29 @@ class _AddPageState extends State<AddPage> {
                       height: 34,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: Status.values
+                        children: RouteStatusEnum.values
                             .map(
-                              (Status value) => FormSelectChip<Status>(
-                                  label: value.label,
-                                  value: value,
-                                  selectedValue: _status,
-                                  callback: _setStatusIndex),
+                              (RouteStatusEnum value) =>
+                                  FormSelectChip<RouteStatusEnum>(
+                                      label: value.label,
+                                      value: value,
+                                      selectedValue: _status,
+                                      callback: _setStatusIndex),
                             )
                             .toList(),
                       ),
                     )),
-                if (_status == Status.completed)
+                if (_status == RouteStatusEnum.completed)
                   Padding(
                       padding: const EdgeInsets.symmetric(vertical: 2),
                       child: SizedBox(
                         height: 34,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: CompletedStatus.values
+                          children: RouteCompletedStatusEnum.values
                               .map(
-                                (CompletedStatus value) =>
-                                    FormSelectChip<CompletedStatus>(
+                                (RouteCompletedStatusEnum value) =>
+                                    FormSelectChip<RouteCompletedStatusEnum>(
                                         label: value.label,
                                         value: value,
                                         selectedValue: _completedStatus,
@@ -322,9 +308,9 @@ class _AddPageState extends State<AddPage> {
                               .toList(),
                         ),
                       ))
-                else if (_status == Status.inProgress &&
-                    (_selectedType == RouteType.lead ||
-                        _selectedType == RouteType.topRope))
+                else if (_status == RouteStatusEnum.inProgress &&
+                    (_selectedType == ClimbTypeEnum.lead ||
+                        _selectedType == ClimbTypeEnum.topRope))
                   const TakesCounter()
               ]),
             ),
@@ -344,8 +330,8 @@ class _AddPageState extends State<AddPage> {
                         min: 0,
                         max: 4,
                         divisions: 4,
-                        label:
-                            Difficulty.values[_difficultyIndex.round()].label,
+                        label: RouteDifficultyEnum
+                            .values[_difficultyIndex.round()].label,
                         onChanged: (double value) {
                           _setDifficulty(value);
                         })),
@@ -359,8 +345,8 @@ class _AddPageState extends State<AddPage> {
                 alignment: WrapAlignment.center,
                 spacing: 4,
                 children: [
-                  for (final tag in tagOptions)
-                    FormMultiSelectChip<Tag>(
+                  for (final tag in TagEnum.values)
+                    FormMultiSelectChip<TagEnum>(
                       label: tag.label,
                       value: tag,
                       values: _selectedTags,

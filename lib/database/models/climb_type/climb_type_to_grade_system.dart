@@ -32,7 +32,7 @@ List<ClimbTypeToGradeSystemCompanion> _init() {
   List<ClimbTypeToGradeSystemCompanion> climbTypeToGradeSystems = [];
   for (var climbTypeEnum in ClimbTypeEnum.values) {
     for (gradeSystem in climbTypeEnum.validGradeSystems) {
-      climbTypeToGradeSystems.add(ClimbTypeToGradeSystemCompanion(climbTypeId: Value(climbTypeEnum.id), gradeSystemId: Value(gradeSystem.id)));
+      climbTypeToGradeSystems.add(ClimbTypeToGradeSystemCompanion(climbTypeId: Value(climbTypeEnum.index), gradeSystemId: Value(gradeSystem.index)));
     }
   }
   return climbTypeToGradeSystems;
