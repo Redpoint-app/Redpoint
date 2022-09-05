@@ -22,7 +22,7 @@ class RoutesPage extends PageTemplate {
 }
 
 class _RoutesPageBody extends StatefulWidget {
-  const _RoutesPageBody({super.key});
+  const _RoutesPageBody();
 
   @override
   State<_RoutesPageBody> createState() => _RoutesPageBodyState();
