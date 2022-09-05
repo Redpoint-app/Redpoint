@@ -35,10 +35,9 @@ class _FilterButtonState extends State<FilterButton> {
         child: TextButton(
           onPressed: widget.onTap,
           style: TextButton.styleFrom(
-              primary: active
+              foregroundColor: active
                   ? Theme.of(context).colorScheme.onPrimary
-                  : Theme.of(context).highlightColor,
-              backgroundColor: active
+                  : Theme.of(context).highlightColor, backgroundColor: active
                   ? Theme.of(context).primaryColor
                   : Theme.of(context).cardColor,
               elevation: .5,

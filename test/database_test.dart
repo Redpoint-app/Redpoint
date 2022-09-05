@@ -22,12 +22,12 @@ void main() {
   RouteCompanion route = RouteCompanion(
       title: Value(routeTitle),
       date: Value(dateTimeNow),
-      climbTypeId: Value(ClimbTypeEnum.topRope.id),
-      gradeSystemId: Value(GradeSystemEnum.yds.id),
+      climbTypeId: Value(ClimbTypeEnum.topRope.index),
+      gradeSystemId: Value(GradeSystemEnum.yds.index),
       grade: Value(grade),
-      status: Value(RouteStatusEnum.completed.id),
-      completedStatus: Value(RouteCompletedStatusEnum.onsight.id),
-      difficulty: Value(RouteDifficultyEnum.intermediate.id),
+      status: Value(RouteStatusEnum.completed.index),
+      completedStatus: Value(RouteCompletedStatusEnum.onsight.index),
+      difficulty: Value(RouteDifficultyEnum.intermediate.index),
       thoughts: Value(routeThoughts)
   );
 

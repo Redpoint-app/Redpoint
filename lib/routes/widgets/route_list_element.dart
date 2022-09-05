@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:redpoint/database/database.dart';
+import 'package:redpoint/database/models/climb_type/climb_type.dart';
+import 'package:redpoint/shared/methods/local_date_util.dart';
 import 'package:redpoint/shared/model/route.dart';
 import 'package:redpoint/shared/widgets/custom_icon_button.dart';
 
 class RouteListElement extends StatefulWidget {
   const RouteListElement({super.key, required this.route});
-  final ClimbingRoute route;
+  final RouteData route;
 
   @override
   State<RouteListElement> createState() => _RouteListElementState();
@@ -53,8 +57,8 @@ class _RouteListElementState extends State<RouteListElement> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text('${widget.route.type.label}, ${widget.route.grade}'),
-                    Text(widget.route.getDateMessage()),
+                    Text('${ClimbTypeEnum.values[widget.route.climbTypeId].label}, ${widget.route.grade}'),
+                    Text(pastDateMessage(widget.route.date)),
                   ],
                 ),
               ],

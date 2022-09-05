@@ -142,7 +142,6 @@ class _AddPageState extends State<AddPage> {
                     Difficulty.values[_difficultyIndex.round()],
                     _selectedTags,
                     _thoughtsController.text);
-                print(route.toString());
 
                 Navigator.pop(context);
               } else {

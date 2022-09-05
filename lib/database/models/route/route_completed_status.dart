@@ -26,18 +26,17 @@ class RouteCompletedStatusDao extends DatabaseAccessor<AppDatabase> with _$Route
 }
 
 enum RouteCompletedStatusEnum {
-  onsight(1, "Onsight"),
-  flash(2, "Flash"),
-  redpoint(3, "Redpoint");
+  onsight("Onsight"),
+  flash("Flash"),
+  redpoint("Redpoint");
 
-  const RouteCompletedStatusEnum(this.id, this.label);
-  final int id;
+  const RouteCompletedStatusEnum(this.label);
   final String label;
 }
 
 List<RouteCompletedStatusCompanion> _init() {
   return [
-    for (var routeCompletedStatusEnum in RouteCompletedStatusEnum.values) RouteCompletedStatusCompanion(id: Value(routeCompletedStatusEnum.id), label: Value(routeCompletedStatusEnum.label))
+    for (var routeCompletedStatusEnum in RouteCompletedStatusEnum.values) RouteCompletedStatusCompanion(id: Value(routeCompletedStatusEnum.index), label: Value(routeCompletedStatusEnum.label))
   ];
 }
 
