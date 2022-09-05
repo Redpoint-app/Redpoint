@@ -57,33 +57,35 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
         Padding(
             padding: const EdgeInsets.only(bottom: 140),
             child: Consumer<FilterChangeNotifier>(
-                builder: (context, filterChangeNotifier, child) {
-              return StreamBuilder<List<RouteData>>(
-                stream: db.routeDao.watchAll,
-                builder: (BuildContext context,
-                    AsyncSnapshot<List<RouteData>> snapshot) {
-                  if (snapshot.hasError) {
-                    return const Text("Error getting routes.");
-                  } else {
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.none:
-                        return const CircularProgressIndicator();
-                      case ConnectionState.waiting:
-                        return const CircularProgressIndicator();
-                      case ConnectionState.active:
-                      case ConnectionState.done:
-                        return Column(
-                            children: snapshot.data!
-                                .where((route) => filterChangeNotifier.filters
-                                    .every((filter) => filter.isValid(route)))
-                                .map((RouteData route) =>
-                                    RouteListElement(route: route))
-                                .toList());
-                    }
-                  }
-                },
-              );
-            })),
+                builder: (context, filterChangeNotifier, child) =>
+                    StreamBuilder<List<RouteData>>(
+                      stream: db.routeDao.watchAll,
+                      builder: (BuildContext context,
+                          AsyncSnapshot<List<RouteData>> snapshot) {
+                        if (snapshot.hasError) {
+                          return const Text("Error getting routes.");
+                        } else {
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.none:
+                            case ConnectionState.waiting:
+                              return const Padding(
+                                  padding: EdgeInsets.only(top: 20),
+                                  child: CircularProgressIndicator());
+                            case ConnectionState.active:
+                            case ConnectionState.done:
+                              return Column(
+                                  children: snapshot.data!
+                                      .where((route) => filterChangeNotifier
+                                          .filters
+                                          .every((filter) =>
+                                              filter.isValid(route)))
+                                      .map((RouteData route) =>
+                                          RouteListElement(route: route))
+                                      .toList());
+                          }
+                        }
+                      },
+                    ))),
       ],
     );
   }
