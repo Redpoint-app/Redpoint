@@ -62,14 +62,14 @@ class RouteDao extends DatabaseAccessor<AppDatabase> with _$RouteDaoMixin {
     return (select(route)
           ..where((t) => t.status.equals(RouteStatusEnum.inProgress.index))
           ..limit(limit)
-          ..orderBy([(t) => OrderingTerm(expression: t.date)])
-    ).watch();
+          ..orderBy([(t) => OrderingTerm(expression: t.date)]))
+        .watch();
   }
 
   Stream<List<RouteData>> getRecentClimbs(int limit) {
     return (select(route)
-      ..limit(limit)
-      ..orderBy([(t) => OrderingTerm(expression: t.date)])
-    ).watch();
+          ..limit(limit)
+          ..orderBy([(t) => OrderingTerm(expression: t.date)]))
+        .watch();
   }
 }
