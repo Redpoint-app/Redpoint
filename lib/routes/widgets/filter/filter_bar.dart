@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:redpoint/database/models/climb_type/climb_type.dart';
 import 'package:redpoint/routes/widgets/filter/removeable_filter_label.dart';
-import 'package:redpoint/shared/model/route_type.dart';
 import 'package:redpoint/routes/widgets/filter/sort_button.dart';
 import 'package:redpoint/shared/providers/filter_change_notifier.dart';
 
@@ -15,7 +15,7 @@ class FilterBar extends StatefulWidget {
 }
 
 class _FilterBarState extends State<FilterBar> {
-  RouteType? _selectedType;
+  ClimbTypeEnum? _selectedType;
 
   @override
   Widget build(Object context) {
@@ -49,7 +49,7 @@ class _FilterBarState extends State<FilterBar> {
         Padding(
             padding: const EdgeInsets.only(left: 5, right: 30),
             child: Row(
-              children: RouteType.values.map((type) {
+              children: ClimbTypeEnum.values.map((type) {
                 bool active = type == _selectedType;
 
                 return FilterButton(
