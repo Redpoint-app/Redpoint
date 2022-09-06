@@ -57,4 +57,19 @@ class RouteDao extends DatabaseAccessor<AppDatabase> with _$RouteDaoMixin {
   Future<int> deleteById(int id) {
     return (delete(route)..where((tbl) => tbl.id.equals(id))).go();
   }
+
+  Stream<List<RouteData>> getLatestProjects(int limit) {
+    return (select(route)
+          ..where((t) => t.status.equals(RouteStatusEnum.inProgress.index))
+          ..limit(limit)
+          ..orderBy([(t) => OrderingTerm(expression: t.date)])
+    ).watch();
+  }
+
+  Stream<List<RouteData>> getRecentClimbs(int limit) {
+    return (select(route)
+      ..limit(limit)
+      ..orderBy([(t) => OrderingTerm(expression: t.date)])
+    ).watch();
+  }
 }
