@@ -48,7 +48,7 @@ enum GradeSystemEnum {
     "V14",
     "V15",
     "V16",
-    "V17"
+    "V17",
   ]),
   yds("Yosemite Decimal System", [
     "5.5",
@@ -62,7 +62,7 @@ enum GradeSystemEnum {
     "5.13",
     "5.14",
     "5.15",
-    "5.16"
+    "5.16",
   ]);
 
   const GradeSystemEnum(this.label, this.grades);
@@ -74,6 +74,8 @@ List<GradeSystemCompanion> _init() {
   return [
     for (var gradeSystemEnum in GradeSystemEnum.values)
       GradeSystemCompanion(
-          id: Value(gradeSystemEnum.index), label: Value(gradeSystemEnum.label))
+        id: Value(gradeSystemEnum.index),
+        label: Value(gradeSystemEnum.label),
+      ),
   ];
 }

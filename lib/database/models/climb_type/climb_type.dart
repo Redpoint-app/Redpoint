@@ -49,6 +49,8 @@ List<ClimbTypeCompanion> _init() {
   return [
     for (var climbTypeEnum in ClimbTypeEnum.values)
       ClimbTypeCompanion(
-          id: Value(climbTypeEnum.index), label: Value(climbTypeEnum.label))
+        id: Value(climbTypeEnum.index),
+        label: Value(climbTypeEnum.label),
+      ),
   ];
 }

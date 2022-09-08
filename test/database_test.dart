@@ -19,15 +19,16 @@ void main() {
   String routeThoughts = "Fun Route!";
 
   RouteCompanion route = RouteCompanion(
-      title: Value(routeTitle),
-      date: Value(dateTimeNow),
-      climbTypeId: Value(ClimbTypeEnum.topRope.index),
-      gradeSystemId: Value(GradeSystemEnum.yds.index),
-      grade: Value(grade),
-      status: Value(RouteStatusEnum.completed.index),
-      completedStatus: Value(RouteCompletedStatusEnum.onsight.index),
-      difficulty: Value(RouteDifficultyEnum.intermediate.index),
-      thoughts: Value(routeThoughts));
+    title: Value(routeTitle),
+    date: Value(dateTimeNow),
+    climbTypeId: Value(ClimbTypeEnum.topRope.index),
+    gradeSystemId: Value(GradeSystemEnum.yds.index),
+    grade: Value(grade),
+    status: Value(RouteStatusEnum.completed.index),
+    completedStatus: Value(RouteCompletedStatusEnum.onsight.index),
+    difficulty: Value(RouteDifficultyEnum.intermediate.index),
+    thoughts: Value(routeThoughts),
+  );
 
   setUp(() async {
     database = AppDatabase.test(NativeDatabase.memory(logStatements: true));
@@ -53,8 +54,10 @@ void main() {
     expect(retrievedRoute?.difficulty, route.difficulty.value);
     expect(retrievedRoute?.thoughts, route.thoughts.value);
 
-    await database.routeDao.updateById(insertedRoute.id,
-        const RouteCompanion(title: Value("Test Route 2"))); // UPDATE
+    await database.routeDao.updateById(
+      insertedRoute.id,
+      const RouteCompanion(title: Value("Test Route 2")),
+    ); // UPDATE
     retrievedRoute = await database.routeDao.getById(insertedRoute.id);
     expect(retrievedRoute?.title, "Test Route 2");
 

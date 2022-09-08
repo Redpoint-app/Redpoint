@@ -43,6 +43,8 @@ List<RouteStatusCompanion> _init() {
   return [
     for (var routeStatusEnum in RouteStatusEnum.values)
       RouteStatusCompanion(
-          id: Value(routeStatusEnum.index), label: Value(routeStatusEnum.label))
+        id: Value(routeStatusEnum.index),
+        label: Value(routeStatusEnum.label),
+      ),
   ];
 }

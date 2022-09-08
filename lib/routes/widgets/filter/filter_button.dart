@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class FilterButton extends StatefulWidget {
-  const FilterButton(
-      {super.key,
-      required this.label,
-      required this.onTap,
-      this.active,
-      this.icon});
+  const FilterButton({
+    super.key,
+    required this.label,
+    required this.onTap,
+    this.active,
+    this.icon,
+  });
   final String label;
   final void Function() onTap;
   final bool? active;
@@ -28,15 +29,17 @@ class _FilterButtonState extends State<FilterButton> {
         child: TextButton(
           onPressed: widget.onTap,
           style: TextButton.styleFrom(
-              foregroundColor: active
-                  ? Theme.of(context).colorScheme.onPrimary
-                  : Theme.of(context).highlightColor,
-              backgroundColor: active
-                  ? Theme.of(context).primaryColor
-                  : Theme.of(context).cardColor,
-              elevation: .5,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12))),
+            foregroundColor: active
+                ? Theme.of(context).colorScheme.onPrimary
+                : Theme.of(context).highlightColor,
+            backgroundColor: active
+                ? Theme.of(context).primaryColor
+                : Theme.of(context).cardColor,
+            elevation: 0.5,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(12)),
+            ),
+          ),
           child: Row(
             children: [
               if (widget.icon != null)
@@ -55,10 +58,11 @@ class _FilterButtonState extends State<FilterButton> {
                 child: Text(
                   widget.label,
                   style: TextStyle(
-                      color: active
-                          ? Theme.of(context).colorScheme.onPrimary
-                          : Theme.of(context).colorScheme.onSurface,
-                      fontSize: 14),
+                    color: active
+                        ? Theme.of(context).colorScheme.onPrimary
+                        : Theme.of(context).colorScheme.onSurface,
+                    fontSize: 14,
+                  ),
                 ),
               ),
             ],

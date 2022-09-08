@@ -64,6 +64,6 @@ enum TagEnum {
 List<TagCompanion> _init() {
   return [
     for (var tagEnum in TagEnum.values)
-      TagCompanion(id: Value(tagEnum.index), label: Value(tagEnum.label))
+      TagCompanion(id: Value(tagEnum.index), label: Value(tagEnum.label)),
   ];
 }

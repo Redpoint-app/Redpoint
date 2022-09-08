@@ -44,7 +44,8 @@ List<RouteCompletedStatusCompanion> _init() {
   return [
     for (var routeCompletedStatusEnum in RouteCompletedStatusEnum.values)
       RouteCompletedStatusCompanion(
-          id: Value(routeCompletedStatusEnum.index),
-          label: Value(routeCompletedStatusEnum.label))
+        id: Value(routeCompletedStatusEnum.index),
+        label: Value(routeCompletedStatusEnum.label),
+      ),
   ];
 }

@@ -29,6 +29,7 @@ class RouteTagDao extends DatabaseAccessor<AppDatabase>
     final query = selectOnly(routeTag)
       ..where(routeTag.routeId.equals(routeId))
       ..addColumns([routeTag.tagId]);
+
     return query.map((row) => row.read(routeTag.tagId)!).get();
   }
 }

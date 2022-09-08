@@ -23,24 +23,24 @@ class FormMultiSelectChip<T> extends StatefulWidget {
 }
 
 class _FormMultiSelectChipState<T> extends State<FormMultiSelectChip> {
+  void _handleChoiceChipSelect(bool selected) {
+    if (!selected) {
+      widget.values.remove(widget.value);
+    } else {
+      if (widget.values.length == widget.maxLength) {
+        widget.values.removeFirst();
+      }
+      widget.values.add(widget.value);
+    }
+    widget.callback();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ChoiceChip(
       label: Text(widget.label),
       selected: widget.values.contains(widget.value),
-      onSelected: (bool selected) {
-        if (!selected) {
-          widget.values.remove(widget.value);
-        } else {
-          if (widget.values.length == widget.maxLength) {
-            widget.values.removeFirst();
-          }
-
-          widget.values.add(widget.value);
-        }
-
-        widget.callback();
-      },
+      onSelected: _handleChoiceChipSelect,
     );
   }
 }

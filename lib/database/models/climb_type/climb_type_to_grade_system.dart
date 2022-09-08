@@ -39,9 +39,11 @@ List<ClimbTypeToGradeSystemCompanion> _init() {
   for (var climbTypeEnum in ClimbTypeEnum.values) {
     for (gradeSystem in climbTypeEnum.validGradeSystems) {
       climbTypeToGradeSystems.add(ClimbTypeToGradeSystemCompanion(
-          climbTypeId: Value(climbTypeEnum.index),
-          gradeSystemId: Value(gradeSystem.index)));
+        climbTypeId: Value(climbTypeEnum.index),
+        gradeSystemId: Value(gradeSystem.index),
+      ));
     }
   }
+
   return climbTypeToGradeSystems;
 }

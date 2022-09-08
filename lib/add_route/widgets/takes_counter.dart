@@ -11,41 +11,47 @@ class TakesCounter extends StatefulWidget {
 class _TakesCounterState extends State<TakesCounter> {
   int count = 1;
 
+  void _incrementCount() {
+    setState(() {
+      count++;
+    });
+  }
+
+  void _decrementCount() {
+    setState(() {
+      if (count >= 2) {
+        count--;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.only(top: 18, bottom: 4),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: SmallIconButton(
-                color: Theme.of(context).disabledColor,
-                icon: Icons.remove,
-                onPressed: () {
-                  setState(() {
-                    if (count >= 2) {
-                      count--;
-                    }
-                  });
-                },
-              ),
+      padding: const EdgeInsets.only(top: 18, bottom: 4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: SmallIconButton(
+              color: Theme.of(context).disabledColor,
+              icon: Icons.remove,
+              onPressed: _decrementCount,
             ),
-            Text("$count ${count == 1 ? 'take' : 'takes'}"),
-            Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: SmallIconButton(
-                  color: Theme.of(context).disabledColor,
-                  icon: Icons.add,
-                  onPressed: () {
-                    setState(() {
-                      count++;
-                    });
-                  },
-                )),
-          ],
-        ));
+          ),
+          Text("$count ${count == 1 ? 'take' : 'takes'}"),
+          Padding(
+            padding: const EdgeInsets.only(left: 8),
+            child: SmallIconButton(
+              color: Theme.of(context).disabledColor,
+              icon: Icons.add,
+              onPressed: _incrementCount,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

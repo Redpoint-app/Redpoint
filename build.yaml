@@ -1,0 +1,9 @@
+# build.yaml. This file is quite powerful, see https://pub.dev/packages/build_config
+
+targets:
+  $default:
+    builders:
+      drift_dev:
+        options:
+          data_class_to_companions: false
+          skip_verification_code: true
