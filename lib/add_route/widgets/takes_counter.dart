@@ -27,7 +27,8 @@ class _TakesCounterState extends State<TakesCounter> {
 
   @override
   Widget build(BuildContext context) {
-    final disabledColor = Theme.of(context).disabledColor;
+    final theme = Theme.of(context);
+    final disabledColor = theme.disabledColor;
 
     return Padding(
       padding: const EdgeInsets.only(top: 18, bottom: 4),

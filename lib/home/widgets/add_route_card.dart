@@ -31,7 +31,8 @@ Route _createRoute() {
 class _AddRouteCardState extends State<AddRouteCard> {
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
+    final theme = Theme.of(context);
+    final primaryColor = theme.primaryColor;
     final transparentPrimaryColor = primaryColor.withOpacity(0.2);
 
     return Padding(

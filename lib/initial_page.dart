@@ -34,7 +34,8 @@ class InitialPageState extends State<InitialPage> {
       ProfilePage(),
     ];
 
-    final brightness = Theme.of(context).brightness;
+    final theme = Theme.of(context);
+    final brightness = theme.brightness;
 
     return Scaffold(
       extendBody: true,
