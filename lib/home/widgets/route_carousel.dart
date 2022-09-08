@@ -1,6 +1,7 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:redpoint/database/database.dart';
 import 'package:redpoint/home/widgets/route_card.dart';
-import 'package:redpoint/shared/model/route.dart';
 
 class RouteCarousel extends StatefulWidget {
   const RouteCarousel({
@@ -10,7 +11,7 @@ class RouteCarousel extends StatefulWidget {
     required this.emptyWidget,
     required this.onTapViewAll,
   });
-  final List<ClimbingRoute> routes;
+  final Stream<List<RouteData>> routes;
   final String title;
   final Widget emptyWidget;
   final void Function() onTapViewAll;
@@ -54,21 +55,50 @@ class _RouteCarouselState extends State<RouteCarousel> {
               ],
             ),
           ),
-          if (widget.routes.isEmpty) widget.emptyWidget,
-          if (widget.routes.isNotEmpty)
-            SizedBox(
-              height: 250.0,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: widget.routes.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return RouteCard(
-                      route: widget.routes[index],
-                      first: index == 0,
-                      last: index == (widget.routes.length - 1));
-                },
-              ),
+          SizedBox(
+            height: 250.0,
+            child: StreamBuilder<List<RouteData>>(
+              stream: widget.routes,
+              builder: (
+                BuildContext context,
+                AsyncSnapshot<List<RouteData>> snapshot,
+              ) {
+                if (snapshot.hasError) {
+                  return const Text("Error getting routes.");
+                } else {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                      return widget.emptyWidget;
+                    case ConnectionState.waiting:
+                      return const SizedBox(
+                        width: 250,
+                        child: Padding(
+                          padding: EdgeInsets.all(75),
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    case ConnectionState.active:
+                    case ConnectionState.done:
+                      return snapshot.data!.isEmpty
+                          ? widget.emptyWidget
+                          : ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: snapshot.data!
+                                  .mapIndexed(
+                                    (int index, RouteData route) => RouteCard(
+                                      route: route,
+                                      first: index == 0,
+                                      last:
+                                          index == (snapshot.data!.length - 1),
+                                    ),
+                                  )
+                                  .toList(),
+                            );
+                  }
+                }
+              },
             ),
+          ),
         ],
       ),
     );

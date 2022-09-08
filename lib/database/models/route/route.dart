@@ -22,7 +22,7 @@ class Route extends Table {
   @override
   List<String> get customConstraints => [
         'FOREIGN KEY (climb_type_id, grade_system_id) REFERENCES climb_type_to_grade_system (climb_type_id, grade_system_id)',
-        'FOREIGN KEY (grade_system_id, grade) REFERENCES grade (system_id, grade)'
+        'FOREIGN KEY (grade_system_id, grade) REFERENCES grade (system_id, grade)',
       ];
 }
 
@@ -56,5 +56,22 @@ class RouteDao extends DatabaseAccessor<AppDatabase> with _$RouteDaoMixin {
 
   Future<int> deleteById(int id) {
     return (delete(route)..where((tbl) => tbl.id.equals(id))).go();
+  }
+
+  Stream<List<RouteData>> getLatestProjects(int limit) {
+    return (select(route)
+          ..where((t) => t.status.equals(RouteStatusEnum.inProgress.index))
+          ..limit(limit)
+          ..orderBy([(t) => OrderingTerm(expression: t.date)]))
+        .watch();
+  }
+
+  Stream<List<RouteData>> getRecentClimbs(int limit) {
+    return (select(route)
+          ..limit(limit)
+          ..orderBy([
+            (t) => OrderingTerm(expression: t.date, mode: OrderingMode.desc),
+          ]))
+        .watch();
   }
 }

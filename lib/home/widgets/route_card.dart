@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:redpoint/shared/model/route.dart';
+import 'package:provider/provider.dart';
+import 'package:redpoint/database/database.dart';
+import 'package:redpoint/database/models/climb_type/climb_type.dart';
+import 'package:redpoint/database/models/tag/tag.dart';
+import 'package:redpoint/shared/methods/local_date_util.dart';
 
 class RouteCard extends StatefulWidget {
-  const RouteCard({super.key, required this.route, this.first, this.last});
-  final ClimbingRoute route;
+  const RouteCard({
+    super.key,
+    required this.route,
+    this.tags,
+    this.first,
+    this.last,
+  });
+  final RouteData route;
+  final List<TagEnum>? tags;
   final bool? first;
   final bool? last;
 
@@ -27,11 +38,13 @@ class _RouteCardState extends State<RouteCard> {
       rightPadding = firstLastPadding;
     }
 
+    var db = Provider.of<AppDatabase>(context, listen: false);
+
     return Padding(
       padding: EdgeInsets.only(left: leftPadding, right: rightPadding),
       child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(24)),
         ),
         child: Padding(
           padding: const EdgeInsets.all(18),
@@ -59,7 +72,7 @@ class _RouteCardState extends State<RouteCard> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8),
                       child: Text(
-                        "${widget.route.type.label}, ${widget.route.grade}",
+                        "${ClimbTypeEnum.values[widget.route.climbTypeId].label}, ${widget.route.grade}",
                         style: const TextStyle(
                           fontSize: 14,
                         ),
@@ -67,20 +80,32 @@ class _RouteCardState extends State<RouteCard> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8),
-                      child: Wrap(
-                        runSpacing: -10,
-                        spacing: 4,
-                        children: widget.route.tags
-                            .map((element) => Chip(
-                                  label: Text(element.label),
-                                ))
-                            .toList(),
+                      child: FutureBuilder<List<int>>(
+                        future:
+                            db.routeTagDao.getTagIdsByRouteId(widget.route.id),
+                        builder: (
+                          BuildContext context,
+                          AsyncSnapshot<List<int>> snapshot,
+                        ) {
+                          return Wrap(
+                            runSpacing: -10,
+                            spacing: 4,
+                            children: snapshot.data
+                                    ?.map((int tagId) => Chip(
+                                          label: Text(
+                                            TagEnum.values[tagId].label,
+                                          ),
+                                        ))
+                                    .toList() ??
+                                [],
+                          );
+                        },
                       ),
                     ),
                   ],
                 ),
               ),
-              Text(widget.route.getDateMessage()),
+              Text(pastDateMessage(widget.route.date)),
             ],
           ),
         ),

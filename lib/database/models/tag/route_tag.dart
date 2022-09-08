@@ -24,4 +24,11 @@ class RouteTagDao extends DatabaseAccessor<AppDatabase>
   Future<int> insert(RouteTagCompanion entry) {
     return into(routeTag).insert(entry);
   }
+
+  Future<List<int>> getTagIdsByRouteId(int routeId) {
+    final query = selectOnly(routeTag)
+      ..where(routeTag.routeId.equals(routeId))
+      ..addColumns([routeTag.tagId]);
+    return query.map((row) => row.read(routeTag.tagId)!).get();
+  }
 }
