@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
 import 'package:redpoint/database/database.dart';
 import 'package:redpoint/home/widgets/route_card.dart';
 
@@ -55,48 +55,50 @@ class _RouteCarouselState extends State<RouteCarousel> {
               ],
             ),
           ),
-          // if (widget.routes.isEmpty) widget.emptyWidget,
-          // if (widget.routes.isNotEmpty)
           SizedBox(
-              height: 250.0,
-              child: StreamBuilder<List<RouteData>>(
-                stream: widget.routes,
-                builder: (BuildContext context,
-                    AsyncSnapshot<List<RouteData>> snapshot) {
-                  if (snapshot.hasError) {
-                    return const Text("Error getting routes.");
-                  } else {
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.none:
-                        return widget.emptyWidget;
-                      case ConnectionState.waiting:
-                        return const SizedBox(
-                            width: 250,
-                            child: Padding(
-                                padding: EdgeInsets.all(75),
-                                child: CircularProgressIndicator()));
-                      case ConnectionState.active:
-                      case ConnectionState.done:
-                        if (snapshot.data!.isEmpty) {
-                          return widget.emptyWidget;
-                        } else {
-                          return ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: snapshot.data!
-                                .mapIndexed(
-                                  (int index, RouteData route) => RouteCard(
+            height: 250.0,
+            child: StreamBuilder<List<RouteData>>(
+              stream: widget.routes,
+              builder: (
+                BuildContext context,
+                AsyncSnapshot<List<RouteData>> snapshot,
+              ) {
+                if (snapshot.hasError) {
+                  return const Text("Error getting routes.");
+                } else {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                      return widget.emptyWidget;
+                    case ConnectionState.waiting:
+                      return const SizedBox(
+                        width: 250,
+                        child: Padding(
+                          padding: EdgeInsets.all(75),
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    case ConnectionState.active:
+                    case ConnectionState.done:
+                      return snapshot.data!.isEmpty
+                          ? widget.emptyWidget
+                          : ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: snapshot.data!
+                                  .mapIndexed(
+                                    (int index, RouteData route) => RouteCard(
                                       route: route,
                                       first: index == 0,
                                       last:
-                                          index == (snapshot.data!.length - 1)),
-                                )
-                                .toList(),
-                          );
-                        }
-                    }
+                                          index == (snapshot.data!.length - 1),
+                                    ),
+                                  )
+                                  .toList(),
+                            );
                   }
-                },
-              )),
+                }
+              },
+            ),
+          ),
         ],
       ),
     );
