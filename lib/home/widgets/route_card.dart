@@ -6,8 +6,13 @@ import 'package:redpoint/database/models/tag/tag.dart';
 import 'package:redpoint/shared/methods/local_date_util.dart';
 
 class RouteCard extends StatefulWidget {
-  const RouteCard(
-      {super.key, required this.route, this.tags, this.first, this.last});
+  const RouteCard({
+    super.key,
+    required this.route,
+    this.tags,
+    this.first,
+    this.last,
+  });
   final RouteData route;
   final List<TagEnum>? tags;
   final bool? first;
@@ -38,8 +43,8 @@ class _RouteCardState extends State<RouteCard> {
     return Padding(
       padding: EdgeInsets.only(left: leftPadding, right: rightPadding),
       child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(24)),
         ),
         child: Padding(
           padding: const EdgeInsets.all(18),
@@ -76,27 +81,26 @@ class _RouteCardState extends State<RouteCard> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8),
                       child: FutureBuilder<List<int>>(
-                          future: db.routeTagDao
-                              .getTagIdsByRouteId(widget.route.id),
-                          builder: (BuildContext context,
-                              AsyncSnapshot<List<int>> snapshot) {
-                            if (snapshot.hasData) {
-                              return Wrap(
-                                  runSpacing: -10,
-                                  spacing: 4,
-                                  children: snapshot.data!
-                                      .map((int tagId) => Chip(
-                                            label: Text(
-                                                TagEnum.values[tagId].label),
-                                          ))
-                                      .toList());
-                            } else {
-                              return Wrap(
-                                  runSpacing: -10,
-                                  spacing: 4,
-                                  children: const []);
-                            }
-                          }),
+                        future:
+                            db.routeTagDao.getTagIdsByRouteId(widget.route.id),
+                        builder: (
+                          BuildContext context,
+                          AsyncSnapshot<List<int>> snapshot,
+                        ) {
+                          return Wrap(
+                            runSpacing: -10,
+                            spacing: 4,
+                            children: snapshot.data
+                                    ?.map((int tagId) => Chip(
+                                          label: Text(
+                                            TagEnum.values[tagId].label,
+                                          ),
+                                        ))
+                                    .toList() ??
+                                [],
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),
