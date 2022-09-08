@@ -18,15 +18,17 @@ class _RouteListElementState extends State<RouteListElement> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            // TODO
+          },
           splashFactory: InkRipple.splashFactory,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
+            padding: const EdgeInsets.all(14),
             child: Column(
               children: [
                 Padding(
@@ -40,13 +42,20 @@ class _RouteListElementState extends State<RouteListElement> {
                           widget.route.title,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 40),
                         child: CustomIconButton(
-                            icon: Icons.more_horiz, size: 20, onTap: () {}),
+                          icon: Icons.more_horiz,
+                          size: 20,
+                          onTap: () {
+                            // TODO
+                          },
+                        ),
                       ),
                     ],
                   ),
@@ -56,7 +65,8 @@ class _RouteListElementState extends State<RouteListElement> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                        '${ClimbTypeEnum.values[widget.route.climbTypeId].label}, ${widget.route.grade}'),
+                      '${ClimbTypeEnum.values[widget.route.climbTypeId].label}, ${widget.route.grade}',
+                    ),
                     Text(pastDateMessage(widget.route.date)),
                   ],
                 ),

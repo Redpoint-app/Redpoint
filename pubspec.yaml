@@ -32,6 +32,7 @@ dev_dependencies:
   storage_inspector: ^0.2.3
   drift_local_storage_inspector: ^0.3.0
   dart_date: ^1.1.1
+  dart_code_metrics: ^4.17.1
 
 flutter:
   uses-material-design: true

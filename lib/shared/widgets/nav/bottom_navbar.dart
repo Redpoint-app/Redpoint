@@ -1,13 +1,15 @@
 /// The navigation bar at the bottom of the screen
-
 import 'package:flutter/material.dart';
 import 'package:redpoint/shared/widgets/nav/fab_placeholder.dart';
 
 import 'nav_button.dart';
 
 class BottomNavbar extends StatefulWidget {
-  const BottomNavbar(
-      {super.key, required this.pageTitle, required this.callback});
+  const BottomNavbar({
+    super.key,
+    required this.pageTitle,
+    required this.callback,
+  });
   final String pageTitle;
   final void Function(int) callback;
 
@@ -36,24 +38,27 @@ class _BottomNavbarState extends State<BottomNavbar> {
               page: 0,
             ),
             NavButton(
-                label: "Routes",
-                active: widget.pageTitle == "Routes",
-                buttonIcon: Icons.list,
-                callback: widget.callback,
-                page: 1),
+              label: "Routes",
+              active: widget.pageTitle == "Routes",
+              buttonIcon: Icons.list,
+              callback: widget.callback,
+              page: 1,
+            ),
             const FABPlaceholder(),
             NavButton(
-                label: "Social",
-                active: widget.pageTitle == "Social",
-                buttonIcon: Icons.show_chart,
-                callback: widget.callback,
-                page: 2),
+              label: "Social",
+              active: widget.pageTitle == "Social",
+              buttonIcon: Icons.show_chart,
+              callback: widget.callback,
+              page: 2,
+            ),
             NavButton(
-                label: "Profile",
-                active: widget.pageTitle == "Profile",
-                buttonIcon: Icons.person,
-                callback: widget.callback,
-                page: 3),
+              label: "Profile",
+              active: widget.pageTitle == "Profile",
+              buttonIcon: Icons.person,
+              callback: widget.callback,
+              page: 3,
+            ),
           ],
         ),
       ),

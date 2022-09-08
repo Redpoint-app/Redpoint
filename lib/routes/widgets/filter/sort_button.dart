@@ -12,16 +12,18 @@ class SortButton extends StatefulWidget {
 class _SortButtonState extends State<SortButton> {
   bool _ascending = false;
 
+  void _toggleAscending() {
+    setState(() {
+      _ascending = !_ascending;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return FilterButton(
       label: widget.label,
       icon: _ascending ? Icons.arrow_downward : Icons.arrow_upward,
-      onTap: () {
-        setState(() {
-          _ascending = !_ascending;
-        });
-      },
+      onTap: _toggleAscending,
     );
   }
 }

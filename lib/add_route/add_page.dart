@@ -55,7 +55,8 @@ class _AddPageState extends State<AddPage> {
   }
 
   void _setCompletedStatusIndex(
-      RouteCompletedStatusEnum? selectedCompletedStatus) {
+    RouteCompletedStatusEnum? selectedCompletedStatus,
+  ) {
     setState(() {
       _completedStatus = selectedCompletedStatus;
     });
@@ -64,10 +65,11 @@ class _AddPageState extends State<AddPage> {
   // Opens the date picker and updates the chosen date
   _selectDate(BuildContext context) async {
     final DateTime? selected = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(1900, 1, 1),
-        lastDate: DateTime.now());
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900, 1, 1),
+      lastDate: DateTime.now(),
+    );
 
     setState(() {
       _date = selected;
@@ -123,8 +125,9 @@ class _AddPageState extends State<AddPage> {
 
                 for (var tag in _selectedTags) {
                   db.routeTagDao.insert(RouteTagCompanion(
-                      routeId: drift.Value(insertedRoute.id),
-                      tagId: drift.Value(tag.index)));
+                    routeId: drift.Value(insertedRoute.id),
+                    tagId: drift.Value(tag.index),
+                  ));
                 }
 
                 if (!mounted) return;
@@ -151,167 +154,178 @@ class _AddPageState extends State<AddPage> {
 
   // Converts the date to a string
   String _dateToString(DateTime? date) {
-    if (date == null) {
-      return "Choose date";
-    } else {
-      return "${months[date.month - 1]} ${date.day}, ${date.year}";
+    return date == null
+        ? "Choose date"
+        : "${months[date.month - 1]} ${date.day}, ${date.year}";
+  }
+
+  void _handleClimbTypeChange(ClimbTypeEnum? selectedType) {
+    if (selectedType != null) {
+      setState(() {
+        _grade = null;
+        _selectedGradeSystem =
+            selectedType.validGradeSystems.first; // TODO: Fix this in RCJ-48
+        _selectedType = selectedType;
+      });
     }
+  }
+
+  void _handleGradeChange(String? selected) {
+    setState(() {
+      _grade = selected;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Add Route"),
-          centerTitle: true,
-          automaticallyImplyLeading: false,
-          leading: IconButton(
-            icon: const Icon(Icons.close),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          actions: [
-            Padding(
-                padding: const EdgeInsets.only(right: 7.0),
-                child: TextButton(
-                    onPressed: _save,
-                    child: Text(
-                      "Save",
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.onPrimary,
-                          fontSize: 17.0),
-                    )))
-          ],
+      appBar: AppBar(
+        title: const Text("Add Route"),
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: const Icon(Icons.close),
+          onPressed: () => Navigator.pop(context),
         ),
-        body: SingleChildScrollView(
-            child: Center(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 7.0),
+            child: TextButton(
+              onPressed: _save,
+              child: Text(
+                "Save",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                  fontSize: 17.0,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Center(
           child: Column(children: [
             Padding(
-                padding: const EdgeInsets.only(right: 20, left: 20, top: 10),
-                child: TextField(
-                  controller: _titleController,
-                  style: const TextStyle(
-                    fontSize: 20.0,
-                  ),
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Enter route name",
-                  ),
-                )),
+              padding: const EdgeInsets.only(right: 20, left: 20, top: 10),
+              child: TextField(
+                controller: _titleController,
+                style: const TextStyle(
+                  fontSize: 20.0,
+                ),
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Enter route name",
+                ),
+              ),
+            ),
             const Divider(),
             Padding(
-                padding: const EdgeInsets.only(top: 5.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    FormButton(
-                        icon: Icons.location_pin,
-                        label: "Choose location",
-                        onPressed: () {}),
-                    FormButton(
-                        icon: Icons.calendar_month,
-                        label: _dateToString(_date),
-                        onPressed: () {
-                          _selectDate(context);
-                        }),
-                  ],
-                )),
+              padding: const EdgeInsets.only(top: 5.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  FormButton(
+                    icon: Icons.location_pin,
+                    label: "Choose location",
+                    onPressed: () {
+                      // TODO
+                    },
+                  ),
+                  FormButton(
+                    icon: Icons.calendar_month,
+                    label: _dateToString(_date),
+                    onPressed: () => _selectDate(context),
+                  ),
+                ],
+              ),
+            ),
             const Divider(),
             Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: DropdownButton(
-                        hint: const Text("Type"),
-                        value: _selectedType,
-                        items: ClimbTypeEnum.values.map((ClimbTypeEnum type) {
-                          return DropdownMenuItem<ClimbTypeEnum>(
-                            value: type,
-                            child: Text(type.label),
-                          );
-                        }).toList(),
-                        onChanged: (ClimbTypeEnum? selectedType) {
-                          if (selectedType != null) {
-                            setState(() {
-                              _grade = null;
-                              _selectedGradeSystem =
-                                  selectedType.validGradeSystems[
-                                      0]; // TODO: Fix this in RCJ-48
-                              _selectedType = selectedType;
-                            });
-                          }
-                        },
-                      ),
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: DropdownButton(
+                      hint: const Text("Type"),
+                      value: _selectedType,
+                      items: ClimbTypeEnum.values.map((ClimbTypeEnum type) {
+                        return DropdownMenuItem<ClimbTypeEnum>(
+                          value: type,
+                          child: Text(type.label),
+                        );
+                      }).toList(),
+                      onChanged: _handleClimbTypeChange,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: DropdownButton(
-                        hint: const Text("Grade"),
-                        value: _grade,
-                        items: _selectedGradeSystem?.grades.map((s) {
-                          return DropdownMenuItem<String>(
-                            value: s,
-                            child: Text(s),
-                          );
-                        }).toList(),
-                        onChanged: (String? selected) {
-                          setState(() {
-                            _grade = selected;
-                          });
-                        },
-                      ),
-                    )
-                  ],
-                )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: DropdownButton(
+                      hint: const Text("Grade"),
+                      value: _grade,
+                      items: _selectedGradeSystem?.grades.map((s) {
+                        return DropdownMenuItem<String>(
+                          value: s,
+                          child: Text(s),
+                        );
+                      }).toList(),
+                      onChanged: _handleGradeChange,
+                    ),
+                  ),
+                ],
+              ),
+            ),
             const Divider(),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 14),
               child: Column(children: [
                 Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 2),
+                  child: SizedBox(
+                    height: 34,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: RouteStatusEnum.values
+                          .map(
+                            (RouteStatusEnum value) =>
+                                FormSelectChip<RouteStatusEnum>(
+                              label: value.label,
+                              value: value,
+                              selectedValue: _status,
+                              callback: _setStatusIndex,
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  ),
+                ),
+                if (_status == RouteStatusEnum.completed)
+                  Padding(
                     padding: const EdgeInsets.symmetric(vertical: 2),
                     child: SizedBox(
                       height: 34,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: RouteStatusEnum.values
+                        children: RouteCompletedStatusEnum.values
                             .map(
-                              (RouteStatusEnum value) =>
-                                  FormSelectChip<RouteStatusEnum>(
-                                      label: value.label,
-                                      value: value,
-                                      selectedValue: _status,
-                                      callback: _setStatusIndex),
+                              (RouteCompletedStatusEnum value) =>
+                                  FormSelectChip<RouteCompletedStatusEnum>(
+                                label: value.label,
+                                value: value,
+                                selectedValue: _completedStatus,
+                                callback: _setCompletedStatusIndex,
+                              ),
                             )
                             .toList(),
                       ),
-                    )),
-                if (_status == RouteStatusEnum.completed)
-                  Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 2),
-                      child: SizedBox(
-                        height: 34,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: RouteCompletedStatusEnum.values
-                              .map(
-                                (RouteCompletedStatusEnum value) =>
-                                    FormSelectChip<RouteCompletedStatusEnum>(
-                                        label: value.label,
-                                        value: value,
-                                        selectedValue: _completedStatus,
-                                        callback: _setCompletedStatusIndex),
-                              )
-                              .toList(),
-                        ),
-                      ))
+                    ),
+                  )
                 else if (_status == RouteStatusEnum.inProgress &&
                     (_selectedType == ClimbTypeEnum.lead ||
                         _selectedType == ClimbTypeEnum.topRope))
-                  const TakesCounter()
+                  const TakesCounter(),
               ]),
             ),
             const Divider(),
@@ -323,18 +337,18 @@ class _AddPageState extends State<AddPage> {
                   child: Text("Difficulty"),
                 ),
                 Padding(
-                    padding:
-                        const EdgeInsets.only(left: 20, right: 20, bottom: 5),
-                    child: Slider(
-                        value: _difficultyIndex,
-                        min: 0,
-                        max: 4,
-                        divisions: 4,
-                        label: RouteDifficultyEnum
-                            .values[_difficultyIndex.round()].label,
-                        onChanged: (double value) {
-                          _setDifficulty(value);
-                        })),
+                  padding:
+                      const EdgeInsets.only(left: 20, right: 20, bottom: 5),
+                  child: Slider(
+                    value: _difficultyIndex,
+                    min: 0,
+                    max: 4,
+                    divisions: 4,
+                    label: RouteDifficultyEnum
+                        .values[_difficultyIndex.round()].label,
+                    onChanged: _setDifficulty,
+                  ),
+                ),
               ],
             ),
             const Divider(),
@@ -352,25 +366,34 @@ class _AddPageState extends State<AddPage> {
                       values: _selectedTags,
                       maxLength: maxTags,
                       callback: () {
-                        setState(() {});
+                        setState(() {
+                          // TODO
+                        });
                       },
-                    )
+                    ),
                 ],
               ),
             ),
             const Divider(),
             Padding(
               padding: const EdgeInsets.only(
-                  left: 15, right: 15, top: 15, bottom: 80),
+                left: 15,
+                right: 15,
+                top: 15,
+                bottom: 80,
+              ),
               child: TextField(
                 maxLines: 7,
                 controller: _thoughtsController,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: "Enter any thoughts here"),
+                  border: OutlineInputBorder(),
+                  hintText: "Enter any thoughts here",
+                ),
               ),
             ),
           ]),
-        )));
+        ),
+      ),
+    );
   }
 }

@@ -4,23 +4,23 @@
 /// as a parameter.
 ///
 /// This widget is used in the status section of the Add route page.
-
 import 'package:flutter/material.dart';
 
 class FormSelectChip<T> extends StatefulWidget {
-  const FormSelectChip(
-      {super.key,
-      required this.label,
-      required this.value,
-      required this.selectedValue,
-      required this.callback});
+  const FormSelectChip({
+    super.key,
+    required this.label,
+    required this.value,
+    required this.selectedValue,
+    required this.callback,
+  });
 
   final String label;
   final T value;
   final T? selectedValue;
   final void Function(T? selectedValue) callback;
 
-  void _onSelected(bool selected) {
+  void _onSelected(bool _) {
     bool isSelected = value == selectedValue;
     T? newValue = isSelected ? null : value;
     callback(newValue);
@@ -35,14 +35,11 @@ class _FormSelectChipState extends State<FormSelectChip> {
   Widget build(BuildContext context) {
     bool isSelected = widget.value == widget.selectedValue;
 
-    return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4),
-        child: ChoiceChip(
-          label: Text(widget.label),
-          selected: isSelected,
-          onSelected: (bool selected) {
-            widget._onSelected(selected);
-          },
-        ));
+    return ChoiceChip(
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      label: Text(widget.label),
+      selected: isSelected,
+      onSelected: widget._onSelected,
+    );
   }
 }

@@ -1,5 +1,4 @@
 /// A button in the bottom navbar. This widget makes reuse and styling easy.
-
 import 'package:flutter/material.dart';
 
 class CustomIconButton extends StatefulWidget {
@@ -29,17 +28,18 @@ class _CustomIconButtonState extends State<CustomIconButton> {
     final Color inkColor = widget.inkColor ?? Theme.of(context).highlightColor;
 
     return Ink(
-        child: InkResponse(
-      onTap: widget.onTap,
-      highlightColor: inkColor,
-      splashColor: inkColor,
-      splashFactory: InkRipple.splashFactory,
-      radius: widget.inkRadius ?? (widget.size / 1.4),
-      child: Icon(
-        widget.icon,
-        color: widget.color ?? Theme.of(context).iconTheme.color,
-        size: widget.size,
+      child: InkResponse(
+        onTap: widget.onTap,
+        highlightColor: inkColor,
+        splashColor: inkColor,
+        splashFactory: InkRipple.splashFactory,
+        radius: widget.inkRadius ?? (widget.size / 1.4),
+        child: Icon(
+          widget.icon,
+          color: widget.color ?? Theme.of(context).iconTheme.color,
+          size: widget.size,
+        ),
       ),
-    ));
+    );
   }
 }

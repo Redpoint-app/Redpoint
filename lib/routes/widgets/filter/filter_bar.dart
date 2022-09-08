@@ -17,6 +17,12 @@ class FilterBar extends StatefulWidget {
 class _FilterBarState extends State<FilterBar> {
   ClimbTypeEnum? _selectedType;
 
+  void _onTap(bool active, ClimbTypeEnum type) {
+    setState(() {
+      _selectedType = active ? null : type;
+    });
+  }
+
   @override
   Widget build(Object context) {
     return SingleChildScrollView(
@@ -29,40 +35,37 @@ class _FilterBarState extends State<FilterBar> {
           ),
         ),
         Consumer<FilterChangeNotifier>(
-            builder: (context, filterChangeNotifier, child) {
-          return filterChangeNotifier.numFilters == 0
-              ? const SizedBox.shrink()
-              : Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  child: Row(
-                    children: filterChangeNotifier.filters
-                        .map((filter) => RemoveableFilterLabel(
-                            label: filter.label,
-                            onTap: () {
-                              filterChangeNotifier
-                                  .removeByType(filter.runtimeType);
-                            }))
-                        .toList(),
-                  ),
-                );
-        }),
+          builder: (context, filterChangeNotifier, child) {
+            return filterChangeNotifier.numFilters == 0
+                ? const SizedBox.shrink()
+                : Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: Row(
+                      children: filterChangeNotifier.filters
+                          .map((filter) => RemoveableFilterLabel(
+                                label: filter.label,
+                                onTap: () => filterChangeNotifier
+                                    .removeByType(filter.runtimeType),
+                              ))
+                          .toList(),
+                    ),
+                  );
+          },
+        ),
         Padding(
-            padding: const EdgeInsets.only(left: 5, right: 30),
-            child: Row(
-              children: ClimbTypeEnum.values.map((type) {
-                bool active = type == _selectedType;
+          padding: const EdgeInsets.only(left: 5, right: 30),
+          child: Row(
+            children: ClimbTypeEnum.values.map((type) {
+              bool active = type == _selectedType;
 
-                return FilterButton(
-                  label: type.label,
-                  onTap: () {
-                    setState(() {
-                      _selectedType = active ? null : type;
-                    });
-                  },
-                  active: active,
-                );
-              }).toList(),
-            ))
+              return FilterButton(
+                label: type.label,
+                onTap: () => _onTap(active, type),
+                active: active,
+              );
+            }).toList(),
+          ),
+        ),
       ]),
     );
   }

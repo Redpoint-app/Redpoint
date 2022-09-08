@@ -31,7 +31,7 @@ const List<Type> tables = [
   RouteCompletedStatus,
   RouteDifficulty,
   RouteTag,
-  Tag
+  Tag,
 ];
 
 const List<Type> daos = [
@@ -44,7 +44,7 @@ const List<Type> daos = [
   RouteCompletedStatusDao,
   RouteDifficultyDao,
   RouteTagDao,
-  TagDao
+  TagDao,
 ];
 
 @DriftDatabase(tables: tables, daos: daos)
@@ -65,7 +65,8 @@ class AppDatabase extends _$AppDatabase {
     return MigrationStrategy(
       beforeOpen: (OpeningDetails details) async {
         await customStatement(
-            'PRAGMA foreign_keys = ON'); // enable foreign keys on sqlite
+          'PRAGMA foreign_keys = ON',
+        ); // enable foreign keys on sqlite
       },
       onCreate: (Migrator m) async {
         await m.createAll(); // Create all tables
@@ -95,6 +96,7 @@ LazyDatabase _openConnection() {
     // for your app.
     final dbFolder = await getApplicationDocumentsDirectory();
     final file = File(p.join(dbFolder.path, 'db.sqlite'));
+
     return NativeDatabase(file);
   });
 }

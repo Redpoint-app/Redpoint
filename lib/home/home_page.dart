@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:redpoint/database/database.dart';
 import 'package:redpoint/home/widgets/add_route_card.dart';
 import 'package:redpoint/home/widgets/route_carousel.dart';
-import 'package:redpoint/main.dart';
+import 'package:redpoint/initial_page.dart';
 import 'package:redpoint/routes/filters/project_filter.dart';
 import 'package:redpoint/shared/navigation/navigation.dart';
 import 'package:redpoint/shared/providers/filter_change_notifier.dart';
@@ -45,10 +45,13 @@ class _HomePageBodyState extends State<_HomePageBody> {
           child: Text(
             "Good ${(DateTime.now().hour >= 12) ? "afternoon" : "morning"},\nUser",
             style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: min(MediaQuery.of(context).size.width,
-                        MediaQuery.of(context).size.height) *
-                    .08),
+              fontWeight: FontWeight.w600,
+              fontSize: min(
+                    MediaQuery.of(context).size.width,
+                    MediaQuery.of(context).size.height,
+                  ) *
+                  0.08,
+            ),
           ),
         ),
         RouteCarousel(
@@ -61,7 +64,9 @@ class _HomePageBodyState extends State<_HomePageBody> {
           title: "Recent climbs",
           routes: db.routeDao.getRecentClimbs(5),
           emptyWidget: const AddRouteCard(),
-          onTapViewAll: () {},
+          onTapViewAll: () {
+            // TODO
+          },
         ),
         const Padding(
           padding: EdgeInsets.only(bottom: 120),

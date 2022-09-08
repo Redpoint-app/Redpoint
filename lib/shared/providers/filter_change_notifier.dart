@@ -19,9 +19,9 @@ class FilterChangeNotifier extends ChangeNotifier {
   void removeByType(Type t) {
     int? index;
 
-    for (var i = 0; i < numFilters; i++) {
-      if (_filters[i].runtimeType == t) {
-        index = i;
+    for (var filterIndex = 0; filterIndex < numFilters; filterIndex++) {
+      if (_filters[filterIndex].runtimeType == t) {
+        index = filterIndex;
       }
     }
 
@@ -35,9 +35,9 @@ class FilterChangeNotifier extends ChangeNotifier {
   void removeByLabel(String label) {
     int? index;
 
-    for (var i = 0; i < numFilters; i++) {
-      if (_filters[i].label == label) {
-        index = i;
+    for (var filterIndex = 0; filterIndex < numFilters; filterIndex++) {
+      if (_filters[filterIndex].label == label) {
+        index = filterIndex;
       }
     }
 

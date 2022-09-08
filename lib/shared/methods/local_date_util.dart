@@ -10,7 +10,7 @@ const months = [
   'September',
   'October',
   'November',
-  'December'
+  'December',
 ];
 
 String pastDateMessage(DateTime date) {

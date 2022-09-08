@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:redpoint/database/database.dart';
 import 'package:redpoint/routes/widgets/filter/filter_bar.dart';
 import 'package:redpoint/routes/widgets/route_list_element.dart';
-import 'package:provider/provider.dart';
 import 'package:redpoint/shared/providers/filter_change_notifier.dart';
 import 'package:redpoint/shared/widgets/custom_icon_button.dart';
 import 'package:redpoint/shared/widgets/layout/page_template.dart';
@@ -32,12 +32,19 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomIconButton(
-                  icon: Icons.filter_alt_outlined, size: 28, onTap: () {}),
+                icon: Icons.filter_alt_outlined,
+                size: 28,
+                onTap: () {
+                  // TODO
+                },
+              ),
               CustomIconButton(
                 icon: Icons.search,
                 size: 28,
-                onTap: () {},
-              )
+                onTap: () {
+                  // TODO
+                },
+              ),
             ],
           ),
         ),
@@ -55,37 +62,41 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
         ),
         const Padding(padding: EdgeInsets.only(bottom: 20), child: FilterBar()),
         Padding(
-            padding: const EdgeInsets.only(bottom: 140),
-            child: Consumer<FilterChangeNotifier>(
-                builder: (context, filterChangeNotifier, child) =>
-                    StreamBuilder<List<RouteData>>(
-                      stream: db.routeDao.watchAll,
-                      builder: (BuildContext context,
-                          AsyncSnapshot<List<RouteData>> snapshot) {
-                        if (snapshot.hasError) {
-                          return const Text("Error getting routes.");
-                        } else {
-                          switch (snapshot.connectionState) {
-                            case ConnectionState.none:
-                            case ConnectionState.waiting:
-                              return const Padding(
-                                  padding: EdgeInsets.only(top: 20),
-                                  child: CircularProgressIndicator());
-                            case ConnectionState.active:
-                            case ConnectionState.done:
-                              return Column(
-                                  children: snapshot.data!
-                                      .where((route) => filterChangeNotifier
-                                          .filters
-                                          .every((filter) =>
-                                              filter.isValid(route)))
-                                      .map((RouteData route) =>
-                                          RouteListElement(route: route))
-                                      .toList());
-                          }
-                        }
-                      },
-                    ))),
+          padding: const EdgeInsets.only(bottom: 140),
+          child: Consumer<FilterChangeNotifier>(
+            builder: (context, filterChangeNotifier, child) =>
+                StreamBuilder<List<RouteData>>(
+              stream: db.routeDao.watchAll,
+              builder: (
+                BuildContext context,
+                AsyncSnapshot<List<RouteData>> snapshot,
+              ) {
+                if (snapshot.hasError) {
+                  return const Text("Error getting routes.");
+                } else {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                    case ConnectionState.waiting:
+                      return const Padding(
+                        padding: EdgeInsets.only(top: 20),
+                        child: CircularProgressIndicator(),
+                      );
+                    case ConnectionState.active:
+                    case ConnectionState.done:
+                      return Column(
+                        children: snapshot.data!
+                            .where((route) => filterChangeNotifier.filters
+                                .every((filter) => filter.isValid(route)))
+                            .map((RouteData route) =>
+                                RouteListElement(route: route))
+                            .toList(),
+                      );
+                  }
+                }
+              },
+            ),
+          ),
+        ),
       ],
     );
   }

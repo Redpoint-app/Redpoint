@@ -8,7 +8,8 @@ Future<void> loadTestData(AppDatabase driftDb) async {
     await driftDb.routeDao.insert(route);
     for (var tag in TagEnum.values.getRange(0, 5)) {
       await driftDb.routeTagDao.insert(
-          RouteTagCompanion(routeId: route.id, tagId: Value(tag.index)));
+        RouteTagCompanion(routeId: route.id, tagId: Value(tag.index)),
+      );
     }
   }
 }

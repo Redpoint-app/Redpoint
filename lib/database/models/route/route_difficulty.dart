@@ -45,7 +45,8 @@ List<RouteDifficultyCompanion> _init() {
   return [
     for (var routeDifficultyEnum in RouteDifficultyEnum.values)
       RouteDifficultyCompanion(
-          id: Value(routeDifficultyEnum.index),
-          label: Value(routeDifficultyEnum.label))
+        id: Value(routeDifficultyEnum.index),
+        label: Value(routeDifficultyEnum.label),
+      ),
   ];
 }

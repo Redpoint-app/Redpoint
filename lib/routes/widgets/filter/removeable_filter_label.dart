@@ -22,11 +22,11 @@ class _RemoveableFilterLabelState extends State<RemoveableFilterLabel> {
       child: PhysicalModel(
         elevation: 0.5,
         color: Colors.black,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
         child: Container(
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
@@ -37,11 +37,12 @@ class _RemoveableFilterLabelState extends State<RemoveableFilterLabel> {
                 Padding(
                   padding: const EdgeInsets.only(right: 4),
                   child: CustomIconButton(
-                      icon: Icons.cancel_rounded,
-                      size: 17,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      inkColor: Theme.of(context).colorScheme.onPrimary,
-                      onTap: widget.onTap),
+                    icon: Icons.cancel_rounded,
+                    size: 17,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                    inkColor: Theme.of(context).colorScheme.onPrimary,
+                    onTap: widget.onTap,
+                  ),
                 ),
                 Text(
                   widget.label,

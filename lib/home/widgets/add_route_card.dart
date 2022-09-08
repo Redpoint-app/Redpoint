@@ -12,20 +12,20 @@ class AddRouteCard extends StatefulWidget {
 
 Route _createRoute() {
   return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => const AddPage(),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(0.0, 1.0);
-        const end = Offset.zero;
-        const curve = Curves.ease;
+    pageBuilder: (context, animation, secondaryAnimation) => const AddPage(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(0.0, 1.0);
+      const end = Offset.zero;
+      const curve = Curves.ease;
 
-        var tween =
-            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
-        return SlideTransition(
-          position: animation.drive(tween),
-          child: child,
-        );
-      });
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
+  );
 }
 
 class _AddRouteCardState extends State<AddRouteCard> {
@@ -36,9 +36,7 @@ class _AddRouteCardState extends State<AddRouteCard> {
       child: InkWell(
         highlightColor: Theme.of(context).primaryColor.withOpacity(0.2),
         splashColor: Theme.of(context).primaryColor.withOpacity(0.2),
-        onTap: () {
-          Navigator.of(context).push(_createRoute());
-        },
+        onTap: () => Navigator.of(context).push(_createRoute()),
         child: DottedBorder(
           color: Theme.of(context).primaryColor,
           strokeWidth: 2,
@@ -55,14 +53,16 @@ class _AddRouteCardState extends State<AddRouteCard> {
                   child: Text(
                     "Add Route",
                     style: TextStyle(
-                        fontSize: 20, color: Theme.of(context).primaryColor),
+                      fontSize: 20,
+                      color: Theme.of(context).primaryColor,
+                    ),
                   ),
                 ),
                 Icon(
                   Icons.add,
                   color: Theme.of(context).primaryColor,
                   size: 28,
-                )
+                ),
               ],
             ),
           ),
