@@ -17,12 +17,8 @@ String pastDateMessage(DateTime date) {
   DateTime now = DateTime.now();
   Duration diff = now.difference(date).abs();
 
-  if (diff.inMinutes < 1) {
-    return "A few seconds ago";
-  } else if (diff.inHours < 1) {
-    return "A few minutes ago";
-  } else if (diff.inDays < 1) {
-    return "A few hours ago";
+  if (diff.inDays < 1) {
+    return "Today";
   } else if (diff.inDays == 1) {
     return "Yesterday";
   } else if (diff.inDays < 7) {
