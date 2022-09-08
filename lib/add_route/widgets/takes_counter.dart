@@ -27,6 +27,9 @@ class _TakesCounterState extends State<TakesCounter> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final disabledColor = theme.disabledColor;
+
     return Padding(
       padding: const EdgeInsets.only(top: 18, bottom: 4),
       child: Row(
@@ -36,7 +39,7 @@ class _TakesCounterState extends State<TakesCounter> {
           Padding(
             padding: const EdgeInsets.only(right: 8),
             child: SmallIconButton(
-              color: Theme.of(context).disabledColor,
+              color: disabledColor,
               icon: Icons.remove,
               onPressed: _decrementCount,
             ),
@@ -45,7 +48,7 @@ class _TakesCounterState extends State<TakesCounter> {
           Padding(
             padding: const EdgeInsets.only(left: 8),
             child: SmallIconButton(
-              color: Theme.of(context).disabledColor,
+              color: disabledColor,
               icon: Icons.add,
               onPressed: _incrementCount,
             ),

@@ -37,6 +37,8 @@ class _HomePageBodyState extends State<_HomePageBody> {
       filterNotifier.add<ProjectFilter>(ProjectFilter());
     }
 
+    final mediaSize = MediaQuery.of(context).size;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -47,8 +49,8 @@ class _HomePageBodyState extends State<_HomePageBody> {
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: min(
-                    MediaQuery.of(context).size.width,
-                    MediaQuery.of(context).size.height,
+                    mediaSize.width,
+                    mediaSize.height,
                   ) *
                   0.08,
             ),

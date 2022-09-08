@@ -31,14 +31,18 @@ Route _createRoute() {
 class _AddRouteCardState extends State<AddRouteCard> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final primaryColor = theme.primaryColor;
+    final transparentPrimaryColor = primaryColor.withOpacity(0.2);
+
     return Padding(
       padding: const EdgeInsets.only(left: 34, top: 4),
       child: InkWell(
-        highlightColor: Theme.of(context).primaryColor.withOpacity(0.2),
-        splashColor: Theme.of(context).primaryColor.withOpacity(0.2),
+        highlightColor: transparentPrimaryColor,
+        splashColor: transparentPrimaryColor,
         onTap: () => Navigator.of(context).push(_createRoute()),
         child: DottedBorder(
-          color: Theme.of(context).primaryColor,
+          color: primaryColor,
           strokeWidth: 2,
           dashPattern: const [10, 10],
           child: SizedBox(
@@ -54,13 +58,13 @@ class _AddRouteCardState extends State<AddRouteCard> {
                     "Add Route",
                     style: TextStyle(
                       fontSize: 20,
-                      color: Theme.of(context).primaryColor,
+                      color: primaryColor,
                     ),
                   ),
                 ),
                 Icon(
                   Icons.add,
-                  color: Theme.of(context).primaryColor,
+                  color: primaryColor,
                   size: 28,
                 ),
               ],

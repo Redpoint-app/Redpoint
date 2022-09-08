@@ -23,12 +23,12 @@ class NavButton extends StatefulWidget {
 class _NavButtonState extends State<NavButton> {
   @override
   Widget build(BuildContext context) {
-    final Color inkColor = widget.active
-        ? Theme.of(context).primaryColor.withOpacity(0.2)
-        : Theme.of(context).highlightColor;
-    final Color? color = widget.active
-        ? Theme.of(context).primaryColor
-        : Theme.of(context).iconTheme.color;
+    final theme = Theme.of(context);
+    final primaryColor = theme.primaryColor;
+
+    final Color inkColor =
+        widget.active ? primaryColor.withOpacity(0.2) : theme.highlightColor;
+    final Color? color = widget.active ? primaryColor : theme.iconTheme.color;
 
     return Ink(
       child: InkResponse(
