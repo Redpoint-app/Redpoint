@@ -25,7 +25,8 @@ class CustomIconButton extends StatefulWidget {
 class _CustomIconButtonState extends State<CustomIconButton> {
   @override
   Widget build(BuildContext context) {
-    final Color inkColor = widget.inkColor ?? Theme.of(context).highlightColor;
+    final theme = Theme.of(context);
+    final Color inkColor = widget.inkColor ?? theme.highlightColor;
 
     return Ink(
       child: InkResponse(
@@ -36,7 +37,7 @@ class _CustomIconButtonState extends State<CustomIconButton> {
         radius: widget.inkRadius ?? (widget.size / 1.4),
         child: Icon(
           widget.icon,
-          color: widget.color ?? Theme.of(context).iconTheme.color,
+          color: widget.color ?? theme.iconTheme.color,
           size: widget.size,
         ),
       ),

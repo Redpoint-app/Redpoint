@@ -34,16 +34,17 @@ class InitialPageState extends State<InitialPage> {
       ProfilePage(),
     ];
 
+    final brightness = Theme.of(context).brightness;
+
     return Scaffold(
       extendBody: true,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle(
           systemNavigationBarColor: Colors.transparent,
-          statusBarBrightness: Theme.of(context).brightness,
-          statusBarIconBrightness:
-              Theme.of(context).brightness == Brightness.dark
-                  ? Brightness.light
-                  : Brightness.dark,
+          statusBarBrightness: brightness,
+          statusBarIconBrightness: brightness == Brightness.dark
+              ? Brightness.light
+              : Brightness.dark,
           statusBarColor: Colors.transparent,
         ),
         child: SafeArea(

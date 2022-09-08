@@ -20,6 +20,9 @@ class FilterButton extends StatefulWidget {
 class _FilterButtonState extends State<FilterButton> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final onPrimary = theme.colorScheme.onPrimary;
+    final onSurface = theme.colorScheme.onSurface;
     bool active = widget.active ?? false;
 
     return Padding(
@@ -29,12 +32,8 @@ class _FilterButtonState extends State<FilterButton> {
         child: TextButton(
           onPressed: widget.onTap,
           style: TextButton.styleFrom(
-            foregroundColor: active
-                ? Theme.of(context).colorScheme.onPrimary
-                : Theme.of(context).highlightColor,
-            backgroundColor: active
-                ? Theme.of(context).primaryColor
-                : Theme.of(context).cardColor,
+            foregroundColor: active ? onPrimary : theme.highlightColor,
+            backgroundColor: active ? theme.primaryColor : theme.cardColor,
             elevation: 0.5,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -48,9 +47,7 @@ class _FilterButtonState extends State<FilterButton> {
                   child: Icon(
                     widget.icon,
                     size: 16,
-                    color: active
-                        ? Theme.of(context).colorScheme.onPrimary
-                        : Theme.of(context).colorScheme.onSurface,
+                    color: active ? onPrimary : onSurface,
                   ),
                 ),
               Padding(
@@ -58,9 +55,7 @@ class _FilterButtonState extends State<FilterButton> {
                 child: Text(
                   widget.label,
                   style: TextStyle(
-                    color: active
-                        ? Theme.of(context).colorScheme.onPrimary
-                        : Theme.of(context).colorScheme.onSurface,
+                    color: active ? onPrimary : onSurface,
                     fontSize: 14,
                   ),
                 ),

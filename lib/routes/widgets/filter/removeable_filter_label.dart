@@ -17,6 +17,9 @@ class RemoveableFilterLabel extends StatefulWidget {
 class _RemoveableFilterLabelState extends State<RemoveableFilterLabel> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final onPrimary = theme.colorScheme.onPrimary;
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: PhysicalModel(
@@ -25,7 +28,7 @@ class _RemoveableFilterLabelState extends State<RemoveableFilterLabel> {
         borderRadius: const BorderRadius.all(Radius.circular(12)),
         child: Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor,
+            color: theme.primaryColor,
             borderRadius: const BorderRadius.all(Radius.circular(12)),
           ),
           child: Padding(
@@ -39,8 +42,8 @@ class _RemoveableFilterLabelState extends State<RemoveableFilterLabel> {
                   child: CustomIconButton(
                     icon: Icons.cancel_rounded,
                     size: 17,
-                    color: Theme.of(context).colorScheme.onPrimary,
-                    inkColor: Theme.of(context).colorScheme.onPrimary,
+                    color: onPrimary,
+                    inkColor: onPrimary,
                     onTap: widget.onTap,
                   ),
                 ),
@@ -49,7 +52,7 @@ class _RemoveableFilterLabelState extends State<RemoveableFilterLabel> {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: Theme.of(context).colorScheme.onPrimary,
+                    color: onPrimary,
                   ),
                 ),
               ],
