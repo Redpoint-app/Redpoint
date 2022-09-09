@@ -16,7 +16,6 @@ class HomePage extends PageTemplate {
   HomePage()
       : super(
           title: "Home",
-          icon: Icons.home,
           body: const _HomePageBody(),
           scrollable: true,
         );

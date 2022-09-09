@@ -12,7 +12,6 @@ class RoutesPage extends PageTemplate {
   RoutesPage()
       : super(
           title: "Routes",
-          icon: Icons.list,
           body: const _RoutesPageBody(),
           scrollable: true,
         );

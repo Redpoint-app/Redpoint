@@ -5,7 +5,6 @@ class ProfilePage extends PageTemplate {
   ProfilePage()
       : super(
           title: "Profile",
-          icon: Icons.person,
           body: const Center(child: Text("Profile")),
         );
 }

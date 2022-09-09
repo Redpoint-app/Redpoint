@@ -5,7 +5,6 @@ class SocialPage extends PageTemplate {
   SocialPage()
       : super(
           title: "Social",
-          icon: Icons.show_chart,
           body: const Center(child: Text("Social")),
         );
 }

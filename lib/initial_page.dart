@@ -72,7 +72,6 @@ class InitialPageState extends State<InitialPage> {
       floatingActionButton: const AddButton(),
       bottomNavigationBar: BottomNavbar(
         pageTitle: pages[pageIndex].title,
-        pages: pages,
         callback: setPage,
       ),
     );
