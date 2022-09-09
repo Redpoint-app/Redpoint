@@ -1,4 +1,3 @@
-/// A button in the bottom navbar. This widget makes reuse and styling easy.
 import 'package:flutter/material.dart';
 import 'package:redpoint/shared/widgets/dimensions.dart';
 
