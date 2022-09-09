@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redpoint/shared/widgets/custom_icon_button.dart';
+import 'package:redpoint/shared/widgets/dimensions.dart';
 
 class SmallIconButton extends StatefulWidget {
   const SmallIconButton({
@@ -20,8 +21,8 @@ class _SmallIconButtonState extends State<SmallIconButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 24.0,
-      height: 24.0,
+      width: ContainersDimensions.widthSmall,
+      height: ContainersDimensions.heightSmall,
       decoration: BoxDecoration(
         color: widget.color ?? Theme.of(context).primaryColor,
         borderRadius: const BorderRadius.all(Radius.circular(30.0)),
@@ -29,7 +30,7 @@ class _SmallIconButtonState extends State<SmallIconButton> {
       child: Center(
         child: CustomIconButton(
           icon: widget.icon,
-          size: 18.0,
+          size: IconsDimensions.iconSizeSmall,
           onTap: widget.onPressed,
         ),
       ),

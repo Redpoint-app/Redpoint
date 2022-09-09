@@ -3,5 +3,9 @@ import 'package:redpoint/shared/widgets/layout/page_template.dart';
 
 class SocialPage extends PageTemplate {
   SocialPage()
-      : super(title: "Social", body: const Center(child: Text("Social")));
+      : super(
+          title: "Social",
+          icon: Icons.show_chart,
+          body: const Center(child: Text("Social")),
+        );
 }

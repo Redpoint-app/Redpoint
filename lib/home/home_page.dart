@@ -13,7 +13,12 @@ import 'package:redpoint/shared/widgets/layout/page_template.dart';
 
 class HomePage extends PageTemplate {
   HomePage()
-      : super(title: "Home", body: const _HomePageBody(), scrollable: true);
+      : super(
+          title: "Home",
+          icon: Icons.home,
+          body: const _HomePageBody(),
+          scrollable: true,
+        );
 }
 
 class _HomePageBody extends StatefulWidget {

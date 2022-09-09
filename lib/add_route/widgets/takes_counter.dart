@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redpoint/add_route/widgets/small_icon_button.dart';
+import 'package:redpoint/shared/widgets/dimensions.dart';
 
 class TakesCounter extends StatefulWidget {
   const TakesCounter({super.key});
@@ -10,6 +11,7 @@ class TakesCounter extends StatefulWidget {
 
 class _TakesCounterState extends State<TakesCounter> {
   int count = 1;
+  final minCount = 1;
 
   void _incrementCount() {
     setState(() {
@@ -19,7 +21,7 @@ class _TakesCounterState extends State<TakesCounter> {
 
   void _decrementCount() {
     setState(() {
-      if (count >= 2) {
+      if (count >= minCount + 1) {
         count--;
       }
     });
@@ -31,7 +33,10 @@ class _TakesCounterState extends State<TakesCounter> {
     final disabledColor = theme.disabledColor;
 
     return Padding(
-      padding: const EdgeInsets.only(top: 18, bottom: 4),
+      padding: const EdgeInsets.only(
+        top: PaddingDimensions.lg,
+        bottom: PaddingDimensions.sm,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

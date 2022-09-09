@@ -1,5 +1,6 @@
 /// A button in the bottom navbar. This widget makes reuse and styling easy.
 import 'package:flutter/material.dart';
+import 'package:redpoint/shared/widgets/dimensions.dart';
 
 class NavButton extends StatefulWidget {
   const NavButton({
@@ -36,7 +37,7 @@ class _NavButtonState extends State<NavButton> {
         highlightColor: inkColor,
         splashColor: inkColor,
         splashFactory: InkRipple.splashFactory,
-        radius: 40,
+        radius: InkDimensions.largeInk,
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           Icon(
             widget.buttonIcon,
@@ -46,7 +47,7 @@ class _NavButtonState extends State<NavButton> {
             padding: const EdgeInsets.only(top: 4),
             child: Text(
               widget.label,
-              style: TextStyle(color: color, fontSize: 14),
+              style: TextStyle(color: color, fontSize: TextDimensions.body),
             ),
           ),
         ]),

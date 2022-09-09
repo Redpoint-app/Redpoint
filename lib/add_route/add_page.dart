@@ -178,6 +178,8 @@ class _AddPageState extends State<AddPage> {
 
   @override
   Widget build(BuildContext context) {
+    int numDifficulties = RouteDifficultyEnum.values.length - 1;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add Route"),
@@ -342,8 +344,8 @@ class _AddPageState extends State<AddPage> {
                   child: Slider(
                     value: _difficultyIndex,
                     min: 0,
-                    max: 4,
-                    divisions: 4,
+                    max: numDifficulties.toDouble(),
+                    divisions: numDifficulties,
                     label: RouteDifficultyEnum
                         .values[_difficultyIndex.round()].label,
                     onChanged: _setDifficulty,

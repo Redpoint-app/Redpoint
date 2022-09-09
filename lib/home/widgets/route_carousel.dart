@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:redpoint/database/database.dart';
 import 'package:redpoint/home/widgets/route_card.dart';
+import 'package:redpoint/shared/widgets/dimensions.dart';
 
 class RouteCarousel extends StatefulWidget {
   const RouteCarousel({
@@ -37,7 +38,7 @@ class _RouteCarouselState extends State<RouteCarousel> {
                 Text(
                   widget.title,
                   style: const TextStyle(
-                    fontSize: 18,
+                    fontSize: TextDimensions.subHeader,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -46,7 +47,7 @@ class _RouteCarouselState extends State<RouteCarousel> {
                   child: Text(
                     "View all",
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: TextDimensions.subHeader,
                       fontWeight: FontWeight.w500,
                       color: Theme.of(context).primaryColor,
                     ),

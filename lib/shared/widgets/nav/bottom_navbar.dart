@@ -1,5 +1,7 @@
 /// The navigation bar at the bottom of the screen
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:redpoint/shared/widgets/layout/page_template.dart';
 import 'package:redpoint/shared/widgets/nav/fab_placeholder.dart';
 
 import 'nav_button.dart';
@@ -8,9 +10,11 @@ class BottomNavbar extends StatefulWidget {
   const BottomNavbar({
     super.key,
     required this.pageTitle,
+    required this.pages,
     required this.callback,
   });
   final String pageTitle;
+  final List<PageTemplate> pages;
   final void Function(int) callback;
 
   @override
@@ -20,46 +24,37 @@ class BottomNavbar extends StatefulWidget {
 class _BottomNavbarState extends State<BottomNavbar> {
   @override
   Widget build(BuildContext context) {
+    const double notchMargin = 8.0;
+    int halfLength = widget.pages.length ~/ 2;
+
     return BottomAppBar(
       shape: const CircularNotchedRectangle(),
-      notchMargin: 8.0, // Margin between FAB and navbar
+      notchMargin: notchMargin, // Margin between FAB and navbar
       child: Padding(
         padding: const EdgeInsets.only(bottom: 15, top: 10),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            NavButton(
-              label: "Home",
-              active: widget.pageTitle == "Home",
-              buttonIcon: Icons.home,
-              callback: widget.callback,
-              page: 0,
-            ),
-            NavButton(
-              label: "Routes",
-              active: widget.pageTitle == "Routes",
-              buttonIcon: Icons.list,
-              callback: widget.callback,
-              page: 1,
-            ),
-            const FABPlaceholder(),
-            NavButton(
-              label: "Social",
-              active: widget.pageTitle == "Social",
-              buttonIcon: Icons.show_chart,
-              callback: widget.callback,
-              page: 2,
-            ),
-            NavButton(
-              label: "Profile",
-              active: widget.pageTitle == "Profile",
-              buttonIcon: Icons.person,
-              callback: widget.callback,
-              page: 3,
-            ),
-          ],
+          children: widget.pages.foldIndexed<List<Widget>>(
+            [],
+            (index, elements, page) {
+              if (index == halfLength) {
+                elements.add(const FABPlaceholder());
+              }
+
+              return [
+                ...elements,
+                NavButton(
+                  buttonIcon: page.icon,
+                  page: index,
+                  active: widget.pageTitle == page.title,
+                  label: page.title,
+                  callback: widget.callback,
+                ),
+              ];
+            },
+          ),
         ),
       ),
     );

@@ -4,6 +4,7 @@ import 'package:redpoint/database/database.dart';
 import 'package:redpoint/database/models/climb_type/climb_type.dart';
 import 'package:redpoint/database/models/tag/tag.dart';
 import 'package:redpoint/shared/methods/local_date_util.dart';
+import 'package:redpoint/shared/widgets/dimensions.dart';
 
 class RouteCard extends StatefulWidget {
   const RouteCard({
@@ -47,7 +48,7 @@ class _RouteCardState extends State<RouteCard> {
           borderRadius: BorderRadius.all(Radius.circular(24)),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(18),
+          padding: const EdgeInsets.all(PaddingDimensions.lg),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,

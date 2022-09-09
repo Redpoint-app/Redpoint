@@ -9,7 +9,12 @@ import 'package:redpoint/shared/widgets/layout/page_template.dart';
 
 class RoutesPage extends PageTemplate {
   RoutesPage()
-      : super(title: "Routes", body: const _RoutesPageBody(), scrollable: true);
+      : super(
+          title: "Routes",
+          icon: Icons.list,
+          body: const _RoutesPageBody(),
+          scrollable: true,
+        );
 }
 
 class _RoutesPageBody extends StatefulWidget {

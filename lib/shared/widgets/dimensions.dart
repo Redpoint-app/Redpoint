@@ -1,5 +1,6 @@
 class IconsDimensions {
   static const double iconSizeSmall = 18.0;
+  static const double radiusToSizeRatio = 1.4;
 }
 
 class ContainersDimensions {
@@ -9,6 +10,7 @@ class ContainersDimensions {
 
 class TextDimensions {
   static const double subHeader = 18.0;
+  static const double body = 14.0;
 }
 
 class PaddingDimensions {
@@ -16,4 +18,8 @@ class PaddingDimensions {
   static const double md = 8.0;
   static const double sm = 4.0;
   static const double xs = 2.0;
+}
+
+class InkDimensions {
+  static const double largeInk = 40;
 }
