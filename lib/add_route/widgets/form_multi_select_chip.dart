@@ -1,6 +1,8 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
+import 'package:redpoint/database/models/tag/tag.dart';
 
 class FormMultiSelectChip<T> extends StatefulWidget {
   const FormMultiSelectChip({
@@ -16,7 +18,7 @@ class FormMultiSelectChip<T> extends StatefulWidget {
   final T value;
   final ListQueue<T> values;
   final int maxLength;
-  final void Function() callback;
+  final void Function(ListQueue<T>) callback;
 
   @override
   State<FormMultiSelectChip> createState() => _FormMultiSelectChipState<T>();
@@ -25,14 +27,33 @@ class FormMultiSelectChip<T> extends StatefulWidget {
 class _FormMultiSelectChipState<T> extends State<FormMultiSelectChip> {
   void _handleChoiceChipSelect(bool selected) {
     if (!selected) {
-      widget.values.remove(widget.value);
+      widget.callback(widget.values.foldIndexed<ListQueue<T>>(
+        ListQueue<T>(),
+        (index, valuesAccumulator, currentValue) {
+          if (currentValue == widget.value) {
+            return valuesAccumulator;
+          } else {
+            valuesAccumulator.add(currentValue);
+            return valuesAccumulator;
+          }
+        },
+      ));
     } else {
-      if (widget.values.length == widget.maxLength) {
-        widget.values.removeFirst();
-      }
-      widget.values.add(widget.value);
+      var newValues = widget.values.foldIndexed<ListQueue<T>>(
+        ListQueue<T>(),
+        (index, valuesAccumulator, currentValue) {
+          if (widget.values.length == widget.maxLength && index == 0) {
+            return valuesAccumulator;
+          } else {
+            valuesAccumulator.add(currentValue);
+            return valuesAccumulator;
+          }
+        },
+      );
+
+      newValues.add(widget.value);
+      widget.callback(newValues);
     }
-    widget.callback();
   }
 
   @override

@@ -40,7 +40,7 @@ class _AddPageState extends State<AddPage> {
 
   double _difficultyIndex = 0;
 
-  final _selectedTags = ListQueue<TagEnum>();
+  var _selectedTags = ListQueue<TagEnum>();
 
   // Controllers for the text fields, to retrieve the text values
   final TextEditingController _titleController = TextEditingController();
@@ -80,6 +80,14 @@ class _AddPageState extends State<AddPage> {
   _setDifficulty(double value) {
     setState(() {
       _difficultyIndex = value;
+    });
+  }
+
+  _selectedTagsChanged(newTags) {
+    print('called');
+    print(newTags);
+    setState(() {
+      _selectedTags = newTags;
     });
   }
 
@@ -182,11 +190,6 @@ class _AddPageState extends State<AddPage> {
     int numDifficulties = RouteDifficultyEnum.values.length - 1;
     const numLines = 7;
     const widthFactor = 0.7;
-
-    selectedTagsChanged() {
-      // Essentially does nothing; just triggers an update
-      setState(() => _selectedTags);
-    }
 
     return Scaffold(
       appBar: AppBar(
@@ -381,7 +384,7 @@ class _AddPageState extends State<AddPage> {
                       value: tag,
                       values: _selectedTags,
                       maxLength: maxTags,
-                      callback: selectedTagsChanged,
+                      callback: _selectedTagsChanged,
                     ),
                 ],
               ),
