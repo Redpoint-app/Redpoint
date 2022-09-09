@@ -66,7 +66,7 @@ class _HomePageBodyState extends State<_HomePageBody> {
         ),
         RouteCarousel(
           title: "Projects",
-          routes: db.routeDao.getLatestProjects(0),
+          routes: db.routeDao.getLatestProjects(numRoutesDisplayed),
           emptyWidget: const AddRouteCard(),
           onTapViewAll: viewAllProjects,
         ),

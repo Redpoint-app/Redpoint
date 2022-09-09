@@ -183,6 +183,11 @@ class _AddPageState extends State<AddPage> {
     const numLines = 7;
     const widthFactor = 0.7;
 
+    selectedTagsChanged() {
+      // Essentially does nothing; just triggers an update
+      setState(() => _selectedTags);
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add Route"),
@@ -376,11 +381,7 @@ class _AddPageState extends State<AddPage> {
                       value: tag,
                       values: _selectedTags,
                       maxLength: maxTags,
-                      callback: () {
-                        setState(() {
-                          // TODO
-                        });
-                      },
+                      callback: selectedTagsChanged,
                     ),
                 ],
               ),
