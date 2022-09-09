@@ -37,12 +37,9 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomIconButton(
-                icon: Icons.filter_alt_outlined,
-                size: IconDimensions.xl,
-                onTap: () {
-                  // TODO
-                },
-              ),
+                  icon: Icons.filter_alt_outlined,
+                  size: IconDimensions.xl,
+                  onTap: () {}),
               CustomIconButton(
                 icon: Icons.search,
                 size: IconDimensions.xl,

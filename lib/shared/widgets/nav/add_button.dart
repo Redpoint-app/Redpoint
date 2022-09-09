@@ -1,6 +1,7 @@
 /// The add button in the bottom navbar.
 import 'package:flutter/material.dart';
 import 'package:redpoint/add_route/add_page.dart';
+import 'package:redpoint/shared/navigation/open_page.dart';
 
 class AddButton extends StatefulWidget {
   const AddButton({super.key});
@@ -9,31 +10,13 @@ class AddButton extends StatefulWidget {
   State<AddButton> createState() => _AddButtonState();
 }
 
-Route _createRoute() {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => const AddPage(),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(0.0, 1.0);
-      const end = Offset.zero;
-      const curve = Curves.ease;
-
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
-}
-
 class _AddButtonState extends State<AddButton> {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
       tooltip: "Add Route",
       child: const Icon(Icons.add),
-      onPressed: () => Navigator.of(context).push(_createRoute()),
+      onPressed: () => Navigator.of(context).push(openPage(const AddPage())),
     );
   }
 }
