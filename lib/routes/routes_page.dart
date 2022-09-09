@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:redpoint/database/database.dart';
-import 'package:redpoint/routes/filters/filter_bottom_modal_sheet.dart';
+import 'package:redpoint/routes/filters/widgets/filter_bottom_modal_sheet.dart';
 import 'package:redpoint/routes/widgets/filter/filter_bar.dart';
 import 'package:redpoint/routes/widgets/route_list_element.dart';
-import 'package:redpoint/shared/navigation/open_page.dart';
 import 'package:redpoint/shared/providers/filter_change_notifier.dart';
 import 'package:redpoint/shared/widgets/custom_icon_button.dart';
 import 'package:redpoint/shared/widgets/dimensions.dart';
@@ -33,8 +32,12 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
     return Column(
       children: <Widget>[
         Padding(
-          padding:
-              const EdgeInsets.only(top: 36, bottom: 24, left: 30, right: 30),
+          padding: const EdgeInsets.only(
+            top: 36,
+            bottom: PaddingDimensions.verticalSpacing,
+            left: PaddingDimensions.pageSiding,
+            right: PaddingDimensions.pageSiding,
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -57,7 +60,10 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 30, bottom: 24),
+          padding: const EdgeInsets.only(
+            left: PaddingDimensions.pageSiding,
+            bottom: PaddingDimensions.verticalSpacing,
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: const [
@@ -68,7 +74,10 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
             ],
           ),
         ),
-        const Padding(padding: EdgeInsets.only(bottom: 20), child: FilterBar()),
+        const Padding(
+          padding: EdgeInsets.only(bottom: PaddingDimensions.verticalSpacing),
+          child: FilterBar(),
+        ),
         Padding(
           padding: const EdgeInsets.only(bottom: 140),
           child: Consumer<FilterChangeNotifier>(

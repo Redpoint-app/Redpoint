@@ -21,6 +21,9 @@ class TextDimensions {
 }
 
 class PaddingDimensions {
+  static const double verticalSpacing = 24.0;
+  static const double pageSiding = 30.0;
+
   static const double lg = 18.0;
   static const double md = 8.0;
   static const double sm = 4.0;
@@ -29,6 +32,7 @@ class PaddingDimensions {
 
 class InkDimensions {
   static const double largeInk = 40;
+  static const double mediumInk = 30;
 }
 
 class CardDimensions {
