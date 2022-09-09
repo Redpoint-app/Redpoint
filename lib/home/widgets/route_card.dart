@@ -54,7 +54,7 @@ class _RouteCardState extends State<RouteCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                width: 230,
+                width: CardDimensions.widthLarge,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -89,8 +89,8 @@ class _RouteCardState extends State<RouteCard> {
                           AsyncSnapshot<List<int>> snapshot,
                         ) {
                           return Wrap(
-                            runSpacing: -10,
-                            spacing: 4,
+                            runSpacing: ChipDimensions.runSpacing,
+                            spacing: PaddingDimensions.sm,
                             children: snapshot.data
                                     ?.map((int tagId) => Chip(
                                           label: Text(

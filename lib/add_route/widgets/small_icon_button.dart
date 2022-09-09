@@ -21,8 +21,8 @@ class _SmallIconButtonState extends State<SmallIconButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: ContainersDimensions.widthSmall,
-      height: ContainersDimensions.heightSmall,
+      width: ContainerDimensions.widthExtraSmall,
+      height: ContainerDimensions.heightExtraSmall,
       decoration: BoxDecoration(
         color: widget.color ?? Theme.of(context).primaryColor,
         borderRadius: const BorderRadius.all(Radius.circular(30.0)),
@@ -30,7 +30,7 @@ class _SmallIconButtonState extends State<SmallIconButton> {
       child: Center(
         child: CustomIconButton(
           icon: widget.icon,
-          size: IconsDimensions.iconSizeSmall,
+          size: IconDimensions.sm,
           onTap: widget.onPressed,
         ),
       ),

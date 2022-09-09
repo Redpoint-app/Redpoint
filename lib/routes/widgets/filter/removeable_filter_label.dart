@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redpoint/shared/widgets/custom_icon_button.dart';
+import 'package:redpoint/shared/widgets/dimensions.dart';
 
 class RemoveableFilterLabel extends StatefulWidget {
   const RemoveableFilterLabel({
@@ -23,7 +24,7 @@ class _RemoveableFilterLabelState extends State<RemoveableFilterLabel> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: PhysicalModel(
-        elevation: 0.5,
+        elevation: CardDimensions.elevation,
         color: Colors.black,
         borderRadius: const BorderRadius.all(Radius.circular(12)),
         child: Container(
@@ -41,7 +42,7 @@ class _RemoveableFilterLabelState extends State<RemoveableFilterLabel> {
                   padding: const EdgeInsets.only(right: 4),
                   child: CustomIconButton(
                     icon: Icons.cancel_rounded,
-                    size: 17,
+                    size: IconDimensions.sm,
                     color: onPrimary,
                     inkColor: onPrimary,
                     onTap: widget.onTap,
@@ -50,7 +51,7 @@ class _RemoveableFilterLabelState extends State<RemoveableFilterLabel> {
                 Text(
                   widget.label,
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: TextDimensions.body,
                     fontWeight: FontWeight.w500,
                     color: onPrimary,
                   ),

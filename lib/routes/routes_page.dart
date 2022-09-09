@@ -5,6 +5,7 @@ import 'package:redpoint/routes/widgets/filter/filter_bar.dart';
 import 'package:redpoint/routes/widgets/route_list_element.dart';
 import 'package:redpoint/shared/providers/filter_change_notifier.dart';
 import 'package:redpoint/shared/widgets/custom_icon_button.dart';
+import 'package:redpoint/shared/widgets/dimensions.dart';
 import 'package:redpoint/shared/widgets/layout/page_template.dart';
 
 class RoutesPage extends PageTemplate {
@@ -38,14 +39,14 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
             children: [
               CustomIconButton(
                 icon: Icons.filter_alt_outlined,
-                size: 28,
+                size: IconDimensions.xl,
                 onTap: () {
                   // TODO
                 },
               ),
               CustomIconButton(
                 icon: Icons.search,
-                size: 28,
+                size: IconDimensions.xl,
                 onTap: () {
                   // TODO
                 },

@@ -1,5 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:redpoint/shared/widgets/dimensions.dart';
 
 import '../../add_route/add_page.dart';
 
@@ -35,6 +36,9 @@ class _AddRouteCardState extends State<AddRouteCard> {
     final primaryColor = theme.primaryColor;
     final transparentPrimaryColor = primaryColor.withOpacity(0.2);
 
+    const widthDifference = 30;
+    const heightDifference = -12;
+
     return Padding(
       padding: const EdgeInsets.only(left: 34, top: 4),
       child: InkWell(
@@ -46,8 +50,8 @@ class _AddRouteCardState extends State<AddRouteCard> {
           strokeWidth: 2,
           dashPattern: const [10, 10],
           child: SizedBox(
-            width: 260,
-            height: 238,
+            width: CardDimensions.widthLarge + widthDifference,
+            height: CardDimensions.heightLarge + heightDifference,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,7 +61,7 @@ class _AddRouteCardState extends State<AddRouteCard> {
                   child: Text(
                     "Add Route",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: TextDimensions.header,
                       color: primaryColor,
                     ),
                   ),
@@ -65,7 +69,7 @@ class _AddRouteCardState extends State<AddRouteCard> {
                 Icon(
                   Icons.add,
                   color: primaryColor,
-                  size: 28,
+                  size: IconDimensions.xl,
                 ),
               ],
             ),

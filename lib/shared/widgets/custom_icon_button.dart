@@ -36,7 +36,7 @@ class _CustomIconButtonState extends State<CustomIconButton> {
         splashColor: inkColor,
         splashFactory: InkRipple.splashFactory,
         radius: widget.inkRadius ??
-            (widget.size / IconsDimensions.radiusToSizeRatio),
+            (widget.size / IconDimensions.radiusToSizeRatio),
         child: Icon(
           widget.icon,
           color: widget.color ?? theme.iconTheme.color,

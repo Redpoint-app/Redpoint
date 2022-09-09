@@ -57,7 +57,7 @@ class _RouteCarouselState extends State<RouteCarousel> {
             ),
           ),
           SizedBox(
-            height: 250.0,
+            height: CardDimensions.heightLarge,
             child: StreamBuilder<List<RouteData>>(
               stream: widget.routes,
               builder: (
@@ -72,7 +72,7 @@ class _RouteCarouselState extends State<RouteCarousel> {
                       return widget.emptyWidget;
                     case ConnectionState.waiting:
                       return const SizedBox(
-                        width: 250,
+                        width: CardDimensions.heightLarge,
                         child: Padding(
                           padding: EdgeInsets.all(75),
                           child: CircularProgressIndicator(),

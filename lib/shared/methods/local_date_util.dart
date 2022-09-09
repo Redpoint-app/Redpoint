@@ -15,6 +15,7 @@ const months = [
 
 const daysInWeek = 7;
 const daysInMonth = 30;
+const hoursInHalfDay = 12;
 
 String pastDateMessage(DateTime date) {
   DateTime now = DateTime.now();
