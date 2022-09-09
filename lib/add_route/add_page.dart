@@ -15,6 +15,7 @@ import 'package:redpoint/database/models/route/route_difficulty.dart';
 import 'package:redpoint/database/models/route/route_status.dart';
 import 'package:redpoint/database/models/tag/tag.dart';
 import 'package:redpoint/shared/methods/local_date_util.dart';
+import 'package:redpoint/shared/widgets/dimensions.dart';
 
 const int maxTags = 5;
 
@@ -39,7 +40,7 @@ class _AddPageState extends State<AddPage> {
 
   double _difficultyIndex = 0;
 
-  final _selectedTags = ListQueue<TagEnum>();
+  var _selectedTags = ListQueue<TagEnum>();
 
   // Controllers for the text fields, to retrieve the text values
   final TextEditingController _titleController = TextEditingController();
@@ -79,6 +80,12 @@ class _AddPageState extends State<AddPage> {
   _setDifficulty(double value) {
     setState(() {
       _difficultyIndex = value;
+    });
+  }
+
+  _selectedTagsChanged(newTags) {
+    setState(() {
+      _selectedTags = newTags;
     });
   }
 
@@ -178,6 +185,10 @@ class _AddPageState extends State<AddPage> {
 
   @override
   Widget build(BuildContext context) {
+    int numDifficulties = RouteDifficultyEnum.values.length - 1;
+    const numLines = 7;
+    const widthFactor = 0.7;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add Route"),
@@ -196,7 +207,7 @@ class _AddPageState extends State<AddPage> {
                 "Save",
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.onPrimary,
-                  fontSize: 17.0,
+                  fontSize: TextDimensions.appBarTextButtonSize,
                 ),
               ),
             ),
@@ -284,17 +295,20 @@ class _AddPageState extends State<AddPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 2),
                   child: SizedBox(
-                    height: 34,
+                    height: ChipDimensions.height,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: RouteStatusEnum.values
                           .map(
-                            (RouteStatusEnum value) =>
-                                FormSelectChip<RouteStatusEnum>(
-                              label: value.label,
-                              value: value,
-                              selectedValue: _status,
-                              callback: _setStatusIndex,
+                            (RouteStatusEnum value) => Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 2),
+                              child: FormSelectChip<RouteStatusEnum>(
+                                label: value.label,
+                                value: value,
+                                selectedValue: _status,
+                                callback: _setStatusIndex,
+                              ),
                             ),
                           )
                           .toList(),
@@ -305,17 +319,20 @@ class _AddPageState extends State<AddPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 2),
                     child: SizedBox(
-                      height: 34,
+                      height: ChipDimensions.height,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: RouteCompletedStatusEnum.values
                             .map(
-                              (RouteCompletedStatusEnum value) =>
-                                  FormSelectChip<RouteCompletedStatusEnum>(
-                                label: value.label,
-                                value: value,
-                                selectedValue: _completedStatus,
-                                callback: _setCompletedStatusIndex,
+                              (RouteCompletedStatusEnum value) => Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 2),
+                                child: FormSelectChip<RouteCompletedStatusEnum>(
+                                  label: value.label,
+                                  value: value,
+                                  selectedValue: _completedStatus,
+                                  callback: _setCompletedStatusIndex,
+                                ),
                               ),
                             )
                             .toList(),
@@ -342,8 +359,8 @@ class _AddPageState extends State<AddPage> {
                   child: Slider(
                     value: _difficultyIndex,
                     min: 0,
-                    max: 4,
-                    divisions: 4,
+                    max: numDifficulties.toDouble(),
+                    divisions: numDifficulties,
                     label: RouteDifficultyEnum
                         .values[_difficultyIndex.round()].label,
                     onChanged: _setDifficulty,
@@ -353,11 +370,11 @@ class _AddPageState extends State<AddPage> {
             ),
             const Divider(),
             FractionallySizedBox(
-              widthFactor: 0.7,
+              widthFactor: widthFactor,
               child: Wrap(
-                runSpacing: -10,
+                runSpacing: ChipDimensions.runSpacing,
                 alignment: WrapAlignment.center,
-                spacing: 4,
+                spacing: PaddingDimensions.sm,
                 children: [
                   for (final tag in TagEnum.values)
                     FormMultiSelectChip<TagEnum>(
@@ -365,11 +382,7 @@ class _AddPageState extends State<AddPage> {
                       value: tag,
                       values: _selectedTags,
                       maxLength: maxTags,
-                      callback: () {
-                        setState(() {
-                          // TODO
-                        });
-                      },
+                      callback: _selectedTagsChanged,
                     ),
                 ],
               ),
@@ -383,7 +396,7 @@ class _AddPageState extends State<AddPage> {
                 bottom: 80,
               ),
               child: TextField(
-                maxLines: 7,
+                maxLines: numLines,
                 controller: _thoughtsController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),

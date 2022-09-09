@@ -3,6 +3,7 @@ import 'package:redpoint/database/database.dart';
 import 'package:redpoint/database/models/climb_type/climb_type.dart';
 import 'package:redpoint/shared/methods/local_date_util.dart';
 import 'package:redpoint/shared/widgets/custom_icon_button.dart';
+import 'package:redpoint/shared/widgets/dimensions.dart';
 
 class RouteListElement extends StatefulWidget {
   const RouteListElement({super.key, required this.route});
@@ -51,7 +52,7 @@ class _RouteListElementState extends State<RouteListElement> {
                         padding: const EdgeInsets.only(left: 40),
                         child: CustomIconButton(
                           icon: Icons.more_horiz,
-                          size: 20,
+                          size: IconDimensions.md,
                           onTap: () {
                             // TODO
                           },

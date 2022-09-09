@@ -70,8 +70,10 @@ class InitialPageState extends State<InitialPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: const AddButton(),
-      bottomNavigationBar:
-          BottomNavbar(pageTitle: pages[pageIndex].title, callback: setPage),
+      bottomNavigationBar: BottomNavbar(
+        pageTitle: pages[pageIndex].title,
+        callback: setPage,
+      ),
     );
   }
 }

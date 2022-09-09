@@ -1,5 +1,5 @@
-/// A button in the bottom navbar. This widget makes reuse and styling easy.
 import 'package:flutter/material.dart';
+import 'package:redpoint/shared/widgets/dimensions.dart';
 
 class CustomIconButton extends StatefulWidget {
   const CustomIconButton({
@@ -34,7 +34,8 @@ class _CustomIconButtonState extends State<CustomIconButton> {
         highlightColor: inkColor,
         splashColor: inkColor,
         splashFactory: InkRipple.splashFactory,
-        radius: widget.inkRadius ?? (widget.size / 1.4),
+        radius: widget.inkRadius ??
+            (widget.size / IconDimensions.radiusToSizeRatio),
         child: Icon(
           widget.icon,
           color: widget.color ?? theme.iconTheme.color,

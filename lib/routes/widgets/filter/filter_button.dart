@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redpoint/shared/widgets/dimensions.dart';
 
 class FilterButton extends StatefulWidget {
   const FilterButton({
@@ -28,13 +29,13 @@ class _FilterButtonState extends State<FilterButton> {
     return Padding(
       padding: const EdgeInsets.only(left: 2, right: 2, bottom: 4),
       child: SizedBox(
-        height: 40,
+        height: ContainerDimensions.heightSmall,
         child: TextButton(
           onPressed: widget.onTap,
           style: TextButton.styleFrom(
             foregroundColor: active ? onPrimary : theme.highlightColor,
             backgroundColor: active ? theme.primaryColor : theme.cardColor,
-            elevation: 0.5,
+            elevation: CardDimensions.elevation,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
@@ -46,7 +47,7 @@ class _FilterButtonState extends State<FilterButton> {
                   padding: const EdgeInsets.all(4),
                   child: Icon(
                     widget.icon,
-                    size: 16,
+                    size: IconDimensions.xs,
                     color: active ? onPrimary : onSurface,
                   ),
                 ),
@@ -56,7 +57,7 @@ class _FilterButtonState extends State<FilterButton> {
                   widget.label,
                   style: TextStyle(
                     color: active ? onPrimary : onSurface,
-                    fontSize: 14,
+                    fontSize: TextDimensions.body,
                   ),
                 ),
               ),

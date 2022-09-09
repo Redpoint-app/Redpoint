@@ -13,6 +13,10 @@ const months = [
   'December',
 ];
 
+const daysInWeek = 7;
+const daysInMonth = 30;
+const hoursInHalfDay = 12;
+
 String pastDateMessage(DateTime date) {
   DateTime now = DateTime.now();
   Duration diff = now.difference(date).abs();
@@ -21,11 +25,11 @@ String pastDateMessage(DateTime date) {
     return "Today";
   } else if (diff.inDays == 1) {
     return "Yesterday";
-  } else if (diff.inDays < 7) {
+  } else if (diff.inDays < daysInWeek) {
     return "A few days ago";
-  } else if (diff.inDays < 14) {
+  } else if (diff.inDays < daysInWeek * 2) {
     return "Last week";
-  } else if (diff.inDays < 30) {
+  } else if (diff.inDays < daysInMonth) {
     return "A few weeks ago";
   } else {
     // Days > 30
@@ -40,7 +44,7 @@ String pastDateMessage(DateTime date) {
         return "A few weeks ago";
       } else if (monthDiff == 1) {
         return "Last month";
-      } else if (monthDiff < 12) {
+      } else if (monthDiff < months.length) {
         return "$monthDiff months ago";
       } else {
         return "Last year";
