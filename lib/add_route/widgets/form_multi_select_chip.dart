@@ -2,7 +2,6 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
-import 'package:redpoint/database/models/tag/tag.dart';
 
 class FormMultiSelectChip<T> extends StatefulWidget {
   const FormMultiSelectChip({

@@ -84,8 +84,6 @@ class _AddPageState extends State<AddPage> {
   }
 
   _selectedTagsChanged(newTags) {
-    print('called');
-    print(newTags);
     setState(() {
       _selectedTags = newTags;
     });
