@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:redpoint/database/database.dart';
+import 'package:redpoint/routes/filters/filter_bottom_modal_sheet.dart';
 import 'package:redpoint/routes/widgets/filter/filter_bar.dart';
 import 'package:redpoint/routes/widgets/route_list_element.dart';
+import 'package:redpoint/shared/navigation/open_page.dart';
 import 'package:redpoint/shared/providers/filter_change_notifier.dart';
 import 'package:redpoint/shared/widgets/custom_icon_button.dart';
 import 'package:redpoint/shared/widgets/dimensions.dart';
@@ -37,9 +39,13 @@ class _RoutesPageBodyState extends State<_RoutesPageBody> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomIconButton(
-                  icon: Icons.filter_alt_outlined,
-                  size: IconDimensions.xl,
-                  onTap: () {}),
+                icon: Icons.filter_alt_outlined,
+                size: IconDimensions.xl,
+                onTap: () => showModalBottomSheet(
+                  context: context,
+                  builder: (context) => const FilterBottomModalSheet(),
+                ),
+              ),
               CustomIconButton(
                 icon: Icons.search,
                 size: IconDimensions.xl,
